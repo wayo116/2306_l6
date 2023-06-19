@@ -139,21 +139,18 @@ class Dell6:
         print('予想個数{}'.format(len(dlist1)))
         print('予想当選額{0}'.format(-len(dlist1)*0.02+cnt3*0.1+cnt4*0.9+cnt5*30+cnt6*10000))
 
-    def merge_similar_elements(self, matrix, similarity_threshold):
+    def merge_similar_elements(matrix, min_similar_elements):
         merged_matrix = []
         for row in matrix:
             merged_row = []
             for element in row:
-                found_similar = False
-                for merged_element in merged_row:
-                    similarity = SequenceMatcher(None, element, merged_element).ratio()
-                    if similarity >= similarity_threshold:
-                        found_similar = True
-                        break
-                if not found_similar:
+                similar_elements = [merged_element for merged_element in merged_row if SequenceMatcher(None, element, merged_element).ratio() == 1]
+                if len(similar_elements) >= min_similar_elements:
                     merged_row.append(element)
+                else:
+                    merged_row.extend(similar_elements)
             merged_matrix.append(merged_row)
-        return merged_matrix
+    return merged_matrix
         
     def notkako_xdel(self, dlist1, dlist2, ifpattern, sname='none'):
         outlist1=[]
