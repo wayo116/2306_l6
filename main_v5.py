@@ -16,7 +16,7 @@ import os
 #import itertools
 os.chdir('/content/2306_l6')
 
-# from datalists import dlists
+from datalists import dlists
 # from Effi_v6 import Effi_TrainPred
 # from randam_kaisai import randam_kaisai_multi3
 # from find_kaisaihani import find_kaisaihani
