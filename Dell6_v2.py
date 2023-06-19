@@ -149,7 +149,7 @@ class Dell6:
             if count == 2:
                 duplicates.append(list(sublist))
 
-    return duplicates
+        return duplicates
         
     def notkako_xdel(self, dlist1, dlist2, ifpattern, sname='none'):
         outlist1=[]
