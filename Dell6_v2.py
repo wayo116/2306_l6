@@ -148,7 +148,7 @@ class Dell6:
         for sublist, count in counts.items():
             if count == 2:
                 duplicates.append(list(sublist))
-
+        print("duplicates",duplicates)
         return duplicates
         
     def notkako_xdel(self, dlist1, dlist2, ifpattern, sname='none'):
