@@ -9,6 +9,7 @@ from itertools import chain
 import copy
 
 from collections import Counter
+from difflib import SequenceMatcher
 
 class Dell6:
     def __init__(self, dlists, pred_dlists, saisinkekka, bunkatu):
@@ -138,18 +139,21 @@ class Dell6:
         print('予想個数{}'.format(len(dlist1)))
         print('予想当選額{0}'.format(-len(dlist1)*0.02+cnt3*0.1+cnt4*0.9+cnt5*30+cnt6*10000))
 
-    def find_duplicates(arr):
-        duplicates = []
-
-        # 各要素の出現回数をカウントする
-        counts = Counter(tuple(sublist) for sublist in arr)
-
-        # 出現回数が2回の要素を重複として抽出する
-        for sublist, count in counts.items():
-            if count == 2:
-                duplicates.append(list(sublist))
-        print("duplicates",duplicates)
-        return duplicates
+    def merge_similar_elements(matrix, similarity_threshold=0.8):
+        merged_matrix = []
+        for row in matrix:
+            merged_row = []
+            for element in row:
+                found_similar = False
+                for merged_element in merged_row:
+                    similarity = SequenceMatcher(None, element, merged_element).ratio()
+                    if similarity >= similarity_threshold:
+                        found_similar = True
+                        break
+                if not found_similar:
+                    merged_row.append(element)
+            merged_matrix.append(merged_row)
+        return merged_matrix
         
     def notkako_xdel(self, dlist1, dlist2, ifpattern, sname='none'):
         outlist1=[]
