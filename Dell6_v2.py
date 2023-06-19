@@ -232,7 +232,7 @@ class Dell6:
     #     return len(list(set(map(tuple, outlist1))))      	  
 
     def get_outlist2(self, dlist1, sname='none'):
-        dlist1 = find_duplicates(dlist1)
+        dlist1 = self.find_duplicates(dlist1)
         print('dlist1>>len:{0}'.format(len(dlist1)))
         outlist1=[]
         bunkatu=self.bunkatu
