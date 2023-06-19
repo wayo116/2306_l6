@@ -150,7 +150,7 @@ class Dell6:
                 else:
                     merged_row.extend(similar_elements)
             merged_matrix.append(merged_row)
-    return merged_matrix
+        return merged_matrix
         
     def notkako_xdel(self, dlist1, dlist2, ifpattern, sname='none'):
         outlist1=[]
