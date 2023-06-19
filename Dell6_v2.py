@@ -200,21 +200,21 @@ class Dell6:
             print('{0} outlist1>>len:{1} type:{2}'.format(sname, len(dlist2), type(dlist2)))
             return dlist2
 
-    def get_outlist(self, dlist1, sname='none'): 
-        print('dlist1>>len:{0}'.format(len(dlist1)))
-        outlist1=[]
-        for  ii in range(len(dlist1)-1):
-            #'print('dlist1-ii[{0}]:{1}'.format(ii, sorted(dlist1[ii])))
-            for  ii2 in range(ii+1, len(dlist1)):
-                #print('dlist1-ii2[{0}]:{1}'.format(ii2, sorted(dlist1[ii2])))
-                if 4<len(set(sorted(dlist1[ii]))-set(sorted(dlist1[ii2]))):
-                    outlist1.append(sorted(dlist1[ii2]))
-                    #print('dlist1-ii2[{0}]:{1}'.format(ii2, sorted(dlist1[ii2])))
-                    #print('set-:{0}'.format(set(sorted(dlist1[ii]))-set(sorted(dlist1[ii2]))))
-        print('outlist1>>len:{0}'.format(len(list(set(map(tuple, outlist1))))))
-        for d1 in list(set(map(tuple, outlist1))):
-            print('{0} get_outlist:{1}'.format(sname, d1))
-        return len(list(set(map(tuple, outlist1))))      	  
+    # def get_outlist(self, dlist1, sname='none'): 
+    #     print('dlist1>>len:{0}'.format(len(dlist1)))
+    #     outlist1=[]
+    #     for  ii in range(len(dlist1)-1):
+    #         #'print('dlist1-ii[{0}]:{1}'.format(ii, sorted(dlist1[ii])))
+    #         for  ii2 in range(ii+1, len(dlist1)):
+    #             #print('dlist1-ii2[{0}]:{1}'.format(ii2, sorted(dlist1[ii2])))
+    #             if 4<len(set(sorted(dlist1[ii]))-set(sorted(dlist1[ii2]))):
+    #                 outlist1.append(sorted(dlist1[ii2]))
+    #                 #print('dlist1-ii2[{0}]:{1}'.format(ii2, sorted(dlist1[ii2])))
+    #                 #print('set-:{0}'.format(set(sorted(dlist1[ii]))-set(sorted(dlist1[ii2]))))
+    #     print('outlist1>>len:{0}'.format(len(list(set(map(tuple, outlist1))))))
+    #     for d1 in list(set(map(tuple, outlist1))):
+    #         print('{0} get_outlist:{1}'.format(sname, d1))
+    #     return len(list(set(map(tuple, outlist1))))      	  
 
     def get_outlist2(self, dlist1, sname='none'):
         print('dlist1>>len:{0}'.format(len(dlist1)))
@@ -228,33 +228,33 @@ class Dell6:
                  print('{0} get_outlist:{1}'.format(sname, dlist1[ii+ii2]))
         return outlist1
        
-    def shori(self):
-        outlist1=self.combi(self.pred_dlists, '組合せ')
-        outlist1=self.notkako_xdel(self.kako_sum(self.dlists, '合計範囲'), outlist1, 5, '合計範囲内')
-        outlist1=self.notkako_xdel(self.kako_minmax(self.dlists[:24,:], '最小最大'), outlist1, 6, '最小最大内')
-        outlist1=self.notkako_xdel(0, outlist1, 3, '連番、0〜2個含む')
-        #outlist1=self.notkako_xdel(0, outlist1, 7, '3〜6連番、含まない')
-        #outlist1=self.notkako_xdel(0, outlist1, 8, '偶数2〜4個、含む')
-        outlist1=self.notkako_xdel(list(itertools.chain.from_iterable(self.dlists[:3,:])), outlist1, 1 ,'過去3回数字、0〜3個含む') 
-        outlist1=self.notkako_xdel(self.dlists[0,:], outlist1, 2, '前回数字、0〜3個含む') 
-        #outlist1=self.notkako_xdel(list(range(40, 44, 1)), outlist1, 4, '40〜43含む')
-        #outlist1=self.notkako_xdel(list(range(41, 43, 1)), outlist1, 4, '42含む')      
-        #outlist1=self.notkako_xdel(list(range(30, 40, 1)), outlist1, 4, '30〜39、1個含む')
-        outlist1=self.notkako_xdel(list(range(1, 10, 1)), outlist1, 4, '1〜9、1個含む')
-        #outlist1=self.notkako_xdel(list(range(10, 20, 1)), outlist1, 4, '10〜19、1個含む')
-        #outlist1=self.notkako_xdel(list(range(20, 30, 1)), outlist1, 4, '20〜29、1個含む')
-        #outlist1=self.notkako_xdel(self.kako_pm1(self.dlists, '前回数字±1'), outlist1, 10, '前回数字±1、2個以上含む')
-        #outlist1=self.notkako_xdel(self.kako_sm1(self.dlists, '前回数字下1桁'), outlist1, 10, '前回数字下1桁、2個以上含む')
-        #outlist1=self.notkako_xdel(self.kako_most(self.dlists, '過去24回数字、3回出現'), outlist1, 10, '過去24回数字、3回出現、2個以上含む')
-        #outlist1=self.notkako_xdel(self.kako_pattern(self.dlists[:,:], '過去数字、パターン'), outlist1, 9, '過去数字、パターン、含む')
+    # def shori(self):
+    #     outlist1=self.combi(self.pred_dlists, '組合せ')
+    #     outlist1=self.notkako_xdel(self.kako_sum(self.dlists, '合計範囲'), outlist1, 5, '合計範囲内')
+    #     outlist1=self.notkako_xdel(self.kako_minmax(self.dlists[:24,:], '最小最大'), outlist1, 6, '最小最大内')
+    #     outlist1=self.notkako_xdel(0, outlist1, 3, '連番、0〜2個含む')
+    #     #outlist1=self.notkako_xdel(0, outlist1, 7, '3〜6連番、含まない')
+    #     #outlist1=self.notkako_xdel(0, outlist1, 8, '偶数2〜4個、含む')
+    #     outlist1=self.notkako_xdel(list(itertools.chain.from_iterable(self.dlists[:3,:])), outlist1, 1 ,'過去3回数字、0〜3個含む') 
+    #     outlist1=self.notkako_xdel(self.dlists[0,:], outlist1, 2, '前回数字、0〜3個含む') 
+    #     #outlist1=self.notkako_xdel(list(range(40, 44, 1)), outlist1, 4, '40〜43含む')
+    #     #outlist1=self.notkako_xdel(list(range(41, 43, 1)), outlist1, 4, '42含む')      
+    #     #outlist1=self.notkako_xdel(list(range(30, 40, 1)), outlist1, 4, '30〜39、1個含む')
+    #     outlist1=self.notkako_xdel(list(range(1, 10, 1)), outlist1, 4, '1〜9、1個含む')
+    #     #outlist1=self.notkako_xdel(list(range(10, 20, 1)), outlist1, 4, '10〜19、1個含む')
+    #     #outlist1=self.notkako_xdel(list(range(20, 30, 1)), outlist1, 4, '20〜29、1個含む')
+    #     #outlist1=self.notkako_xdel(self.kako_pm1(self.dlists, '前回数字±1'), outlist1, 10, '前回数字±1、2個以上含む')
+    #     #outlist1=self.notkako_xdel(self.kako_sm1(self.dlists, '前回数字下1桁'), outlist1, 10, '前回数字下1桁、2個以上含む')
+    #     #outlist1=self.notkako_xdel(self.kako_most(self.dlists, '過去24回数字、3回出現'), outlist1, 10, '過去24回数字、3回出現、2個以上含む')
+    #     #outlist1=self.notkako_xdel(self.kako_pattern(self.dlists[:,:], '過去数字、パターン'), outlist1, 9, '過去数字、パターン、含む')
         
-        #dlen=self.get_outlist(outlist1, '準重複削除')
+    #     #dlen=self.get_outlist(outlist1, '準重複削除')
 
-        self.check(outlist1, self.saisinkekka)
+    #     self.check(outlist1, self.saisinkekka)
 
-        outlist2=self.get_outlist2(outlist1, '**') 
-        self.check(outlist2, self.saisinkekka)
-        return outlist2
+    #     outlist2=self.get_outlist2(outlist1, '**') 
+    #     self.check(outlist2, self.saisinkekka)
+    #     return outlist2
 
     def shori2(self):
         outlist1=self.pred_dlists
