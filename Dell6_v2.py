@@ -139,7 +139,7 @@ class Dell6:
         print('予想個数{}'.format(len(dlist1)))
         print('予想当選額{0}'.format(-len(dlist1)*0.02+cnt3*0.1+cnt4*0.9+cnt5*30+cnt6*10000))
 
-    def merge_similar_elements(matrix, similarity_threshold):
+    def merge_similar_elements(self, matrix, similarity_threshold):
         merged_matrix = []
         for row in matrix:
             merged_row = []
