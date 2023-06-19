@@ -233,7 +233,7 @@ class Dell6:
     #     return len(list(set(map(tuple, outlist1))))      	  
 
     def get_outlist2(self, dlist1, sname='none'):
-        dlist1 = self.merge_similar_elements(dlist1, 0.8)
+        dlist1 = self.merge_similar_elements(dlist1, 5)
         print('dlist1>>len:{0}'.format(len(dlist1)))
         outlist1=[]
         bunkatu=self.bunkatu
