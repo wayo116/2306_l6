@@ -1,6 +1,13 @@
 import itertools
-from combi import combi
 
+def combi(num_list,combisu):
+    print('----combi----')
+    new_list = []
+    for num in itertools.combinations(num_list, combisu):
+        new_list.append(list(num))
+    #print('new_list',new_list)
+    return new_list
+    
 def inner_outer(dlists,in_hani,out_hani,in_combisu,out_combisu):
     print('----inner_outer----')
     inner_list = list(set(list(itertools.chain.from_iterable(dlists[in_hani[0]:in_hani[1]]))))
