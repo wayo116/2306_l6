@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 from itertools import chain
 import copy
 
+from collections import Counter
+
 class Dell6:
     def __init__(self, dlists, pred_dlists, saisinkekka, bunkatu):
         print('----Dell6:コンストラクタ----')
@@ -135,6 +137,19 @@ class Dell6:
         print('6個当り{}'.format(cnt6))
         print('予想個数{}'.format(len(dlist1)))
         print('予想当選額{0}'.format(-len(dlist1)*0.02+cnt3*0.1+cnt4*0.9+cnt5*30+cnt6*10000))
+
+    def find_duplicates(arr):
+        duplicates = []
+
+        # 各要素の出現回数をカウントする
+        counts = Counter(tuple(sublist) for sublist in arr)
+
+        # 出現回数が2回の要素を重複として抽出する
+        for sublist, count in counts.items():
+            if count == 2:
+                duplicates.append(list(sublist))
+
+    return duplicates
         
     def notkako_xdel(self, dlist1, dlist2, ifpattern, sname='none'):
         outlist1=[]
@@ -217,6 +232,7 @@ class Dell6:
     #     return len(list(set(map(tuple, outlist1))))      	  
 
     def get_outlist2(self, dlist1, sname='none'):
+        dlist1 = find_duplicates(dlist1)
         print('dlist1>>len:{0}'.format(len(dlist1)))
         outlist1=[]
         bunkatu=self.bunkatu
