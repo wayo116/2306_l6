@@ -139,7 +139,7 @@ class Dell6:
         print('予想個数{}'.format(len(dlist1)))
         print('予想当選額{0}'.format(-len(dlist1)*0.02+cnt3*0.1+cnt4*0.9+cnt5*30+cnt6*10000))
 
-    def merge_similar_elements(matrix, similarity_threshold=0.8):
+    def merge_similar_elements(matrix, similarity_threshold):
         merged_matrix = []
         for row in matrix:
             merged_row = []
@@ -236,7 +236,7 @@ class Dell6:
     #     return len(list(set(map(tuple, outlist1))))      	  
 
     def get_outlist2(self, dlist1, sname='none'):
-        dlist1 = self.merge_similar_elements(dlist1, similarity_threshold=0.8)
+        dlist1 = self.merge_similar_elements(dlist1, 0.8)
         print('dlist1>>len:{0}'.format(len(dlist1)))
         outlist1=[]
         bunkatu=self.bunkatu
