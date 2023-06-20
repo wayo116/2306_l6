@@ -239,7 +239,7 @@ class Dell6:
     def get_outlist2(self, dlist1, sname='none'):
         arr = dlist1
         cnt = 0
-        icchisu = 2
+        icchisu = 5
         while True:
 
             # print("cnt",cnt)
@@ -251,6 +251,7 @@ class Dell6:
 
             cnt = cnt + 1
         dlist1 = arr
+        print("len(arr)",len(arr))
 
         print('dlist1>>len:{0}'.format(len(dlist1)))
         outlist1=[]
