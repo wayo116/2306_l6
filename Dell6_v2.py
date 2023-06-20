@@ -139,18 +139,22 @@ class Dell6:
         print('予想個数{}'.format(len(dlist1)))
         print('予想当選額{0}'.format(-len(dlist1)*0.02+cnt3*0.1+cnt4*0.9+cnt5*30+cnt6*10000))
 
-    def merge_similar_elements(self, matrix, min_similar_elements):
-        merged_matrix = []
-        for row in matrix:
-            merged_row = []
-            for element in row:
-                similar_elements = [merged_element for merged_element in merged_row if SequenceMatcher(None, element, merged_element).ratio() == 1]
-                if len(similar_elements) >= min_similar_elements:
-                    merged_row.append(element)
-                else:
-                    merged_row.extend(similar_elements)
-            merged_matrix.append(merged_row)
-        return merged_matrix
+    def remove_duplicates(self,dlist,cnt,icchisu):
+    
+        # print("dlist[" f"{cnt}" "]:" f"{dlist[cnt]}\n")
+
+        newlist = []
+        newlist.extend(dlist[:cnt+1])
+
+        for row in dlist[cnt+1:]:
+            # print("row",row)
+            
+            if len(set(row) & set(dlist[cnt])) < icchisu: 
+                newlist.append(row)
+
+        # print("newlist:" f"{newlist}\n")
+
+        return newlist
         
     def notkako_xdel(self, dlist1, dlist2, ifpattern, sname='none'):
         outlist1=[]
@@ -233,8 +237,21 @@ class Dell6:
     #     return len(list(set(map(tuple, outlist1))))      	  
 
     def get_outlist2(self, dlist1, sname='none'):
-        #print(dlist1)
-        dlist1 = self.merge_similar_elements(dlist1, 5)
+        arr = dlist1
+        cnt = 0
+        icchisu = 2
+        while True:
+
+            # print("cnt",cnt)
+
+            if cnt == len(arr):
+                break
+
+            arr = self.remove_duplicates(arr,cnt,icchisu)
+
+            cnt = cnt + 1
+        dlist1 = arr
+
         print('dlist1>>len:{0}'.format(len(dlist1)))
         outlist1=[]
         bunkatu=self.bunkatu
