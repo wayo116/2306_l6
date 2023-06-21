@@ -23,8 +23,10 @@ from datalists import dlists
 
 from Dell6_v2 import Dell6
 from inner_outer import inner_outer, inner_outer2
+from Utility.kfind import kfind
+
 outlists=[]
-saisinkekka_list=[18,25,26,37,39,43]
+saisinkekka_list=[1,9,34,35,39,42]
 '''
 print('\n----学習----')
 
@@ -110,9 +112,26 @@ saisinkekka=saisinkekka_list
 bunkatu=5
 
 in_hani=[0,1]
-out_hani=[5,15]
+out_hani=[2,11]
 in_combisu=1
 out_combisu=5
+pred_dlists=inner_outer(dlists,in_hani,out_hani,in_combisu,out_combisu)
+
+#shori2は、pred_dlistsには組合せリストを入れる
+outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
+#outlists.extend(outlist)
+#print('outlist',outlist)
+
+print('\n----インナーアウターで予想 in,out範囲自動指定----')
+
+saisinkekka=saisinkekka_list
+bunkatu=5
+inner_list,outer_list = kfind(dlists,30)
+
+in_hani=[inner_list[0],inner_list[1]]
+out_hani=[outer_list[0],outer_list[1]]
+in_combisu=5
+out_combisu=1
 pred_dlists=inner_outer(dlists,in_hani,out_hani,in_combisu,out_combisu)
 
 #shori2は、pred_dlistsには組合せリストを入れる
@@ -126,9 +145,9 @@ saisinkekka=saisinkekka_list
 bunkatu=5
 
 in_hani=[0,1]
-out_hani=[5,15]
-in_combisu=3
-out_combisu=2
+out_hani=[2,11]
+in_combisu=1
+out_combisu=4
 notinout_combisu=1
 pred_dlists=inner_outer2(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout_combisu)
 
@@ -136,3 +155,6 @@ pred_dlists=inner_outer2(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
 #outlists.extend(outlist)
 #print('outlist',outlist)
+
+from google.colab import drive
+drive.mount('/content/drive')
