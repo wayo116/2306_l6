@@ -58,10 +58,10 @@ def kfind(dlist, taisho_hani):
 
     inner_list = []
     outer_list = []
-    inner_list.append(min(frequent_numbers))
-    inner_list.append(max(frequent_numbers))
-    outer_list.append(min(outlier_numbers))
-    outer_list.append(max(outlier_numbers))
+    inner_list.append(min(frequent_numbers)-1)
+    inner_list.append(max(frequent_numbers)-1)
+    outer_list.append(min(outlier_numbers)-1)
+    outer_list.append(max(outlier_numbers)-1)
     print("inner_list:"f"{inner_list}\n" "outer_list:"f"{outer_list}\n")
 
     return inner_list, outer_list
