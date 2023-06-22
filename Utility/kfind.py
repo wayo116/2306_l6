@@ -52,7 +52,7 @@ def kfind(dlist, taisho_hani):
     outlier_numbers = [item[0] for item in sorted_counts[-10:]]  # 出現回数の下位*つを取得
 
     # 結果の表示
-    # print("よく出現する数字:", sorted_counts)
+    print("よく出現する数字:", sorted_counts)
     # print("よく出現する数字の範囲:", min(frequent_numbers), "-", max(frequent_numbers))
     # print("外れ値の範囲:", min(outlier_numbers), "-", max(outlier_numbers))
 
