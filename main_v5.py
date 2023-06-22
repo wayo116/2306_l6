@@ -22,11 +22,11 @@ from datalists import dlists
 # from find_kaisaihani import find_kaisaihani
 
 from Dell6_v2 import Dell6
-from inner_outer import inner_outer, inner_outer2
-from Utility.kfind import kfind
+from inner_outer import inner_outer, inner_outer2, inner_outer3
+from Utility.kfind import kfind, kfind2
 
 outlists=[]
-saisinkekka_list=[1,9,34,35,39,42]
+saisinkekka_list=[9,16,18,19,39,41]
 '''
 print('\n----学習----')
 
@@ -112,7 +112,7 @@ saisinkekka=saisinkekka_list
 bunkatu=5
 
 in_hani=[0,1]
-out_hani=[2,11]
+out_hani=[5,15]
 in_combisu=1
 out_combisu=5
 pred_dlists=inner_outer(dlists,in_hani,out_hani,in_combisu,out_combisu)
@@ -122,34 +122,34 @@ outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
 #outlists.extend(outlist)
 #print('outlist',outlist)
 
-print('\n----インナーアウターで予想 in,out範囲自動指定----')
+print('\n----インナーアウターで予想2 in,out範囲自動指定----')
 
 saisinkekka=saisinkekka_list
 bunkatu=5
-inner_list,outer_list = kfind(dlists,30)
+inner_list,outer_list = kfind2(dlists,10)
 
-in_hani=[inner_list[0],inner_list[1]]
-out_hani=[outer_list[0],outer_list[1]]
+in_hani=inner_list
+out_hani=outer_list
 in_combisu=5
 out_combisu=1
-pred_dlists=inner_outer(dlists,in_hani,out_hani,in_combisu,out_combisu)
+pred_dlists=inner_outer2(dlists,in_hani,out_hani,in_combisu,out_combisu)
 
 #shori2は、pred_dlistsには組合せリストを入れる
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
 #outlists.extend(outlist)
 #print('outlist',outlist)
 
-print('\n----インナーアウター2で予想----')
+print('\n----インナーアウター3で予想----')
 
 saisinkekka=saisinkekka_list
 bunkatu=5
 
-in_hani=[0,1]
-out_hani=[2,11]
-in_combisu=1
-out_combisu=4
+in_hani=[0,10]
+out_hani=[20,30]
+in_combisu=4
+out_combisu=1
 notinout_combisu=1
-pred_dlists=inner_outer2(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout_combisu)
+pred_dlists=inner_outer3(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout_combisu)
 
 #shori2は、pred_dlistsには組合せリストを入れる
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
