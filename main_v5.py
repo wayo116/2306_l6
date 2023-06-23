@@ -126,10 +126,10 @@ print('\n----インナーアウターで予想2 in,out範囲自動指定----')
 
 saisinkekka=saisinkekka_list
 bunkatu=5
-inner_hani,outer_hani = kfind2(dlists,10)
+inner_idxs,outer_idxs = kfind2(dlists,10)
 
-in_hani=inner_hani
-out_hani=outer_hani
+in_hani=inner_idxs
+out_hani=outer_idxs
 in_combisu=5
 out_combisu=1
 pred_dlists=inner_outer2(dlists,in_hani,out_hani,in_combisu,out_combisu)
