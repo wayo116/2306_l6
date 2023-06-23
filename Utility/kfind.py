@@ -111,11 +111,11 @@ def kfind2(dlist, taisho_hani):
     
     # よく出現する数字の範囲を取得
     # frequent_numbers = [item[0] for item in sorted_counts[:10]]  # 出現回数の上位*つを取得
-    frequent_numbers = [item[0] for item in sorted_counts[:10] if item[1]>1]
+    frequent_numbers = [item[0]-1 for item in sorted_counts[:10] if item[1]>1]
 
     # 外れ値の範囲を取得
     # outlier_numbers = [item[0] for item in sorted_counts[-10:]]  # 出現回数の下位*つを取得
-    outlier_numbers = [item[0] for item in sorted_counts[-10:] if item[1]<2]
+    outlier_numbers = [item[0]-1 for item in sorted_counts[-10:] if item[1]<2]
 
     # 結果の表示
     print("よく出現する数字:", sorted_counts)
