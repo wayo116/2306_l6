@@ -55,15 +55,15 @@ def kfind(dlist, taisho_hani):
     # print("よく出現する数字の範囲:", min(frequent_numbers), "-", max(frequent_numbers))
     # print("外れ値の範囲:", min(outlier_numbers), "-", max(outlier_numbers))
 
-    inner_list = []
-    outer_list = []
-    inner_list.append(min(frequent_numbers)-1)
-    inner_list.append(max(frequent_numbers)-1)
-    outer_list.append(max(frequent_numbers)-1)
-    outer_list.append(max(outlier_numbers)-1)
-    print("inner_list:"f"{inner_list}\n" "outer_list:"f"{outer_list}\n")
+    inner_hani = []
+    outer_hani = []
+    inner_hani.append(min(frequent_numbers)-1)
+    inner_hani.append(max(frequent_numbers)-1)
+    outer_hani.append(max(frequent_numbers)-1)
+    outer_hani.append(max(outlier_numbers)-1)
+    print("inner_hani:"f"{inner_hani}\n" "outer_hani:"f"{outer_hani}\n")
 
-    return inner_list, outer_list
+    return inner_hani, outer_hani
 
 
 def kfind2(dlist, taisho_hani):
@@ -122,19 +122,19 @@ def kfind2(dlist, taisho_hani):
     # print("よくoutlier_numbers出現する数字の範囲:", min(frequent_numbers), "-", max(frequent_numbers))
     # print("外れ値の範囲:", min(outlier_numbers), "-", max(outlier_numbers))
 
-    # inner_list = []
-    # outer_list = []
-    # inner_list.append(min(frequent_numbers)-1)
-    # inner_list.append(max(frequent_numbers)-1)
-    # outer_list.append(max(frequent_numbers)-1)
-    # outer_list.append(max(outlier_numbers)-1)
+    # inner_hani = []
+    # outer_hani = []
+    # inner_hani.append(min(frequent_numbers)-1)
+    # inner_hani.append(max(frequent_numbers)-1)
+    # outer_hani.append(max(frequent_numbers)-1)
+    # outer_hani.append(max(outlier_numbers)-1)
 
-    inner_list = frequent_numbers
-    outer_list = outlier_numbers
-    print("inner_list:"f"{inner_list}\n" "outer_list:"f"{outer_list}\n")
+    inner_hani = frequent_numbers
+    outer_hani = outlier_numbers
+    print("inner_hani:"f"{inner_hani}\n" "outer_hani:"f"{outer_hani}\n")
 
-    return inner_list, outer_list
+    return inner_hani, outer_hani
 
 
-# inner_list, outer_list = kfind(dlists,20)
+# inner_hani, outer_hani = kfind(dlists,20)
 
