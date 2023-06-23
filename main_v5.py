@@ -26,7 +26,17 @@ from inner_outer import inner_outer, inner_outer2, inner_outer3
 from Utility.kfind import kfind, kfind2
 
 outlists=[]
-saisinkekka_list=[9,16,18,19,39,41]
+
+kaisai = 0
+if kaisai == 0:
+    saisinkekka_list=[9,16,18,19,39,41]
+    dlists = dlists
+elif kaisai > 0:
+    saisinkekka_list = dlists[kaisai-1]
+    dlists = dlists[kaisai:]
+print("saisinkekka_list",saisinkekka_list)
+print("dlists",dlists[:5])
+
 '''
 print('\n----学習----')
 
