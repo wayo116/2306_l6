@@ -22,7 +22,7 @@ def kfind(dlist, taisho_hani):
 
                 if dyouso in new_dlists[ii]:
                     # print("hit-idx:" f"{ii}\n")
-                    fbox.append(ii)
+                    fbox.append(ii-1)
                     break
 
         # print("fbox:"f"{fbox}\n")
@@ -51,16 +51,16 @@ def kfind(dlist, taisho_hani):
     outlier_numbers = [item[0] for item in sorted_counts[-10:]]  # 出現回数の下位*つを取得
 
     # 結果の表示
-    print("よく出現する数字:", sorted_counts)
+    print("よく出現するidx:", sorted_counts)
     # print("よく出現する数字の範囲:", min(frequent_numbers), "-", max(frequent_numbers))
     # print("外れ値の範囲:", min(outlier_numbers), "-", max(outlier_numbers))
 
     inner_idxs = []
     outer_idxs = []
-    inner_idxs.append(min(frequent_numbers)-1)
-    inner_idxs.append(max(frequent_numbers)-1)
-    outer_idxs.append(max(frequent_numbers)-1)
-    outer_idxs.append(max(outlier_numbers)-1)
+    inner_idxs.append(min(frequent_numbers))
+    inner_idxs.append(max(frequent_numbers))
+    outer_idxs.append(max(frequent_numbers))
+    outer_idxs.append(max(outlier_numbers))
     print("inner_idxs:"f"{inner_idxs}\n" "outer_idxs:"f"{outer_idxs}\n")
 
     return inner_idxs, outer_idxs
@@ -87,7 +87,7 @@ def kfind2(dlist, taisho_hani):
 
                 if dyouso in new_dlists[ii]:
                     # print("hit-idx:" f"{ii}\n")
-                    fbox.append(ii)
+                    fbox.append(ii-1)
                     break
 
         # print("fbox:"f"{fbox}\n")
@@ -111,14 +111,14 @@ def kfind2(dlist, taisho_hani):
     
     # よく出現する数字の範囲を取得
     # frequent_numbers = [item[0] for item in sorted_counts[:10]]  # 出現回数の上位*つを取得
-    frequent_numbers = [item[0]-1 for item in sorted_counts[:10] if item[1]>1]
+    frequent_numbers = [item[0] for item in sorted_counts[:10] if item[1]>1]
 
     # 外れ値の範囲を取得
     # outlier_numbers = [item[0] for item in sorted_counts[-10:]]  # 出現回数の下位*つを取得
-    outlier_numbers = [item[0]-1 for item in sorted_counts[-10:] if item[1]<2]
+    outlier_numbers = [item[0] for item in sorted_counts[-10:] if item[1]<2]
 
     # 結果の表示
-    print("よく出現する数字:", sorted_counts)
+    print("よく出現するidx:", sorted_counts)
     # print("よくoutlier_numbers出現する数字の範囲:", min(frequent_numbers), "-", max(frequent_numbers))
     # print("外れ値の範囲:", min(outlier_numbers), "-", max(outlier_numbers))
 
