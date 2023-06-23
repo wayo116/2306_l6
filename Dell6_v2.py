@@ -155,6 +155,25 @@ class Dell6:
         # print("newlist:" f"{newlist}\n")
 
         return newlist
+
+    def similar(self, dlist1):
+        arr = dlist1
+        cnt = 0
+        icchisu = 5
+        while True:
+
+            # print("cnt",cnt)
+
+            if cnt == len(arr):
+                break
+
+            arr = self.remove_duplicates(arr,cnt,icchisu)
+
+            cnt = cnt + 1
+        #dlist1 = arr
+        print("len(arr)",len(arr))
+
+        return arr
         
     def notkako_xdel(self, dlist1, dlist2, ifpattern, sname='none'):
         outlist1=[]
@@ -237,21 +256,6 @@ class Dell6:
     #     return len(list(set(map(tuple, outlist1))))      	  
 
     def get_outlist2(self, dlist1, sname='none'):
-        arr = dlist1
-        cnt = 0
-        icchisu = 5
-        while True:
-
-            # print("cnt",cnt)
-
-            if cnt == len(arr):
-                break
-
-            arr = self.remove_duplicates(arr,cnt,icchisu)
-
-            cnt = cnt + 1
-        dlist1 = arr
-        print("len(arr)",len(arr))
 
         print('dlist1>>len:{0}'.format(len(dlist1)))
         outlist1=[]
@@ -263,7 +267,7 @@ class Dell6:
                  outlist1.append(dlist1[ii+ii2])
                  print('{0} get_outlist:{1}'.format(sname, dlist1[ii+ii2]))
         return outlist1
-       
+        
     # def shori(self):
     #     outlist1=self.combi(self.pred_dlists, '組合せ')
     #     outlist1=self.notkako_xdel(self.kako_sum(self.dlists, '合計範囲'), outlist1, 5, '合計範囲内')
@@ -316,6 +320,9 @@ class Dell6:
 
         self.check(outlist1, self.saisinkekka)
 
+        outlist1 = self.similar(outlist1)
+        self.check(outlist1, self.saisinkekka)
+        
         outlist2=self.get_outlist2(outlist1, '**') 
         self.check(outlist2, self.saisinkekka)
         return outlist2
