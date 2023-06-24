@@ -149,7 +149,7 @@ class Dell6:
         for row in dlist[cnt+1:]:
             # print("row",row)
             
-            if len(set(row) & set(dlist[cnt])) == icchisu: 
+            if len(set(row) & set(dlist[cnt])) < icchisu: 
                 newlist.append(row)
 
         # print("newlist:" f"{newlist}\n")
@@ -159,7 +159,8 @@ class Dell6:
     def similar(self, dlist1):
         arr = dlist1
         cnt = 0
-        icchisu = 1
+        icchisu = 5
+
 
         while True:
 
