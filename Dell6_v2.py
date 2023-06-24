@@ -159,8 +159,7 @@ class Dell6:
     def similar(self, dlist1):
         arr = dlist1
         cnt = 0
-        icchisu = 3
-
+        icchisu = 6
 
         while True:
 
