@@ -117,7 +117,7 @@ def kfind2(dlist, taisho_hani):
     # outlier_numbers = [item[0] for item in sorted_counts[-10:]]  # 出現回数の下位*つを取得
     outlier_numbers = [item[0] for item in sorted_counts[-10:] if item[1]<2 and item[0]>10]
     outhani_list=[]
-    for ii in range(20,40):
+    for ii in range(20,30):
         outhani_list.append(ii)
     outlier_numbers = list(set(outlier_numbers) ^ set(outhani_list))
     
