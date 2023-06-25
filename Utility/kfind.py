@@ -116,7 +116,11 @@ def kfind2(dlist, taisho_hani):
     # 外れ値の範囲を取得
     # outlier_numbers = [item[0] for item in sorted_counts[-10:]]  # 出現回数の下位*つを取得
     outlier_numbers = [item[0] for item in sorted_counts[-10:] if item[1]<2]
-
+    outhani_list=[]
+    for ii in range(20:30):
+        outhani_list.append(ii)
+    outlier_numbers = list(set(outlier_numbers) ^ set(outhani_list))
+    
     # 結果の表示
     print("よく出現するidx:", sorted_counts)
     # print("よくoutlier_numbers出現する数字の範囲:", min(frequent_numbers), "-", max(frequent_numbers))
