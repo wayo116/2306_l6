@@ -1,4 +1,4 @@
-from datalists import dlists
+#from datalists import dlists
 import numpy as np
 
 def yobu(dlists, kaisus):
