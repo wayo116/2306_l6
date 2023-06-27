@@ -38,8 +38,8 @@ def aisho(dlists, kaisus):
 
     return dcnt
 
-kaisus = 1500
-yobu(dlists, kaisus)
-aisho(dlists, kaisus)
+#kaisus = 1500
+#yobu(dlists, kaisus)
+#aisho(dlists, kaisus)
 
         
