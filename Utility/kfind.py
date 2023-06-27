@@ -1,7 +1,7 @@
-from datalists import dlists
+#from datalists import dlists
 from collections import Counter
 
-def kfind(dlist, taisho_hani):
+def kfind(dlists, taisho_hani):
     st = 0
     ed = 100
     # taisho_hani = 50
@@ -66,7 +66,7 @@ def kfind(dlist, taisho_hani):
     return inner_idxs, outer_idxs
 
 
-def kfind2(dlist, taisho_hani):
+def kfind2(dlists, taisho_hani):
     st = 0
     ed = 100
     # taisho_hani = 50
