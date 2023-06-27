@@ -26,7 +26,7 @@ def match_combi(dlists, kaisus, sikichi):
                                 # print(newlist)
                                 newlists.append(newlist)
     print('match_combi組合せ数',len(newlists))
-    return result
+    return newlists
 
 # kaisus = 1500
 # sikichi = 10
