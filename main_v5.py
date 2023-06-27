@@ -22,14 +22,16 @@ from datalists import dlists
 # from find_kaisaihani import find_kaisaihani
 
 from Dell6_v2 import Dell6
-from inner_outer import inner_outer, inner_outer2, inner_outer3
+from inner_outer import inner_outer, inner_outer2, inner_outer3, inner_outer4
 from Utility.kfind import kfind, kfind2
+from Utility.match_combi import match_combi
 
 outlists=[]
 
-kaisai = 0
+kaisai = 1
 if kaisai == 0:
-    saisinkekka_list=[9,16,18,19,39,41]
+    #最新結果は未登録の時
+    saisinkekka_list=[12,14,18,25,36,42]
     dlists = dlists
 elif kaisai > 0:
     saisinkekka_list = dlists[kaisai-1]
@@ -160,6 +162,39 @@ in_combisu=4
 out_combisu=1
 notinout_combisu=1
 pred_dlists=inner_outer3(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout_combisu)
+
+#shori2は、pred_dlistsには組合せリストを入れる
+outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
+#outlists.extend(outlist)
+#print('outlist',outlist)
+
+print('\n----インナーアウター4で予想----')
+
+saisinkekka=saisinkekka_list
+bunkatu=5
+
+inner_idxs,outer_idxs = kfind2(dlists,10)
+
+in_hani=inner_idxs
+out_hani=outer_idxs
+in_combisu=4
+out_combisu=1
+notinout_combisu=1
+pred_dlists=inner_outer4(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout_combisu)
+
+#shori2は、pred_dlistsには組合せリストを入れる
+outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
+#outlists.extend(outlist)
+#print('outlist',outlist)
+
+print('\n----match_combiで予想----')
+
+saisinkekka=saisinkekka_list
+bunkatu=5
+
+kaisus = 1500
+sikichi = 10
+pred_dlists=match_combi(dlists, kaisus, sikichi)
 
 #shori2は、pred_dlistsには組合せリストを入れる
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
