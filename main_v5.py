@@ -22,7 +22,7 @@ from datalists import dlists
 # from find_kaisaihani import find_kaisaihani
 
 from Dell6_v2 import Dell6
-from Utility.inner_outer import inner_outer, inner_outer2, inner_outer3, inner_outer4
+from Utility.inner_outer import inner_outer_manu, inner_outer_auto, inner_outer_other_manu, inner_outer_other_auto
 from Utility.kfind import kfind, kfind2
 from Utility.match_combi import match_combi
 
@@ -118,7 +118,7 @@ outlist=Dell6(dlists, diff_list, saisinkekka, bunkatu).shori()
 #print('outlist',outlist)
 '''
 #'''
-print('\n----インナーアウターで予想----')
+print('\n----inner_outer_manuで予想----')
 
 saisinkekka=saisinkekka_list
 bunkatu=5
@@ -127,14 +127,14 @@ in_hani=[0,1]
 out_hani=[5,15]
 in_combisu=1
 out_combisu=5
-pred_dlists=inner_outer(dlists,in_hani,out_hani,in_combisu,out_combisu)
+pred_dlists=inner_outer_manu(dlists,in_hani,out_hani,in_combisu,out_combisu)
 
 #shori2は、pred_dlistsには組合せリストを入れる
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
 #outlists.extend(outlist)
 #print('outlist',outlist)
 
-print('\n----インナーアウターで予想2 in,out範囲自動指定----')
+print('\n----inner_outer_autoで予想----')
 
 saisinkekka=saisinkekka_list
 bunkatu=5
@@ -144,14 +144,14 @@ in_hani=inner_idxs
 out_hani=outer_idxs
 in_combisu=5
 out_combisu=1
-pred_dlists=inner_outer2(dlists,in_hani,out_hani,in_combisu,out_combisu)
+pred_dlists=inner_outer_auto(dlists,in_hani,out_hani,in_combisu,out_combisu)
 
 #shori2は、pred_dlistsには組合せリストを入れる
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
 #outlists.extend(outlist)
 #print('outlist',outlist)
 
-print('\n----インナーアウター3で予想----')
+print('\n----inner_outer_other_manuで予想----')
 
 saisinkekka=saisinkekka_list
 bunkatu=5
@@ -161,14 +161,14 @@ out_hani=[20,30]
 in_combisu=4
 out_combisu=1
 notinout_combisu=1
-pred_dlists=inner_outer3(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout_combisu)
+pred_dlists=inner_outer_other_manu(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout_combisu)
 
 #shori2は、pred_dlistsには組合せリストを入れる
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
 #outlists.extend(outlist)
 #print('outlist',outlist)
 
-print('\n----インナーアウター4で予想----')
+print('\n----inner_outer_other_autoで予想----')
 
 saisinkekka=saisinkekka_list
 bunkatu=5
@@ -180,7 +180,7 @@ out_hani=outer_idxs
 in_combisu=4
 out_combisu=1
 notinout_combisu=1
-pred_dlists=inner_outer4(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout_combisu)
+pred_dlists=inner_outer_other_auto(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout_combisu)
 
 #shori2は、pred_dlistsには組合せリストを入れる
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
