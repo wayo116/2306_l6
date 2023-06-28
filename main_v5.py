@@ -24,7 +24,7 @@ from datalists import dlists
 from Dell6_v2 import Dell6
 from Utility.inner_outer import inner_outer_manu, inner_outer_auto, inner_outer_other_manu, inner_outer_other_auto
 from Utility.kfind import kfind, kfind2
-from Utility.match_combi import match_combi
+from Utility.match_combi import yobu_combi
 
 outlists=[]
 
@@ -194,7 +194,7 @@ bunkatu=5
 
 kaisus = 50
 sikichi = 1
-pred_dlists=match_combi(dlists, kaisus, sikichi)
+pred_dlists=yobu_combi(dlists, kaisus, sikichi)
 
 #shori2は、pred_dlistsには組合せリストを入れる
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
