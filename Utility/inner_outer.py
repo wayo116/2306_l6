@@ -8,7 +8,7 @@ def combi(num_list,combisu):
     #print('new_list',new_list)
     return new_list
     
-def inner_outer(dlists,in_hani,out_hani,in_combisu,out_combisu):
+def inner_outer_manu(dlists,in_hani,out_hani,in_combisu,out_combisu):
     print('----inner_outer----')
     
     inner_list = list(set(list(itertools.chain.from_iterable(dlists[in_hani[0]:in_hani[1]]))))
@@ -38,7 +38,7 @@ def inner_outer(dlists,in_hani,out_hani,in_combisu,out_combisu):
     return newlists
 
 
-def inner_outer2(dlists,in_hani,out_hani,in_combisu,out_combisu):
+def inner_outer_auto(dlists,in_hani,out_hani,in_combisu,out_combisu):
     print('----inner_outer----')
 
     new_dlists_in = []
@@ -75,7 +75,7 @@ def inner_outer2(dlists,in_hani,out_hani,in_combisu,out_combisu):
 
     return newlists
 
-def inner_outer3(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout_combisu):
+def inner_outer_other_manu(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout_combisu):
     print('----inner_outer----')
     inner_list = list(set(list(itertools.chain.from_iterable(dlists[in_hani[0]:in_hani[1]]))))
     print('inner_list',inner_list)
@@ -112,7 +112,7 @@ def inner_outer3(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout_combisu
 
     return newlists
 
-def inner_outer4(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout_combisu):
+def inner_outer_other_auto(dlists,in_hani,out_hani,in_combisu,out_combisu,notinout_combisu):
     print('----inner_outer----')
 
     new_dlists_in = []
