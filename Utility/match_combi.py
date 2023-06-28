@@ -4,7 +4,7 @@ from Utility.matching import yobu
 import itertools
 
 
-def match_combi(dlists, kaisus, sikichi):
+def yobu_combi(dlists, kaisus, sikichi):
     dcnt = yobu(dlists, kaisus)
 
     result = []
@@ -30,4 +30,4 @@ def match_combi(dlists, kaisus, sikichi):
 
 # kaisus = 1500
 # sikichi = 10
-# match_combi(dlists, kaisus, sikichi)
+# yobu_combi(dlists, kaisus, sikichi)
