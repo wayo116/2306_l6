@@ -87,7 +87,13 @@ def aisho_dcnt(dlists, kaisus):
     
     return aisho(dlists, kaisus)
 
-
+def find_elements(lst,st,ed):
+    result = []
+    for num in lst:
+        if st <= num <= ed:
+            result.append(num)
+    return result
+    
 def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi):
 
     result = []
@@ -109,7 +115,7 @@ def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi):
     print("result",result)
 
     newlists=[]
-    for no1 in result[0]:
+    for no1 in find_elements(result[0],1,38):
         for no2 in result[1]:
             for no3 in result[2]:
                 for no4 in result[3]:
