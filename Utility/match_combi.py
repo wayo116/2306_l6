@@ -78,12 +78,12 @@ def aisho_lists(dlists, kaisus, sikichi):
     return result
 
 
-def yobu_dcnt(dlists, kaisus, sikichi):
+def yobu_dcnt(dlists, kaisus):
     
     return yobu(dlists, kaisus)
 
 
-def aisho_dcnt(dlists, kaisus, sikichi):
+def aisho_dcnt(dlists, kaisus):
     
     return aisho(dlists, kaisus)
 
