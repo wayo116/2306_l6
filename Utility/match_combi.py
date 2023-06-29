@@ -116,11 +116,11 @@ def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi):
                     for no5 in result[4]:
                         for no6 in result[5]:
                             newlist=[]
-                            if no1<39 and (no2>1 and no2<40) and (no3>2 and no2<41) and (no4>3 and no4<42) and (no5>4 and no5<43) and (no6>5 and no6<44): 
-                                newlist = sorted([no1]+[no2]+[no3]+[no4]+[no5]+[no6])
-                                if len(set(newlist)) == 6:
-                                    # print(newlist)
-                                    newlists.append(newlist)
+                            #if no1<39 and (no2>1 and no2<40) and (no3>2 and no2<41) and (no4>3 and no4<42) and (no5>4 and no5<43) and (no6>5 and no6<44): 
+                            newlist = sorted([no1]+[no2]+[no3]+[no4]+[no5]+[no6])
+                            if len(set(newlist)) == 6:
+                                # print(newlist)
+                                newlists.append(newlist)
     print('match_combi組合せ数',len(newlists))
     return newlists
 
