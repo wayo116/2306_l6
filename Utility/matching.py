@@ -51,6 +51,10 @@ def aisho_near(dlists, kaisus):
             result = int(result + 1)
             dcnt[int(dlists[kaisu][youso]-1), int(dlists[kaisu][youso_hoka]-1)] = result
 
+            result = dcnt[int(dlists[kaisu][youso_hoka]-1), int(dlists[kaisu][youso]-1)]
+            result = int(result + 1)
+            dcnt[int(dlists[kaisu][youso_hoka]-1), int(dlists[kaisu][youso]-1)] = result
+
     np.set_printoptions(threshold=np.inf)
     print("dcnt",dcnt)
 
