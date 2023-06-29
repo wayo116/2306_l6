@@ -28,7 +28,7 @@ from Utility.match_combi import yobu_combi, aisho_combi, yobu_lists, aisho_lists
 
 outlists=[]
 
-kaisai = 0
+kaisai = 1
 if kaisai == 0:
     #最新結果は未登録の時
     saisinkekka_list=[12,14,18,25,36,42]
@@ -117,7 +117,7 @@ outlist=Dell6(dlists, diff_list, saisinkekka, bunkatu).shori()
 #outlists.extend(outlist)
 #print('outlist',outlist)
 '''
-#'''
+'''
 print('\n----inner_outer_manuで予想----')
 
 saisinkekka=saisinkekka_list
@@ -186,7 +186,7 @@ pred_dlists=inner_outer_other_auto(dlists,in_hani,out_hani,in_combisu,out_combis
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
 #outlists.extend(outlist)
 #print('outlist',outlist)
-#'''
+
 print('\n----match_combiで予想----')
 
 saisinkekka=saisinkekka_list
@@ -222,7 +222,7 @@ pred_dlists=aisho_combi(dlists, kaisus, sikichi)
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
 #outlists.extend(outlist)
 #print('outlist',outlist)
-
+'''
 print('\n----match_combiで予想----')
 
 saisinkekka=saisinkekka_list
@@ -233,8 +233,7 @@ sikichi = 1
 yobu_lists = yobu_lists(dlists, kaisus, sikichi)
 
 kaisus = 50
-sikichi = 2
-aisho_dcnt = aisho_dcnt(dlists, kaisus, sikichi)
+aisho_dcnt = aisho_dcnt(dlists, kaisus)
 
 sikichi = 4
 pred_dlists=yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi)
