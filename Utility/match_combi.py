@@ -118,11 +118,11 @@ def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi):
 
     newlists=[]
     for no1 in find_elements(result[0],1,38):
-        for no2 in result[1]:
-            for no3 in result[2]:
-                for no4 in result[3]:
-                    for no5 in result[4]:
-                        for no6 in result[5]:
+        for no2 in find_elements(result[1],2,39):
+            for no3 in find_elements(result[2],3,40):
+                for no4 in find_elements(result[3],4,41):
+                    for no5 in find_elements(result[4],5,42):
+                        for no6 in find_elements(result[5],6,43):
                             newlist=[]
                             #if no1<39 and (no2>1 and no2<40) and (no3>2 and no2<41) and (no4>3 and no4<42) and (no5>4 and no5<43) and (no6>5 and no6<44): 
                             newlist = sorted([no1]+[no2]+[no3]+[no4]+[no5]+[no6])
