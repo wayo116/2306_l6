@@ -38,6 +38,24 @@ def aisho(dlists, kaisus):
 
     return dcnt
 
+
+def aisho_near(dlists, kaisus):
+    dcnt =  np.zeros((43,43))
+
+    # kaisus = 100
+    for kaisu in range(kaisus):
+        for youso in range(5):
+            
+            youso_hoka = youso+1
+            result = dcnt[int(dlists[kaisu][youso]-1), int(dlists[kaisu][youso_hoka]-1)]
+            result = int(result + 1)
+            dcnt[int(dlists[kaisu][youso]-1), int(dlists[kaisu][youso_hoka]-1)] = result
+
+    np.set_printoptions(threshold=np.inf)
+    print("dcnt",dcnt)
+
+    return dcnt
+
 #kaisus = 1500
 #yobu(dlists, kaisus)
 #aisho(dlists, kaisus)
