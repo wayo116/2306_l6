@@ -25,12 +25,13 @@ from Dell6_v2 import Dell6
 from Utility.inner_outer import inner_outer_manu, inner_outer_auto, inner_outer_other_manu, inner_outer_other_auto
 from Utility.kfind import kfind, kfind2
 from Utility.match_combi import yobu_combi, aisho_combi, yobu_lists, aisho_lists, yobu_dcnt, aisho_dcnt, yobu_aisho_combi
+from Utility.max_in_min import max_in_min
 
 outlists=[]
 
-kaisai = 1
+kaisai = 0
 if kaisai == 0:
-    #最新結果は未登録の時
+    #最新結果がcolabにはあるが、gitjubには未登録の時
     saisinkekka_list=[12,14,18,25,36,42]
     dlists = dlists
 elif kaisai > 0:
@@ -228,15 +229,17 @@ print('\n----match_combiで予想----')
 saisinkekka=saisinkekka_list
 bunkatu=5
 
-kaisus = 50
-sikichi = 1
+kaisus = 500
+yobu_dcnt = yobu_dcnt(dlists, kaisus)
+sikichi = max_in_min(yobu_dcnt)
 yobu_lists = yobu_lists(dlists, kaisus, sikichi)
 
-kaisus = 50
+kaisus = 500
 aisho_dcnt = aisho_dcnt(dlists, kaisus)
 
-sikichi = 4
-pred_dlists=yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi)
+sikichi = max_in_min(aisho_dcnt)
+
+pred_dlists = yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi)
 
 #shori2は、pred_dlistsには組合せリストを入れる
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
