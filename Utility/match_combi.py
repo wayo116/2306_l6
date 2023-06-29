@@ -92,8 +92,8 @@ def find_elements(lst,st,ed):
     for num in lst:
         if st <= num <= ed:
             result.append(num)
-    print(lst)        
-    print(result)
+    #print(lst)        
+    #print(result)
     return result
     
 def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi):
