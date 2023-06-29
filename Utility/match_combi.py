@@ -1,6 +1,6 @@
 #from datalists import dlists
 import numpy as np
-from Utility.matching import yobu, aisho
+from Utility.matching import yobu, aisho, aisho_near
 import itertools
 
 
@@ -30,7 +30,8 @@ def yobu_combi(dlists, kaisus, sikichi):
 
 
 def aisho_combi(dlists, kaisus, sikichi):
-    dcnt = aisho(dlists, kaisus)
+    #dcnt = aisho(dlists, kaisus)
+    dcnt = aisho_near(dlists, kaisus)
 
     result = []
     for youso in dlists[0]:
@@ -67,7 +68,8 @@ def yobu_lists(dlists, kaisus, sikichi):
 
 
 def aisho_lists(dlists, kaisus, sikichi):
-    dcnt = aisho(dlists, kaisus)
+    #dcnt = aisho(dlists, kaisus)
+    dcnt = aisho_near(dlists, kaisus)
 
     result = []
     for youso in dlists[0]:
@@ -85,7 +87,8 @@ def yobu_dcnt(dlists, kaisus):
 
 def aisho_dcnt(dlists, kaisus):
     
-    return aisho(dlists, kaisus)
+    #return aisho(dlists, kaisus)
+    return aisho_near(dlists, kaisus)
 
 def find_elements(lst,st,ed):
     result = []
