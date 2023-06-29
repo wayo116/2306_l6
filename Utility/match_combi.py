@@ -78,6 +78,16 @@ def aisho_lists(dlists, kaisus, sikichi):
     return result
 
 
+def yobu_dcnt(dlists, kaisus, sikichi):
+    
+    return yobu(dlists, kaisus)
+
+
+def aisho_dcnt(dlists, kaisus, sikichi):
+    
+    return aisho(dlists, kaisus)
+
+
 def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi):
 
     result = []
@@ -113,17 +123,3 @@ def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi):
     print('match_combi組合せ数',len(newlists))
     return newlists
 
-# kaisus = 1500
-# sikichi = 10
-# yobu_combi(dlists, kaisus, sikichi)
-
-# from datalists import dlists
-# kaisus = 50
-# sikichi = 1
-# yobu_lists = yobu_lists(dlists, kaisus, sikichi)
-
-# kaisus = 50
-# aisho_dcnt = aisho(dlists, kaisus)
-
-# sikichi = 4
-# yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi)
