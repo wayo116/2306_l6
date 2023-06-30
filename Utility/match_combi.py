@@ -106,8 +106,8 @@ def find_elements(lst,st,ed):
     return result
 
 
-def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi):
-    tates = tate_hani(dlists,5)
+def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi, thani):
+    tates = tate_hani(dlists,thani)
     
     result = []
     for ii in range(6):
