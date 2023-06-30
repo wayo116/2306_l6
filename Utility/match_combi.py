@@ -1,6 +1,7 @@
 #from datalists import dlists
 import numpy as np
 from Utility.matching import yobu, aisho, aisho_near
+from Utility.tate_hani import tate_hani
 import itertools
 
 
@@ -104,7 +105,8 @@ def find_elements(lst,st,ed):
     return result
     
 def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi):
-
+    tates = tate_hani(dlists,5)
+    
     result = []
     for ii in range(6):
         temp = []
@@ -115,7 +117,8 @@ def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi):
             print("aisho_dcnt[" f"{youso-1}" "]=" f"{aisho_dcnt[youso-1]}")
             temp.extend([idx+1 for idx, item in enumerate(aisho_dcnt[youso-1]) if item >= sikichi])
             #temp.extend([idx+1 for idx, item in enumerate(aisho_dcnt[youso-1]) if item >= sikichi][0])
-        temp = find_elements(temp,ii+1,ii+38)
+        #temp = find_elements(temp,ii+1,ii+38)
+        temp = find_elements(temp,min(tates[ii]),max(tates[ii]))
         print("temp",temp)
 
         sorted_result = sorted(set(temp)) 
