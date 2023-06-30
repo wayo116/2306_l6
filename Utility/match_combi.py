@@ -9,7 +9,8 @@ def yobu_combi(dlists, kaisus, sikichi):
 
     result = []
     for youso in dlists[0]:
-        result.append([idx+1 for idx, item in enumerate(dcnt[youso-1]) if item >= sikichi])
+        #result.append([idx+1 for idx, item in enumerate(dcnt[youso-1]) if item >= sikichi])
+        result.append([idx+1 for idx, item in enumerate(dcnt[youso-1]) if item == sikichi])
 
     print(result)
 
@@ -35,7 +36,8 @@ def aisho_combi(dlists, kaisus, sikichi):
 
     result = []
     for youso in dlists[0]:
-        result.append([idx+1 for idx, item in enumerate(dcnt[youso-1]) if item >= sikichi])
+        #result.append([idx+1 for idx, item in enumerate(dcnt[youso-1]) if item >= sikichi])
+        result.append([idx+1 for idx, item in enumerate(dcnt[youso-1]) if item == sikichi])
 
     print(result)
 
@@ -60,7 +62,8 @@ def yobu_lists(dlists, kaisus, sikichi):
 
     result = []
     for youso in dlists[0]:
-        result.append([idx+1 for idx, item in enumerate(dcnt[youso-1]) if item >= sikichi])
+        #result.append([idx+1 for idx, item in enumerate(dcnt[youso-1]) if item >= sikichi])
+        result.append([idx+1 for idx, item in enumerate(dcnt[youso-1]) if item == sikichi])
 
     print(result)
 
@@ -73,7 +76,8 @@ def aisho_lists(dlists, kaisus, sikichi):
 
     result = []
     for youso in dlists[0]:
-        result.append([idx+1 for idx, item in enumerate(dcnt[youso-1]) if item >= sikichi])
+        #result.append([idx+1 for idx, item in enumerate(dcnt[youso-1]) if item >= sikichi])
+        result.append([idx+1 for idx, item in enumerate(dcnt[youso-1]) if item == sikichi])
 
     print(result)
 
@@ -109,7 +113,8 @@ def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi):
         for youso in yobu_lists[ii]:
             print("youso",youso)
             print("aisho_dcnt[" f"{youso-1}" "]=" f"{aisho_dcnt[youso-1]}")
-            temp.extend([idx+1 for idx, item in enumerate(aisho_dcnt[youso-1]) if item >= sikichi])
+            #temp.extend([idx+1 for idx, item in enumerate(aisho_dcnt[youso-1]) if item >= sikichi])
+            temp.extend([idx+1 for idx, item in enumerate(aisho_dcnt[youso-1]) if item == sikichi])
         temp = find_elements(temp,ii+1,ii+38)
         print("temp",temp)
 
