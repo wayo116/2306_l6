@@ -15,7 +15,7 @@ def yobu(dlists, kaisus):
             dcnt[int(dlists[mae_kaisu][youso]-1),int(dlists[usiro_kaisu][youso]-1)] = result
 
     np.set_printoptions(threshold=np.inf)
-    print("dcnt",dcnt)
+    #print("dcnt",dcnt)
 
     return dcnt
 
@@ -34,7 +34,7 @@ def aisho(dlists, kaisus):
                     dcnt[int(dlists[kaisu][youso]-1), int(dlists[kaisu][youso_hoka]-1)] = result
 
     np.set_printoptions(threshold=np.inf)
-    print("dcnt",dcnt)
+    #print("dcnt",dcnt)
 
     return dcnt
 
@@ -56,7 +56,7 @@ def aisho_near(dlists, kaisus):
             dcnt[int(dlists[kaisu][youso_hoka]-1), int(dlists[kaisu][youso]-1)] = result
 
     np.set_printoptions(threshold=np.inf)
-    print("dcnt",dcnt)
+    #print("dcnt",dcnt)
 
     return dcnt
 
