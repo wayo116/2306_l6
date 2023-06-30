@@ -6,3 +6,5 @@ def tate_hani(dlists, kaisus):
         results.append(result)
 
     print(results)
+    
+    return results
