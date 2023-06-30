@@ -2,8 +2,7 @@ def tate_hani(dlists, kaisus):
     results=[]
     for ii in range(6):
         result=[]
-        for kaisu in kaisus:
-            result.append(int(dlists[kaisu][ii]))
+        result = [dlists[kaisu][ii] for kaisu in kaisus]
         results.append(result)
 
     print(results)
