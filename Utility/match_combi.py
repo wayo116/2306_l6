@@ -125,6 +125,17 @@ def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi):
 
     print("result",result)
 
+    new_result= []
+    new_result.append(result[0])
+    new_result.append(list(set(result[1])-set(result[0])))
+    new_result.append(list(set(result[2])-set(result[1])-set(result[0])))
+    new_result.append(list(set(result[3])-set(result[2])-set(result[1])-set(result[0])))
+    new_result.append(list(set(result[4])-set(result[3])-set(result[2])-set(result[1])-set(result[0])))
+    new_result.append(list(set(result[5])-set(result[4])-set(result[3])-set(result[2])-set(result[1])-set(result[0])))
+    print("new_result",new_result)
+
+    result = new_result
+    
     newlists=[]
     for no1 in result[0]:
         for no2 in result[1]:
