@@ -112,16 +112,16 @@ def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi, thani):
     result = []
     for ii in range(6):
         temp = []
-        print("yobu_lists[" f"{ii}" "]=" f"{yobu_lists[ii]}")
+        #print("yobu_lists[" f"{ii}" "]=" f"{yobu_lists[ii]}")
 
         for youso in yobu_lists[ii]:
-            print("youso",youso)
-            print("aisho_dcnt[" f"{youso-1}" "]=" f"{aisho_dcnt[youso-1]}")
+            #print("youso",youso)
+            #print("aisho_dcnt[" f"{youso-1}" "]=" f"{aisho_dcnt[youso-1]}")
             temp.extend([idx+1 for idx, item in enumerate(aisho_dcnt[youso-1]) if item >= sikichi])
             #temp.extend([idx+1 for idx, item in enumerate(aisho_dcnt[youso-1]) if item >= sikichi][0])
         #temp = find_elements(temp,ii+1,ii+38)
         temp = find_elements(temp,min(tates[ii]),max(tates[ii]))
-        print("temp",temp)
+        #print("temp",temp)
 
         sorted_result = sorted(set(temp)) 
         print("sorted_result",sorted_result)
