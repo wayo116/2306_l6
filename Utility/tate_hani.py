@@ -24,9 +24,9 @@ def tate_hani2(dlists, kaisus, topx):
     for ii in range(6):
         result=[]
         c = collections.Counter(results[ii])
-        counts = list(zip(*c.most_common()))
-        countsx = counts[:topx]
-        result = [min(countsx),max(countsx)]
+        values,counts = list(zip(*c.most_common()))
+        valuesx = values[:topx]
+        result = [min(valuesx),max(valuesx)]
         
         results2.append(result)
         
