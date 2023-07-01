@@ -191,7 +191,7 @@ class Dell6:
                         cnt=cnt+1
                 if cnt<=2:
                     outlist1.append(d2)
-            if ifpattern==4 and len(set(d1)&set(d2))==1:
+            if ifpattern==4 and len(set(d1)&set(d2))>=1:
                 outlist1.append(d2)
             if ifpattern==5 and d1[0]<sum(d2) and d1[1]>sum(d2):
                 outlist1.append(d2)
