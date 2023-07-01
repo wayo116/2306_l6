@@ -17,12 +17,18 @@ def tate_hani2(dlists, kaisus, topx):
     for ii in range(6):
         result=[]
         result = [dlists[kaisu][ii] for kaisu in range(kaisus)]
-        c = collections.Counter(result)
+        
+        results.append(result)
+        
+    results2=[]
+    for ii in range(6):
+        result=[]
+        c = collections.Counter(results[ii])
         counts = list(zip(*c.most_common()))
         countsx = counts[:topx]
         result = [min(countsx),max(countsx)]
-        results.append(result)
-
-    print(results)
+        
+    results2.append(result)
+    print(results2)
     
-    return results
+    return results2
