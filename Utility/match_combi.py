@@ -106,7 +106,7 @@ def find_elements(lst,st,ed):
     return result
 
 
-def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi, thani):
+def yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi, thani ,ttopx):
     #tates = tate_hani(dlists,thani)
     tates = tate_hani2(dlists,thani,ttopx)
     
