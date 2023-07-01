@@ -28,7 +28,8 @@ def tate_hani2(dlists, kaisus, topx):
         countsx = counts[:topx]
         result = [min(countsx),max(countsx)]
         
-    results2.append(result)
+        results2.append(result)
+        
     print(results2)
     
     return results2
