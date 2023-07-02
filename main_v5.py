@@ -26,13 +26,15 @@ from Utility.inner_outer import inner_outer_manu, inner_outer_auto, inner_outer_
 from Utility.kfind import kfind, kfind2
 from Utility.match_combi import yobu_combi, aisho_combi, yobu_lists, aisho_lists, yobu_dcnt, aisho_dcnt, yobu_aisho_combi
 from Utility.max_in_min import max_in_min
+from Utility.tate_hani import tate_hani, tate_hani2
+tate_hani2(dlists,1500,10)
 
 outlists=[]
 
 kaisai = 0
 if kaisai == 0:
     #最新結果がcolabにはあるが、gitjubには未登録の時
-    saisinkekka_list=[12,14,18,25,36,42]
+    saisinkekka_list=[4,22,27,31,32,40]
     dlists = dlists
 elif kaisai > 0:
     saisinkekka_list = dlists[kaisai-1]
@@ -40,6 +42,7 @@ elif kaisai > 0:
 print("saisinkekka_list",saisinkekka_list)
 print("dlists",dlists[:5])
 
+#tate_hani(dlists,5)
 '''
 print('\n----学習----')
 
@@ -118,7 +121,7 @@ outlist=Dell6(dlists, diff_list, saisinkekka, bunkatu).shori()
 #outlists.extend(outlist)
 #print('outlist',outlist)
 '''
-'''
+
 print('\n----inner_outer_manuで予想----')
 
 saisinkekka=saisinkekka_list
@@ -187,7 +190,7 @@ pred_dlists=inner_outer_other_auto(dlists,in_hani,out_hani,in_combisu,out_combis
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
 #outlists.extend(outlist)
 #print('outlist',outlist)
-
+'''
 print('\n----match_combiで予想----')
 
 saisinkekka=saisinkekka_list
@@ -229,17 +232,20 @@ print('\n----match_combiで予想----')
 saisinkekka=saisinkekka_list
 bunkatu=5
 
-kaisus = 500
+kaisus = 1500
 yobu_dcnt = yobu_dcnt(dlists, kaisus)
 sikichi = max_in_min(yobu_dcnt)
 yobu_lists = yobu_lists(dlists, kaisus, sikichi)
 
-kaisus = 500
+kaisus = 1500
 aisho_dcnt = aisho_dcnt(dlists, kaisus)
 
 sikichi = max_in_min(aisho_dcnt)
 
-pred_dlists = yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi)
+thani = 20
+ttopx = 5
+
+pred_dlists = yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi, thani, ttopx)
 
 #shori2は、pred_dlistsには組合せリストを入れる
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
