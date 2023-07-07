@@ -259,14 +259,17 @@ class Dell6:
     def get_outlist2(self, dlist1, sname='none'):
 
         print('dlist1>>len:{0}'.format(len(dlist1)))
-        outlist1=[]
-        bunkatu=self.bunkatu
-        k=round(len(dlist1)/(bunkatu+1))
-        for ii in range(k, len(dlist1)-k, k):
-            print('-----{}-----'.format(ii))
-            for ii2 in range(1):
-                 outlist1.append(dlist1[ii+ii2])
-                 print('{0} get_outlist:{1}'.format(sname, dlist1[ii+ii2]))
+        if len(dlist1)<(bunkatu+1):
+            outlist1=dlist1
+        else:
+            outlist1=[]
+            bunkatu=self.bunkatu
+            k=round(len(dlist1)/(bunkatu+1))
+            for ii in range(k, len(dlist1)-k, k):
+                print('-----{}-----'.format(ii))
+                for ii2 in range(1):
+                    outlist1.append(dlist1[ii+ii2])
+                    print('{0} get_outlist:{1}'.format(sname, dlist1[ii+ii2]))
         return outlist1
         
     # def shori(self):
