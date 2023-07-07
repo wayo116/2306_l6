@@ -259,11 +259,12 @@ class Dell6:
     def get_outlist2(self, dlist1, sname='none'):
 
         print('dlist1>>len:{0}'.format(len(dlist1)))
-        if len(dlist1)<(bunkatu+1):
+        bunkatu=self.bunkatu
+        
+        if len(dlist1)<=(bunkatu+1):
             outlist1=dlist1
         else:
             outlist1=[]
-            bunkatu=self.bunkatu
             k=round(len(dlist1)/(bunkatu+1))
             for ii in range(k, len(dlist1)-k, k):
                 print('-----{}-----'.format(ii))
