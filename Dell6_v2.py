@@ -263,6 +263,7 @@ class Dell6:
         
         if len(dlist1)<=(bunkatu+1):
             outlist1=dlist1
+            print('{0} get_outlist:{1}'.format(sname, dlist1))
         else:
             outlist1=[]
             k=round(len(dlist1)/(bunkatu+1))
