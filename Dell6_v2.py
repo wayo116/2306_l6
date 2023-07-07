@@ -321,8 +321,8 @@ class Dell6:
 
         self.check(outlist1, self.saisinkekka)
 
-        #outlist1 = self.similar(outlist1)
-        #self.check(outlist1, self.saisinkekka)
+        outlist1 = self.similar(outlist1)
+        self.check(outlist1, self.saisinkekka)
         
         outlist2=self.get_outlist2(outlist1, '**') 
         self.check(outlist2, self.saisinkekka)
