@@ -37,7 +37,7 @@ def no_dataset(dlists, target_kaisu_lists):
 
                 list1 = tmp[1:]
                 # print("list1",list1)
-                list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(target_kaisu_list), listsu=100)
+                list2s = create_random_lists_float(range_start=0.5*-1, range_end=0.5, yousosu=len(target_kaisu_list), listsu=100)
                 for list2 in list2s:
                     # print("list2",list2)
                     result = [x + y for x, y in zip(list1, list2)]
@@ -69,7 +69,7 @@ def no_dataset_test(dlists, target_kaisu_lists):
             # list1 = tmp[1:]
             list1 = tmp[0:]
             # print("list1",list1)
-            list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(target_kaisu_list), listsu=100)
+            list2s = create_random_lists_float(range_start=0.5*-1, range_end=0.5, yousosu=len(target_kaisu_list), listsu=100)
             for list2 in list2s:
                 # print("list2",list2)
                 result = [x + y for x, y in zip(list1, list2)]
@@ -171,10 +171,10 @@ else:
 csv_dir = "./result.csv"
 with open(csv_dir, "a", newline="") as file:
     writer = csv.writer(file)
-    writer.writerow(["st_cnt", "yousosu_cnt", "icchi", "dlists0", "score ,", "predictions"])
+    writer.writerow(["st_cnt", "yousosu_cnt", "icchi", "dlists0", "score ,", "predictions","per"])
 
 for st_cnt in range(1,10,1):
-    for yousosu_cnt in range(1,24,1):
+    for yousosu_cnt in range(4,14,1):
         range_start = 1
         range_end = 24
         yousosu = yousosu_cnt
@@ -194,11 +194,14 @@ for st_cnt in range(1,10,1):
         icchi =  len(set(dlists0) & set(predictions))
         print(icchi)
 
+        per = icchi/len(set(predictions))*100
+        print(per)
+
         # csv_dir = "./result.csv"
         with open(csv_dir, "a", newline="") as file:
             writer = csv.writer(file)
             # writer.writerow(["yousosu_cnt", "icchi", "dlists0", "score ,", "predictions"])
-            writer.writerow([st_cnt, yousosu_cnt, icchi, dlists0, score ,predictions])
+            writer.writerow([st_cnt, yousosu_cnt, icchi, dlists0, score ,predictions, per])
         
 
 
