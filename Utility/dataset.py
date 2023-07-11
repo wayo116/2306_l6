@@ -66,7 +66,7 @@ def no_dataset_test(dlists, target_kaisu_lists):
             # list1 = tmp[1:]
             list1 = tmp[0:]
             # print("list1",list1)
-            list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(target_kaisu_list), listsu=3)
+            list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(target_kaisu_list), listsu=100)
             for list2 in list2s:
                 # print("list2",list2)
                 result = [x + y for x, y in zip(list1, list2)]
@@ -89,7 +89,7 @@ def create_random_lists(range_start, range_end, yousosu, listsu=6):
         random_list = random.sample(range(range_start, range_end + 1), yousosu)
         random_lists.append(random_list)
 
-    print("random_lists",random_lists)
+    # print("random_lists",random_lists)
     return random_lists
 
 
@@ -101,7 +101,7 @@ def create_random_lists_float(range_start, range_end, yousosu, listsu=6):
         random_list = [round(random.uniform(range_start, range_end), 2) for _ in range(yousosu)]
         random_lists.append(random_list)
 
-    print("random_lists",random_lists)
+    # print("random_lists",random_lists)
     return random_lists
 
 
@@ -122,9 +122,9 @@ def light_gbm(data, data2):
         filtered_data = [row for row in data if row[0] == label][:min_label_count]
         balanced_data.extend(filtered_data)
 
-    print("\nBalanced Data:")
-    for row in balanced_data:
-        print(row)
+    # print("\nBalanced Data:")
+    # for row in balanced_data:
+    #     print(row)
 
     data = np.array(balanced_data)
     X = data[:,1:]
@@ -144,7 +144,7 @@ def light_gbm(data, data2):
     print("score", model.score(X_test, y_test))
 
     # 推論
-    predictions = model.predict(data2)
+    predictions = sorted(list(map(int, set(model.predict(data2)))))
     print("Predictions:", predictions)
 
     # 結果表示
@@ -156,7 +156,7 @@ def light_gbm(data, data2):
 
 range_start = 1
 range_end = 24
-yousosu = 4
+yousosu = 8
 target_kaisu_lists = create_random_lists(range_start, range_end, yousosu)
 
 st = 2
