@@ -12,6 +12,7 @@ Original file is located at
 #!pip install scikit-image
 # import tensorflow as tf
 import os
+import csv
 # import collections,math
 #import itertools
 os.chdir('/content/2306_l6')
@@ -27,14 +28,20 @@ from Utility.kfind import kfind, kfind2
 from Utility.match_combi import yobu_combi, aisho_combi, yobu_lists, aisho_lists, yobu_dcnt, aisho_dcnt, yobu_aisho_combi
 from Utility.max_in_min import max_in_min
 from Utility.tate_hani import tate_hani, tate_hani2
+from Utility.dataset import no_dataset, no_dataset_test, create_random_lists, create_random_lists_float, light_gbm
 tate_hani2(dlists,1500,10)
 
 outlists=[]
 
-kaisai = 0
-if kaisai == 0:
+kaisai = 2
+if kaisai == -1:
+    #本番
+    #最新結果がgitjubに登録済の時
+    saisinkekka_list=[99,99,99,99,99,99]
+    dlists = dlists
+elif kaisai == 0:
     #最新結果がcolabにはあるが、gitjubには未登録の時
-    saisinkekka_list=[4,22,27,31,32,40]
+    saisinkekka_list=[1,2,8,9,10,20]
     dlists = dlists
 elif kaisai > 0:
     saisinkekka_list = dlists[kaisai-1]
@@ -121,7 +128,7 @@ outlist=Dell6(dlists, diff_list, saisinkekka, bunkatu).shori()
 #outlists.extend(outlist)
 #print('outlist',outlist)
 '''
-
+'''
 print('\n----inner_outer_manuで予想----')
 
 saisinkekka=saisinkekka_list
@@ -171,7 +178,7 @@ pred_dlists=inner_outer_other_manu(dlists,in_hani,out_hani,in_combisu,out_combis
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
 #outlists.extend(outlist)
 #print('outlist',outlist)
-
+'''
 print('\n----inner_outer_other_autoで予想----')
 
 saisinkekka=saisinkekka_list
@@ -227,22 +234,23 @@ outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
 #outlists.extend(outlist)
 #print('outlist',outlist)
 '''
+'''
 print('\n----match_combiで予想----')
 
 saisinkekka=saisinkekka_list
 bunkatu=5
 
-kaisus = 1500
+kaisus = 150
 yobu_dcnt = yobu_dcnt(dlists, kaisus)
 sikichi = max_in_min(yobu_dcnt)
 yobu_lists = yobu_lists(dlists, kaisus, sikichi)
 
-kaisus = 1500
+kaisus = 150
 aisho_dcnt = aisho_dcnt(dlists, kaisus)
 
 sikichi = max_in_min(aisho_dcnt)
 
-thani = 20
+thani = 150
 ttopx = 5
 
 pred_dlists = yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi, thani, ttopx)
@@ -251,6 +259,52 @@ pred_dlists = yobu_aisho_combi(dlists, yobu_lists, aisho_dcnt, sikichi, thani, t
 outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
 #outlists.extend(outlist)
 #print('outlist',outlist)
+'''
+
+print('\n----lightGBMで予想----')
+csv_dir = "./result.csv"
+
+# ファイルが存在する場合のみ削除
+if os.path.exists(csv_dir):
+    os.remove(csv_dir)
+    print("ファイルを削除しました。")
+else:
+    print("指定されたファイルは存在しません。")
+
+csv_dir = "./result.csv"
+with open(csv_dir, "a", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["st_cnt", "yousosu_cnt", "icchi", "dlists0", "score ,", "predictions","per"])
+
+for st_cnt in range(1,2,1):
+    for yousosu_cnt in range(12,15,1):
+        range_start = 1
+        range_end = 24
+        yousosu = yousosu_cnt
+        target_kaisu_lists = create_random_lists(range_start, range_end, yousosu)
+
+        st = st_cnt
+        dlists0 = dlists[st-1]
+
+        dlists1 = dlists[st+1:500+st+1]
+        data = no_dataset(dlists1, target_kaisu_lists)
+
+        dlists2 = dlists[st:500+st]
+        data2 = no_dataset_test(dlists2, target_kaisu_lists)
+
+        score ,predictions = light_gbm(data, data2)
+
+        icchi =  len(set(dlists0) & set(predictions))
+        print(icchi)
+
+        per = icchi/len(set(predictions))*100
+        print(per)
+
+        # csv_dir = "./result.csv"
+        with open(csv_dir, "a", newline="") as file:
+            writer = csv.writer(file)
+            # writer.writerow(["yousosu_cnt", "icchi", "dlists0", "score ,", "predictions"])
+            writer.writerow([st_cnt, yousosu_cnt, icchi, dlists0, score ,predictions, per])
 
 from google.colab import drive
 drive.mount('/content/drive')
