@@ -158,7 +158,7 @@ def light_gbm(data, data2):
     #     print()
 
     return score ,predictions
-
+'''
 csv_dir = "./result.csv"
 
 # ファイルが存在する場合のみ削除
@@ -202,6 +202,7 @@ for st_cnt in range(1,10,1):
             writer = csv.writer(file)
             # writer.writerow(["yousosu_cnt", "icchi", "dlists0", "score ,", "predictions"])
             writer.writerow([st_cnt, yousosu_cnt, icchi, dlists0, score ,predictions, per])
+'''
         
 
 
