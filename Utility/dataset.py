@@ -9,6 +9,9 @@ from sklearn.datasets import load_iris
 # import pandas as pd
 import lightgbm as lgb
 
+import csv
+import os
+
 
 def no_dataset(dlists, target_kaisu_lists):
 
@@ -141,7 +144,8 @@ def light_gbm(data, data2):
     model.fit(X_train, y_train)
 
     # 評価
-    print("score", model.score(X_test, y_test))
+    score = model.score(X_test, y_test)
+    print("score", score)
 
     # 推論
     predictions = sorted(list(map(int, set(model.predict(data2)))))
@@ -153,20 +157,49 @@ def light_gbm(data, data2):
     #     print("Prediction:", prediction)
     #     print()
 
+    return score ,predictions
 
-range_start = 1
-range_end = 24
-yousosu = 8
-target_kaisu_lists = create_random_lists(range_start, range_end, yousosu)
+csv_dir = "./result.csv"
 
-st = 2
-dlists = dlists[st+1:500]
-data = no_dataset(dlists, target_kaisu_lists)
+# ファイルが存在する場合のみ削除
+if os.path.exists(csv_dir):
+    os.remove(csv_dir)
+    print("ファイルを削除しました。")
+else:
+    print("指定されたファイルは存在しません。")
 
-dlists = dlists[st:500]
-data2 = no_dataset_test(dlists, target_kaisu_lists)
+csv_dir = "./result.csv"
+with open(csv_dir, "a", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["st_cnt", "yousosu_cnt", "icchi", "dlists0", "score ,", "predictions"])
 
-light_gbm(data, data2)
+for st_cnt in range(1,10,1):
+    for yousosu_cnt in range(1,24,1):
+        range_start = 1
+        range_end = 24
+        yousosu = yousosu_cnt
+        target_kaisu_lists = create_random_lists(range_start, range_end, yousosu)
+
+        st = st_cnt
+        dlists0 = dlists[st-1]
+
+        dlists1 = dlists[st+1:500+st+1]
+        data = no_dataset(dlists1, target_kaisu_lists)
+
+        dlists2 = dlists[st:500+st]
+        data2 = no_dataset_test(dlists2, target_kaisu_lists)
+
+        score ,predictions = light_gbm(data, data2)
+
+        icchi =  len(set(dlists0) & set(predictions))
+        print(icchi)
+
+        # csv_dir = "./result.csv"
+        with open(csv_dir, "a", newline="") as file:
+            writer = csv.writer(file)
+            # writer.writerow(["yousosu_cnt", "icchi", "dlists0", "score ,", "predictions"])
+            writer.writerow([st_cnt, yousosu_cnt, icchi, dlists0, score ,predictions])
+        
 
 
 
