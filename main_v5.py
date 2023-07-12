@@ -266,6 +266,8 @@ outlist=Dell6(dlists, pred_dlists, saisinkekka, bunkatu).shori2()
 
 print('\n----lightGBMで予想----')
 start = time.time()
+saisinkekka=saisinkekka_list
+bunkatu=5
 
 range_start = 1
 range_end = 20
