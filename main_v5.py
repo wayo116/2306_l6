@@ -29,12 +29,12 @@ from Utility.kfind import kfind, kfind2
 from Utility.match_combi import yobu_combi, aisho_combi, yobu_lists, aisho_lists, yobu_dcnt, aisho_dcnt, yobu_aisho_combi
 from Utility.max_in_min import max_in_min
 from Utility.tate_hani import tate_hani, tate_hani2
-from Utility.dataset import no_dataset, no_dataset_test, create_random_lists, create_random_lists_float, light_gbm
+from Utility.dataset import no_dataset, no_dataset_multi, no_dataset_test, no_dataset_test_multi, create_random_lists, create_random_lists_multi, create_random_lists_float, light_gbm
 #tate_hani2(dlists,1500,10)
 
 outlists=[]
 
-kaisai = 5
+kaisai = -1
 if kaisai == -1:
     #本番
     #最新結果がgitjubに登録済の時
@@ -270,15 +270,19 @@ saisinkekka=saisinkekka_list
 bunkatu=5
 
 range_start = 1
-range_end = 20
-yousosu = 14
-target_kaisu_lists = create_random_lists(range_start, range_end, yousosu)
+range_end = 24
+yousosu = 4
+#target_kaisu_lists = create_random_lists(range_start, range_end, yousosu)
+target_kaisu_lists = create_random_lists_multi(range_start, range_end, yousosu, 3)
 
 dlists1 = dlists[1:500]
-data = no_dataset(dlists1, target_kaisu_lists)
+#data = no_dataset(dlists1, target_kaisu_lists)
+data = no_dataset_multi(dlists1, target_kaisu_lists)
 
+target_kaisu_lists = create_random_lists_multi(range_start, range_end, yousosu, 1)
 dlists2 = dlists[0:500]
-data2 = no_dataset_test(dlists2, target_kaisu_lists)
+#data2 = no_dataset_test(dlists2, target_kaisu_lists)
+data2 = no_dataset_test_multi(dlists2, target_kaisu_lists)
 
 score ,predictions = light_gbm(data, data2)
 
