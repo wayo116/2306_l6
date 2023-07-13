@@ -51,6 +51,46 @@ def no_dataset(dlists, target_kaisu_lists):
 
     return no_dataset
 
+def no_dataset_multi(dlists, target_kaisu_lists):
+
+    no_dataset = []
+    for dlist_retu in range(6):
+
+        #target_kaisu_list = target_kaisu_lists[dlist_retu]
+        target_kaisu_lists_lists = target_kaisu_lists[dlist_retu]
+        
+        for target_kaisu_list in target_kaisu_lists_lists:
+            for kaisu, dlist in enumerate(dlists):
+    
+                kaisu_limit = len(dlists)-max(target_kaisu_list)
+                # print("kaisu_limit",kaisu_limit)
+                if kaisu >= kaisu_limit:
+                    break
+    
+                tmp = []
+                tmp.append(dlist[dlist_retu])
+                for target_kaisu_youso in target_kaisu_list:
+                    tmp.append(dlists[kaisu+target_kaisu_youso][dlist_retu])
+    
+                if tmp != []:
+                    # no_dataset.append(tmp)
+    
+                    list1 = tmp[1:]
+                    # print("list1",list1)
+                    list2s = create_random_lists_float(range_start=0.9*-1, range_end=0.9, yousosu=len(target_kaisu_list), listsu=100)
+                    for list2 in list2s:
+                        # print("list2",list2)
+                        result = [x + y for x, y in zip(list1, list2)]
+                        # print("result",result)
+                        result.insert(0, dlist[dlist_retu])
+                        # print("result_in",result)
+                        no_dataset.append(result)
+         
+    # print("no_dataset",no_dataset)
+    print("no_dataset_len",len(no_dataset))
+
+    return no_dataset
+
 
 def no_dataset_test(dlists, target_kaisu_lists):
 
