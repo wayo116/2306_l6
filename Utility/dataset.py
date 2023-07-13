@@ -95,6 +95,18 @@ def create_random_lists(range_start, range_end, yousosu, listsu=6):
     # print("random_lists",random_lists)
     return random_lists
 
+def create_random_lists_multi(range_start, range_end, yousosu, multisu, listsu=6):
+
+    random_lists = []
+    for dummy_cnt in range(listsu):
+        tmp = []
+        for cnt in range(multisu):
+            random.seed(cnt+1)
+            random_list = random.sample(range(range_start, range_end + 1), yousosu)
+            tmp.append(random_list)
+        random_lists.append(tmp)
+    # print("random_lists",random_lists)
+    return random_lists
 
 def create_random_lists_float(range_start, range_end, yousosu, listsu=6):
     
