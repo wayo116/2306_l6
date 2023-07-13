@@ -103,8 +103,8 @@ def create_random_lists_multi(range_start, range_end, yousosu, multisu, listsu=6
         for cnt in range(multisu):
             random.seed(cnt+1)
             random_list = random.sample(range(range_start, range_end + 1), yousosu)
-            tmp.append(random_list)
-        random_lists.append([tmp])
+            tmp2 = tmp.append(random_list)
+        random_lists.append(tmp2)
     # print("random_lists",random_lists)
     return random_lists
 
