@@ -37,7 +37,7 @@ def no_dataset(dlists, target_kaisu_lists):
 
                 list1 = tmp[1:]
                 # print("list1",list1)
-                list2s = create_random_lists_float(range_start=0.9*-1, range_end=0.9, yousosu=len(target_kaisu_list), listsu=100)
+                list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(target_kaisu_list), listsu=100)
                 for list2 in list2s:
                     # print("list2",list2)
                     result = [x + y for x, y in zip(list1, list2)]
@@ -77,7 +77,7 @@ def no_dataset_multi(dlists, target_kaisu_lists, nmasi):
     
                     list1 = tmp[1:]
                     # print("list1",list1)
-                    list2s = create_random_lists_float(range_start=0.9*-1, range_end=0.9, yousosu=len(target_kaisu_list), listsu=nmasi)
+                    list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(target_kaisu_list), listsu=nmasi)
                     for list2 in list2s:
                         # print("list2",list2)
                         result = [x + y for x, y in zip(list1, list2)]
