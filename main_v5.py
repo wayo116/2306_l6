@@ -34,7 +34,7 @@ from Utility.dataset import no_dataset, no_dataset_multi, no_dataset_test, no_da
 
 outlists=[]
 
-kaisai = -1
+kaisai = 50
 if kaisai == -1:
     #本番
     #最新結果がgitjubに登録済の時
@@ -269,21 +269,31 @@ start = time.time()
 saisinkekka=saisinkekka_list
 bunkatu=5
 
+#学習用
 range_start = 1
 range_end = 24
-yousosu = 4
-#target_kaisu_lists = create_random_lists(range_start, range_end, yousosu)
-target_kaisu_lists = create_random_lists_multi(range_start, range_end, yousosu, 3)
+yousosu = 6
+multisu = 2
+randomkeisu =10
+target_kaisu_lists = create_random_lists_multi(range_start, range_end, yousosu, multisu, randomkeisu)
 
 dlists1 = dlists[1:500]
-#data = no_dataset(dlists1, target_kaisu_lists)
-data = no_dataset_multi(dlists1, target_kaisu_lists)
+nmasi = 53
+data = no_dataset_multi(dlists1, target_kaisu_lists, nmasi)
 
-target_kaisu_lists = create_random_lists_multi(range_start, range_end, yousosu, 1)
+#テスト用
+range_start = 1
+range_end = 24
+yousosu = 6
+multisu = 1
+randomkeisu =103
+target_kaisu_lists = create_random_lists_multi(range_start, range_end, yousosu, multisu, randomkeisu)
+
 dlists2 = dlists[0:500]
-#data2 = no_dataset_test(dlists2, target_kaisu_lists)
-data2 = no_dataset_test_multi(dlists2, target_kaisu_lists)
+nmasi = 50
+data2 = no_dataset_test_multi(dlists2, target_kaisu_lists, nmasi)
 
+#lightgbmで推論
 score ,predictions = light_gbm(data, data2)
 
 pred_dlists = combi(predictions,6)
