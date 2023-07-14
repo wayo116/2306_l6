@@ -51,7 +51,7 @@ def no_dataset(dlists, target_kaisu_lists):
 
     return no_dataset
 
-def no_dataset_multi(dlists, target_kaisu_lists):
+def no_dataset_multi(dlists, target_kaisu_lists, nmasi):
 
     no_dataset = []
     for dlist_retu in range(6):
@@ -77,7 +77,7 @@ def no_dataset_multi(dlists, target_kaisu_lists):
     
                     list1 = tmp[1:]
                     # print("list1",list1)
-                    list2s = create_random_lists_float(range_start=0.9*-1, range_end=0.9, yousosu=len(target_kaisu_list), listsu=100)
+                    list2s = create_random_lists_float(range_start=0.9*-1, range_end=0.9, yousosu=len(target_kaisu_list), listsu=nmasi)
                     for list2 in list2s:
                         # print("list2",list2)
                         result = [x + y for x, y in zip(list1, list2)]
@@ -124,7 +124,7 @@ def no_dataset_test(dlists, target_kaisu_lists):
     return no_dataset
 
 
-def no_dataset_test_multi(dlists, target_kaisu_lists):
+def no_dataset_test_multi(dlists, target_kaisu_lists, nmasi):
 
     no_dataset = []
     for dlist_retu in range(6):
@@ -143,7 +143,7 @@ def no_dataset_test_multi(dlists, target_kaisu_lists):
                 # list1 = tmp[1:]
                 list1 = tmp[0:]
                 # print("list1",list1)
-                list2s = create_random_lists_float(range_start=0.9*-1, range_end=0.9, yousosu=len(target_kaisu_list), listsu=100)
+                list2s = create_random_lists_float(range_start=0.9*-1, range_end=0.9, yousosu=len(target_kaisu_list), listsu=nmasi)
                 for list2 in list2s:
                     # print("list2",list2)
                     result = [x + y for x, y in zip(list1, list2)]
@@ -169,11 +169,11 @@ def create_random_lists(range_start, range_end, yousosu, listsu=6):
     # print("random_lists",random_lists)
     return random_lists
 
-def create_random_lists_multi(range_start, range_end, yousosu, multisu, listsu=6):
+def create_random_lists_multi(range_start, range_end, yousosu, multisu, randomkeisu, listsu=6):
 
     random_lists = []
     for cnt1 in range(listsu):
-        cnt1 = cnt1 *10
+        cnt1 = cnt1 *randomkeisu
         tmp = []
         for cnt2 in range(multisu):
             random.seed(cnt1+cnt2+1)
