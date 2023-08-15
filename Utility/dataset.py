@@ -229,7 +229,7 @@ def light_gbm(data, data2):
 
     # モデル
     # max_depth=-1は無制限を意味する
-    model = lgb.LGBMClassifier(n_estimators=100, learning_rate=0.1, max_depth=-1, objective='multiclass')
+    model = lgb.LGBMClassifier(force_col_wise=True, n_estimators=100, learning_rate=0.1, max_depth=-1, objective='multiclass')
     model.fit(X_train, y_train)
 
     # 評価
