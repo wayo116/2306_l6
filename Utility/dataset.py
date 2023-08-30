@@ -4,8 +4,9 @@ import random
 import numpy as np
 from collections import Counter
 
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
 from sklearn.datasets import load_iris
+from sklearn.metrics import accuracy_score
 # import pandas as pd
 import lightgbm as lgb
 
@@ -229,7 +230,7 @@ def light_gbm(data, data2):
 
     # モデル
     # max_depth=-1は無制限を意味する
-    model = lgb.LGBMClassifier(force_col_wise=True, n_estimators=100, learning_rate=0.1, max_depth=-1, objective='multiclass')
+    model = lgb.LGBMClassifier(force_col_wise=True, n_estimators=100, learning_rate=0.1, max_depth=-1 ,objective='multiclass')
     model.fit(X_train, y_train)
 
     # 評価
@@ -239,6 +240,137 @@ def light_gbm(data, data2):
     # 推論
     predictions = sorted(list(map(int, set(model.predict(data2)))))
     print("Predictions:", predictions)
+
+    # 結果表示
+    # for true_label, prediction in zip(y_test, predictions):
+    #     print("True Label:", true_label)
+    #     print("Prediction:", prediction)
+    #     print()
+
+    return score ,predictions
+
+
+def lightgbm_cross(data, data2):
+
+    # 一列目のラベルを取得
+    labels = [row[0] for row in data]
+
+    # ラベルの個数をカウント
+    label_counts = Counter(labels)
+
+    # 一番個数が少ないラベルの数を取得
+    min_label_count = min(label_counts.values())
+
+    # 一番少ないラベルに合わせて他のラベルをフィルタリング
+    balanced_data = []
+    for label in label_counts.keys():
+        filtered_data = [row for row in data if row[0] == label][:min_label_count]
+        balanced_data.extend(filtered_data)
+
+    # print("\nBalanced Data:")
+    # for row in balanced_data:
+    #     print(row)
+
+    data = np.array(balanced_data)
+    X = data[:,1:]
+    print(X)
+    y = data[:,0]
+    print(y)
+
+    # データ分割
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    
+    # モデル
+    model = lgb.LGBMClassifier(force_col_wise=True, n_estimators=100, learning_rate=0.05, max_depth=-1, objective='multiclass', num_leaves=31)
+    
+    # 交差検証を行いモデル評価を計算
+    cv_scores = cross_val_score(model, X_train, y_train, cv=3)  # 5分割交差検証を行う
+    mean_cv_score = np.mean(cv_scores)
+    print("Cross-Validation Mean Score:", mean_cv_score)
+    
+    # モデルを全てのトレーニングデータで再トレーニング
+    model.fit(X_train, y_train)
+    
+    # テストデータで評価
+    score = model.score(X_test, y_test)
+    print("Test Set Score:", score)
+    
+    # 推論
+    predictions = sorted(list(map(int, set(model.predict(data2)))))
+    print("Predictions:", predictions)
+
+
+    # 結果表示
+    # for true_label, prediction in zip(y_test, predictions):
+    #     print("True Label:", true_label)
+    #     print("Prediction:", prediction)
+    #     print()
+
+    return score ,predictions
+
+
+def lightgbm_grid(data, data2):
+
+    # 一列目のラベルを取得
+    labels = [row[0] for row in data]
+
+    # ラベルの個数をカウント
+    label_counts = Counter(labels)
+
+    # 一番個数が少ないラベルの数を取得
+    min_label_count = min(label_counts.values())
+
+    # 一番少ないラベルに合わせて他のラベルをフィルタリング
+    balanced_data = []
+    for label in label_counts.keys():
+        filtered_data = [row for row in data if row[0] == label][:min_label_count]
+        balanced_data.extend(filtered_data)
+
+    # print("\nBalanced Data:")
+    # for row in balanced_data:
+    #     print(row)
+
+    data = np.array(balanced_data)
+    X = data[:,1:]
+    print(X)
+    y = data[:,0]
+    print(y)
+
+    # データ分割
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    
+    # LightGBMモデルの定義
+    model = lgb.LGBMClassifier()
+
+    # ハイパーパラメータ探索の範囲を指定
+    param_grid = {
+        # 'objective': [multiclass],
+        'num_leaves': [31, 50, 100],
+        'max_depth': [5, 10, 20],
+        'learning_rate': [0.01, 0.1, 0.2]
+        # 他のハイパーパラメータも追加可能
+    }
+
+    # グリッドサーチを行う
+    grid_search = GridSearchCV(estimator=model, param_grid=param_grid, cv=3, scoring='accuracy')
+    grid_search.fit(X_train, y_train)
+
+    # 最適なハイパーパラメータを取得
+    best_params = grid_search.best_params_
+    print("best_params",best_params)
+
+    # 最適なハイパーパラメータでモデルを学習
+    model = lgb.LGBMClassifier(**best_params)
+    model.fit(X_train, y_train)
+
+    # テストデータで評価
+    score = model.score(X_test, y_test)
+    print("Test Set Score:", score)
+    
+    # 推論
+    predictions = sorted(list(map(int, set(model.predict(data2)))))
+    print("Predictions:", predictions)
+
 
     # 結果表示
     # for true_label, prediction in zip(y_test, predictions):
