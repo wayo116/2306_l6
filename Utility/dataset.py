@@ -250,6 +250,58 @@ def light_gbm(data, data2):
     return score ,predictions
 
 
+def light_gbm_nogood(data, data2):
+
+    # 一列目のラベルを取得
+    labels = [row[0] for row in data]
+
+    # ラベルの個数をカウント
+    label_counts = Counter(labels)
+
+    # 一番個数が少ないラベルの数を取得
+    min_label_count = min(label_counts.values())
+
+    # 一番少ないラベルに合わせて他のラベルをフィルタリング
+    balanced_data = []
+    for label in label_counts.keys():
+        filtered_data = [row for row in data if row[0] == label][:min_label_count]
+        balanced_data.extend(filtered_data)
+
+    # print("\nBalanced Data:")
+    # for row in balanced_data:
+    #     print(row)
+
+    data = np.array(balanced_data)
+    X = data[:,1:]
+    print(X)
+    y = data[:,0]
+    print(y)
+
+    # データ分割
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    # モデル
+    # max_depth=-1は無制限を意味する
+    model = lgb.LGBMClassifier(force_col_wise=True, n_estimators=1, learning_rate=1, max_depth=-1 ,objective='multiclass')
+    model.fit(X_train, y_train)
+
+    # 評価
+    score = model.score(X_test, y_test)
+    print("score", score)
+
+    # 推論
+    predictions = sorted(list(map(int, set(model.predict(data2)))))
+    print("Predictions:", predictions)
+
+    # 結果表示
+    # for true_label, prediction in zip(y_test, predictions):
+    #     print("True Label:", true_label)
+    #     print("Prediction:", prediction)
+    #     print()
+
+    return score ,predictions
+
+
 def lightgbm_cross(data, data2):
 
     # 一列目のラベルを取得
@@ -379,6 +431,72 @@ def lightgbm_grid(data, data2):
     #     print()
 
     return score ,predictions
+
+
+def light_gbm2(data, data2):
+
+    # 一列目のラベルを取得
+    labels = [row[0] for row in data]
+
+    # ラベルの個数をカウント
+    label_counts = Counter(labels)
+
+    # 一番個数が少ないラベルの数を取得
+    min_label_count = min(label_counts.values())
+
+    # 一番少ないラベルに合わせて他のラベルをフィルタリング
+    balanced_data = []
+    for label in label_counts.keys():
+        filtered_data = [row for row in data if row[0] == label][:min_label_count]
+        balanced_data.extend(filtered_data)
+
+    # print("\nBalanced Data:")
+    # for row in balanced_data:
+    #     print(row)
+
+    data = np.array(balanced_data)
+    X = data[:,1:]
+    print(X)
+    y = data[:,0]
+    print(y)
+
+    # データを分割
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    # モデルの設定
+    model = lgb.LGBMClassifier(
+        n_estimators=100,  # エポック数
+        learning_rate=0.1,
+        max_depth=-1,
+        objective='multiclass',
+        num_class=43,   # クラス数を指定
+        metric='multi_logloss',  # 評価指標はマルチクラスの対数損失
+        force_col_wise=True,
+        # early_stopping_rounds=50,  # 早期停止の設定
+    )
+
+    # モデルを訓練
+    model.fit(
+        X_train,
+        y_train,
+        eval_set=[(X_test, y_test)],
+        eval_metric='multi_logloss',  # 検証データの評価指標
+        # verbose=100,  # 進捗を表示する間隔
+    )
+
+    # テストデータでの予測結果を得る
+    y_pred = model.predict(X_test)
+    print("y_pred",len(y_pred))
+
+    accuracy = accuracy_score(y_test, y_pred)
+    print(f"Test Accuracy: {accuracy}")
+    # 結果表示
+    # for true_label, prediction in zip(y_test, predictions):
+    #     print("True Label:", true_label)
+    #     print("Prediction:", prediction)
+    #     print()
+
+    return accuracy ,y_pred
 '''
 csv_dir = "./result.csv"
 

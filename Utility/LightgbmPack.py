@@ -3,7 +3,7 @@ import csv
 import time
 
 from datalists import dlists
-from Utility.dataset import no_dataset_multi, no_dataset_test_multi, create_random_lists_multi, light_gbm, lightgbm_cross, lightgbm_grid
+from Utility.dataset import no_dataset_multi, no_dataset_test_multi, create_random_lists_multi, light_gbm, light_gbm_nogood, lightgbm_cross, lightgbm_grid, light_gbm2
 
 
 class LightgbmPack():
@@ -34,7 +34,7 @@ class LightgbmPack():
                     "percent" 
                     ])
 
-    def lightgbmpack(self, kaisai, saisinkekka_list, dlists, **params):
+    def lightgbmpack(self, kaisai, saisinkekka_list, dlists, lgbm_model, **params):
         print('\n----lightGBMで予想----')
         start = time.time()
 
@@ -63,9 +63,13 @@ class LightgbmPack():
         data2 = no_dataset_test_multi(dlists2, target_kaisu_lists, nmasi)
 
         #lightgbmで推論
-        score ,predictions = light_gbm(data, data2)
-        # score ,predictions = lightgbm_cross(data, data2)
-        # score ,predictions = lightgbm_grid(data, data2)
+        if lgbm_model == "light_gbm":
+            score ,predictions = light_gbm(data, data2)
+            # score ,predictions = lightgbm_cross(data, data2)
+            # score ,predictions = lightgbm_grid(data, data2)
+            # score ,predictions = light_gbm2(data, data2)
+        if lgbm_model == "light_gbm_nogood":
+            score ,predictions = light_gbm_nogood(data, data2)
 
         l1 = saisinkekka_list
         l2 = predictions
