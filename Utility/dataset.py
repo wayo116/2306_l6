@@ -242,6 +242,8 @@ def light_gbm_KFold(train_data, test_data):
     params = {
         'objective': 'regression',
         'verbose': -1,
+        'num_leaves': 31,  # チューニングが必要
+        'learning_rate': 0.1,  # チューニングが必要
     }
 
     valid_scores = []
