@@ -4,8 +4,9 @@ import random
 import numpy as np
 from collections import Counter
 
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, KFold
 import lightgbm as lgb
+from sklearn.metrics import mean_absolute_error
 
 import csv
 import os
@@ -147,7 +148,7 @@ def light_gbm(train_data, test_data):
 
     # モデル
     # max_depth=-1は無制限を意味する
-    model = lgb.LGBMClassifier(force_col_wise=True, n_estimators=100, learning_rate=0.1, max_depth=-1 ,objective='multiclass')
+    model = lgb.LGBMClassifier(force_col_wise=True, n_estimators=100, learning_rate=0.01, max_depth=-1 ,objective='multiclass')
     model.fit(X_train, y_train)
 
     # 評価
@@ -205,3 +206,78 @@ def light_gbm_nogood(train_data, test_data):
     print("Predictions:", predictions)
 
     return score ,predictions
+
+
+def light_gbm_KFold(train_data, test_data):
+
+    # 一列目のラベルを取得
+    labels = [row[0] for row in train_data]
+
+    # ラベルの個数をカウント
+    label_counts = Counter(labels)
+
+    # 一番個数が少ないラベルの数を取得
+    min_label_count = min(label_counts.values())
+
+    # 一番少ないラベルに合わせて他のラベルをフィルタリング
+    balanced_data = []
+    for label in label_counts.keys():
+        filtered_data = [row for row in train_data if row[0] == label][:min_label_count]
+        balanced_data.extend(filtered_data)
+
+    # print("\nBalanced Data:")
+    # for row in balanced_data:
+    #     print(row)
+
+    data = np.array(balanced_data)
+    X = data[:,1:]
+    print(X)
+    y = data[:,0]
+    print(y)
+
+    FOLD = 5
+    NUM_ROUND = 100
+    # VERBOSE_EVAL = -1
+
+    params = {
+        'objective': 'regression',
+        'verbose': -1,
+    }
+
+    valid_scores = []
+    models = []
+    kf = KFold(n_splits=FOLD, shuffle=True, random_state=42)
+
+    for fold, (train_indices, valid_indices) in enumerate(kf.split(X)):
+        X_train, X_valid = X[train_indices], X[valid_indices]
+        y_train, y_valid = y[train_indices], y[valid_indices]
+        lgb_train = lgb.Dataset(X_train, y_train)
+        lgb_eval = lgb.Dataset(X_valid, y_valid)
+
+        model = lgb.train(
+            params,
+            lgb_train,
+            valid_sets=lgb_eval,
+            num_boost_round=NUM_ROUND,
+            # verbose_eval=VERBOSE_EVAL
+            # early_stopping_rounds=50
+        )
+
+        y_valid_pred = model.predict(X_valid)
+        score = mean_absolute_error(y_valid, y_valid_pred)
+        print(f'fold {fold} MAE: {score}')
+        valid_scores.append(score)
+
+        models.append(model)
+    
+    cv_score = np.mean(valid_scores)
+    print(f'CV score: {cv_score}')
+
+    # 推論
+    # 最小値のインデックスを取得
+    min_index = valid_scores.index(min(valid_scores))
+    print("min_index",min_index)
+    predictions = sorted(list(map(int, set(models[min_index].predict(test_data)))))
+    print("Predictions:", predictions)
+
+    return cv_score ,predictions
