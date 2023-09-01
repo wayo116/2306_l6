@@ -24,7 +24,7 @@ with open(csv_dir, "a", newline="") as file:
         "percent" 
         ])
 
-for kaisai in range(1,20):
+for kaisai in range(1,6):
     # kaisai = -1
     if kaisai == -1:
         #本番
@@ -50,102 +50,100 @@ for kaisai in range(1,20):
 
     print('\n----vol 1----')
     params = {"train_params":{"range_start": 1,
-                        "range_end":200,
-                        "yousosu":100,
-                        "multisu":3,
-                        "randomkeisu":214,
+                        "range_end":101,
+                        "yousosu":50,
+                        "multisu":1,
+                        "randomkeisu":112,
                         "nmasi":6},
         "test_params":{"range_start": 1,
-                        "range_end":200,
-                        "yousosu":100,
-                        "multisu":2,
-                        "randomkeisu":314,
-                        "nmasi":1}}
+                        "range_end":101,
+                        "yousosu":50,
+                        "multisu":1,
+                        "randomkeisu":212,
+                        "nmasi":6}}
 
-    predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, **params)
+    predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, "light_gbm_KFold", **params)
     predictions_all.extend(predictions)
 
-    print('\n----vol 2----')
-    params = {"train_params":{"range_start": 1,
-                        "range_end":200,
-                        "yousosu":101,
-                        "multisu":3,
-                        "randomkeisu":214,
-                        "nmasi":6},
-        "test_params":{"range_start": 1,
-                        "range_end":200,
-                        "yousosu":101,
-                        "multisu":2,
-                        "randomkeisu":314,
-                        "nmasi":1}}
+    # print('\n----vol 2----')
+    # params = {"train_params":{"range_start": 20,
+    #                     "range_end":90,
+    #                     "yousosu":60,
+    #                     "multisu":1,
+    #                     "randomkeisu":212,
+    #                     "nmasi":6},
+    #     "test_params":{"range_start": 20,
+    #                     "range_end":90,
+    #                     "yousosu":60,
+    #                     "multisu":1,
+    #                     "randomkeisu":212,
+    #                     "nmasi":2}}
 
-    predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, **params)
-    predictions_all.extend(predictions)
+    # predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, "light_gbm", **params)
+    # predictions_all.extend(predictions)
 
-    print('\n----vol 3----')
-    params = {"train_params":{"range_start": 1,
-                        "range_end":200,
-                        "yousosu":102,
-                        "multisu":3,
-                        "randomkeisu":214,
-                        "nmasi":6},
-        "test_params":{"range_start": 1,
-                        "range_end":200,
-                        "yousosu":102,
-                        "multisu":2,
-                        "randomkeisu":314,
-                        "nmasi":1}}
+    # print('\n----vol 3----')
+    # params = {"train_params":{"range_start": 1,
+    #                     "range_end":52,
+    #                     "yousosu":50,
+    #                     "multisu":1,
+    #                     "randomkeisu":112,
+    #                     "nmasi":3},
+    #     "test_params":{"range_start": 1,
+    #                     "range_end":52,
+    #                     "yousosu":50,
+    #                     "multisu":1,
+    #                     "randomkeisu":112,
+    #                     "nmasi":1}}
 
-    predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, **params)
-    predictions_all.extend(predictions)
-
-
-    print('\n----vol 1del----')
-    params = {"train_params":{"range_start": 1,
-                        "range_end":200,
-                        "yousosu":3,
-                        "multisu":1,
-                        "randomkeisu":214,
-                        "nmasi":1},
-        "test_params":{"range_start": 1,
-                        "range_end":200,
-                        "yousosu":3,
-                        "multisu":1,
-                        "randomkeisu":314,
-                        "nmasi":1}}
-
-    predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, **params)
-    predictions_delall.extend(predictions)
-
-    print('\n----vol 2del----')
-    params = {"train_params":{"range_start": 1,
-                        "range_end":200,
-                        "yousosu":3,
-                        "multisu":1,
-                        "randomkeisu":314,
-                        "nmasi":1},
-        "test_params":{"range_start": 1,
-                        "range_end":200,
-                        "yousosu":3,
-                        "multisu":1,
-                        "randomkeisu":214,
-                        "nmasi":1}}
-
-
-    predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, **params)
-    predictions_delall.extend(predictions)
+    # predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, "light_gbm", **params)
+    # predictions_all.extend(predictions)
 
     print("saisinkekka_list",saisinkekka_list)
     predictions_all = sorted(list(map(int, set(predictions_all))))
     print("predictions_all_set",predictions_all)
 
+    # print('\n----vol 1del----')
+    # params = {"train_params":{"range_start": 100,
+    #                     "range_end":300,
+    #                     "yousosu":2,
+    #                     "multisu":1,
+    #                     "randomkeisu":214,
+    #                     "nmasi":1},
+    #     "test_params":{"range_start": 100,
+    #                     "range_end":300,
+    #                     "yousosu":2,
+    #                     "multisu":4,
+    #                     "randomkeisu":314,
+    #                     "nmasi":1}}
+
+    # predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, "light_gbm_nogood", **params)
+    # predictions_delall.extend(predictions)
+
+    # print('\n----vol 2del----')
+    # params = {"train_params":{"range_start": 1,
+    #                     "range_end":110,
+    #                     "yousosu":3,
+    #                     "multisu":1,
+    #                     "randomkeisu":314,
+    #                     "nmasi":1},
+    #     "test_params":{"range_start": 1,
+    #                     "range_end":110,
+    #                     "yousosu":3,
+    #                     "multisu":1,
+    #                     "randomkeisu":214,
+    #                     "nmasi":1}}
+
+
+    # predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, "light_gbm_nogood", **params)
+    # predictions_delall.extend(predictions)
+
+    print("saisinkekka_list",saisinkekka_list)
     predictions_delall = sorted(list(map(int, set(predictions_delall))))
     print("predictions_delall_set",predictions_delall)
 
     predictions_unique = [item for item in predictions_all if item not in predictions_delall]
-
-    print(predictions_unique)
-
+    print("predictions_unique",predictions_unique)
 
     l1 = saisinkekka_list
     l2 = predictions_unique
