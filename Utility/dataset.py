@@ -159,7 +159,7 @@ def light_gbm(train_data, test_data):
     predictions = sorted(list(map(int, set(model.predict(test_data)))))
     print("Predictions:", predictions)
 
-    return score ,predictions
+    return predictions
 
 
 def light_gbm_nogood(train_data, test_data):
@@ -205,7 +205,7 @@ def light_gbm_nogood(train_data, test_data):
     predictions = sorted(list(map(int, set(model.predict(test_data)))))
     print("Predictions:", predictions)
 
-    return score ,predictions
+    return predictions
 
 
 def light_gbm_KFold(train_data, test_data):
@@ -282,4 +282,4 @@ def light_gbm_KFold(train_data, test_data):
     predictions = sorted(list(map(int, set(models[min_index].predict(test_data)))))
     print("Predictions:", predictions)
 
-    return cv_score ,predictions
+    return predictions
