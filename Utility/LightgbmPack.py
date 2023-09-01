@@ -3,7 +3,7 @@ import csv
 import time
 
 from datalists import dlists
-from Utility.dataset import no_dataset_multi, no_dataset_test_multi, create_random_lists_multi, light_gbm, light_gbm_nogood, lightgbm_cross, lightgbm_grid, light_gbm2
+from Utility.dataset import no_dataset_trainval_multi, no_dataset_test_multi, create_random_lists_multi, light_gbm, light_gbm_nogood
 
 
 class LightgbmPack():
@@ -38,7 +38,7 @@ class LightgbmPack():
         print('\n----lightGBMで予想----')
         start = time.time()
 
-        #学習用
+        #学習検証用
         range_start = params["train_params"]["range_start"]
         range_end = params["train_params"]["range_end"]
         yousosu = params["train_params"]["yousosu"]
@@ -46,9 +46,9 @@ class LightgbmPack():
         randomkeisu = params["train_params"]["randomkeisu"]
         target_kaisu_lists = create_random_lists_multi(range_start, range_end, yousosu, multisu, randomkeisu)
 
-        dlists1 = dlists[1:]
+        train_val_dlists = dlists[1:]
         nmasi = params["train_params"]["nmasi"]
-        data = no_dataset_multi(dlists1, target_kaisu_lists, nmasi)
+        train_data = no_dataset_trainval_multi(train_val_dlists, target_kaisu_lists, nmasi)
 
         #テスト用
         range_start = params["test_params"]["range_start"]
@@ -58,26 +58,28 @@ class LightgbmPack():
         randomkeisu = params["test_params"]["randomkeisu"]
         target_kaisu_lists = create_random_lists_multi(range_start, range_end, yousosu, multisu, randomkeisu)
 
-        dlists2 = dlists[0:]
+        test_dlists = dlists[0:]
         nmasi = params["test_params"]["nmasi"]
-        data2 = no_dataset_test_multi(dlists2, target_kaisu_lists, nmasi)
+        test_data = no_dataset_test_multi(test_dlists, target_kaisu_lists, nmasi)
 
         #lightgbmで推論
         if lgbm_model == "light_gbm":
-            score ,predictions = light_gbm(data, data2)
-            # score ,predictions = lightgbm_cross(data, data2)
-            # score ,predictions = lightgbm_grid(data, data2)
-            # score ,predictions = light_gbm2(data, data2)
+            score ,predictions = light_gbm(train_data, test_data)
+            
         if lgbm_model == "light_gbm_nogood":
-            score ,predictions = light_gbm_nogood(data, data2)
+            score ,predictions = light_gbm_nogood(train_data, test_data)
 
+        # %計算
         l1 = saisinkekka_list
         l2 = predictions
         l1_l2_and = set(l1) & set(l2)
         l1l2_len = len(l1_l2_and)
         predictions_len = len(predictions)
         
-        percent = round(l1l2_len/predictions_len*100)
+        if l1l2_len > 0 and predictions_len > 0:
+            percent = round(l1l2_len/predictions_len*100)
+        else:
+            percent = 0
         print("percent",percent)
 
         if self.makecsv:
