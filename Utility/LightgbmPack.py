@@ -64,13 +64,13 @@ class LightgbmPack():
 
         #lightgbmで推論
         if lgbm_model == "light_gbm":
-            score ,predictions = light_gbm(train_data, test_data)
+            predictions = light_gbm(train_data, test_data)
             
         if lgbm_model == "light_gbm_nogood":
-            score ,predictions = light_gbm_nogood(train_data, test_data)
+            predictions = light_gbm_nogood(train_data, test_data)
 
         if lgbm_model == "light_gbm_KFold":
-            score ,predictions = light_gbm_KFold(train_data, test_data)
+            predictions = light_gbm_KFold(train_data, test_data)
 
         # %計算
         l1 = saisinkekka_list
