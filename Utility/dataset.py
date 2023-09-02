@@ -231,7 +231,7 @@ def light_gbm_KFold(train_data, test_data):
 
     data = np.array(balanced_data)
     X = data[:,1:]
-    X = X/43
+    X = X*5
     print(X)
     y = data[:,0]
     print(y)
