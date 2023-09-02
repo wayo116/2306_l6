@@ -231,12 +231,12 @@ def light_gbm_KFold(train_data, test_data):
 
     data = np.array(balanced_data)
     X = data[:,1:]
-    X = X*5
     print(X)
     y = data[:,0]
     print(y)
 
-    FOLD = 5
+    FOLD = 3
+
     NUM_ROUND = 100
     # VERBOSE_EVAL = -1
 
