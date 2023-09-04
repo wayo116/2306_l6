@@ -71,6 +71,7 @@ def no_dataset_trainval_multi(dlists, target_kaisu_lists, nmasi):
             std5 = np.std(dlists[kaisu+1:kaisu+1+5, dlist_retu])
             std10 = np.std(dlists[kaisu+1:kaisu+1+10, dlist_retu])
             std25 = np.std(dlists[kaisu+1:kaisu+1+25, dlist_retu])
+            min25 = np.min(dlists[kaisu+1:kaisu+1+25, dlist_retu])
             tmp.append(std3)
             tmp.append(std5)
             tmp.append(std10)
