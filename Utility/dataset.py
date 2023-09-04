@@ -60,7 +60,7 @@ def no_dataset_trainval_multi(dlists, target_kaisu_lists, nmasi):
 
         for dlist_retu in range(6):
 
-            kaisu_limit = len(dlists)-25
+            kaisu_limit = len(dlists)-5
             # print("kaisu_limit",kaisu_limit)
             if kaisu >= kaisu_limit:
                 break
@@ -138,7 +138,7 @@ def no_dataset_test_multi(dlists, target_kaisu_lists, nmasi):
         
         for dlist_retu in range(6):
 
-            kaisu_limit = len(dlists)-25
+            kaisu_limit = len(dlists)-5
             # print("kaisu_limit",kaisu_limit)
             if kaisu >= kaisu_limit:
                 break
