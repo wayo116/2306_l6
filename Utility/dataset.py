@@ -75,7 +75,21 @@ def no_dataset_trainval_multi(dlists, target_kaisu_lists, nmasi):
             tmp.append(std5)
             tmp.append(std10)
             tmp.append(std25)
-            no_dataset.append(tmp)
+            
+            if tmp != []:
+                # no_dataset.append(tmp)
+
+                list1 = tmp[1:]
+                # print("list1",list1)
+                list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(tmp), listsu=nmasi)
+                # list2s = create_random_lists_float(range_start=0, range_end=0, yousosu=len(target_kaisu_list), listsu=nmasi)
+                for list2 in list2s:
+                    # print("list2",list2)
+                    result = [x + y for x, y in zip(list1, list2)]
+                    # print("result",result)
+                    result.insert(0, dlist[dlist_retu])
+                    # print("result_in",result)
+                    no_dataset.append(result)
 
     # print("no_dataset",no_dataset)
     print("no_dataset_len",len(no_dataset))
@@ -116,8 +130,8 @@ def no_dataset_test_multi(dlists, target_kaisu_lists, nmasi):
     # print("no_dataset_test_len",len(no_dataset))
 
     no_dataset = []
-    for kaisu, dlist in enumerate(dlists[0:6]):
-        print(dlist)
+    for kaisu, dlist in enumerate(dlists[0:1]):
+        
         for dlist_retu in range(6):
 
             kaisu_limit = len(dlists)-25
@@ -135,7 +149,21 @@ def no_dataset_test_multi(dlists, target_kaisu_lists, nmasi):
             tmp.append(std5)
             tmp.append(std10)
             tmp.append(std25)
-            no_dataset.append(tmp)
+
+            if tmp != []:
+                # no_dataset.append(tmp)
+
+                list1 = tmp[1:]
+                # print("list1",list1)
+                list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(tmp), listsu=nmasi)
+                # list2s = create_random_lists_float(range_start=0, range_end=0, yousosu=len(target_kaisu_list), listsu=nmasi)
+                for list2 in list2s:
+                    # print("list2",list2)
+                    result = [x + y for x, y in zip(list1, list2)]
+                    # print("result",result)
+                    result.insert(0, dlist[dlist_retu])
+                    # print("result_in",result)
+                    no_dataset.append(result)
 
     # print("no_dataset",no_dataset)
     print("no_dataset_len",len(no_dataset))
