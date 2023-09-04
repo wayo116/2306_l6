@@ -67,13 +67,13 @@ def no_dataset_trainval_multi(dlists, target_kaisu_lists, nmasi):
 
             tmp = []
             tmp.append(dlist[dlist_retu])
-            std3 = np.std(dlists[kaisu+1:kaisu+1+3, dlist_retu])
+            var5 = np.var(dlists[kaisu+1:kaisu+1+5, dlist_retu])
             med5 = np.median(dlists[kaisu+1:kaisu+1+5, dlist_retu])
             mean5 = np.mean(dlists[kaisu+1:kaisu+1+5, dlist_retu])
             std5 = np.std(dlists[kaisu+1:kaisu+1+5, dlist_retu])
             min5 = np.min(dlists[kaisu+1:kaisu+1+5, dlist_retu])
             max5 = np.max(dlists[kaisu+1:kaisu+1+5, dlist_retu])
-            tmp.append(std3)
+            tmp.append(var5)
             tmp.append(median5)
             tmp.append(mean5)
             tmp.append(std5)
@@ -145,13 +145,13 @@ def no_dataset_test_multi(dlists, target_kaisu_lists, nmasi):
 
             tmp = []
             # tmp.append(dlist[dlist_retu])
-            std3 = np.std(dlists[kaisu:kaisu+3, dlist_retu])
+            var5 = np.std(dlists[kaisu:kaisu+5, dlist_retu])
             med5 = np.median(dlists[kaisu:kaisu+5, dlist_retu])
             mean5 = np.std(dlists[kaisu:kaisu+5, dlist_retu])
             std5 = np.std(dlists[kaisu:kaisu+5, dlist_retu])
-            min5 = np.min(dlists[kaisu+1:kaisu+1+5, dlist_retu])
-            max5 = np.max(dlists[kaisu+1:kaisu+1+5, dlist_retu])
-            tmp.append(std3)
+            min5 = np.min(dlists[kaisu:kaisu+5, dlist_retu])
+            max5 = np.max(dlists[kaisu:kaisu+5, dlist_retu])
+            tmp.append(var5)
             tmp.append(med5)
             tmp.append(mean5)
             tmp.append(std5)
