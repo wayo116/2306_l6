@@ -4,9 +4,12 @@ import random
 import numpy as np
 from collections import Counter
 
-from sklearn.model_selection import train_test_split, KFold
+from sklearn.model_selection import train_test_split, KFold, cross_val_score
 import lightgbm as lgb
-from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_absolute_error, accuracy_score, classification_report
+# from sklearn.preprocessing import StandardScaler, OneHotEncoder
+# from sklearn.compose import ColumnTransformer
+import lightgbm as lgb
 
 import csv
 import os
@@ -32,7 +35,7 @@ def no_dataset_trainval_multi(dlists, target_kaisu_lists, nmasi):
                 tmp.append(dlist[dlist_retu])
                 for target_kaisu_youso in target_kaisu_list:
                     tmp.append(dlists[kaisu+target_kaisu_youso][dlist_retu])
-    
+
                 if tmp != []:
                     # no_dataset.append(tmp)
     
@@ -140,7 +143,7 @@ def light_gbm(train_data, test_data):
     data = np.array(balanced_data)
     X = data[:,1:]
     print(X)
-    y = data[:,0]
+    y = data[:,0]-1
     print(y)
 
     # データ分割
@@ -156,10 +159,10 @@ def light_gbm(train_data, test_data):
     print("score", score)
 
     # 推論
-    predictions = sorted(list(map(int, set(model.predict(test_data)))))
+    predictions = sorted(list(map(int, set(model.predict(test_data)+1))))
     print("Predictions:", predictions)
 
-    return predictions
+    return score ,predictions
 
 
 def light_gbm_nogood(train_data, test_data):
@@ -186,7 +189,7 @@ def light_gbm_nogood(train_data, test_data):
     data = np.array(balanced_data)
     X = data[:,1:]
     print(X)
-    y = data[:,0]
+    y = data[:,0]-1
     print(y)
 
     # データ分割
@@ -202,17 +205,17 @@ def light_gbm_nogood(train_data, test_data):
     print("score", score)
 
     # 推論
-    predictions = sorted(list(map(int, set(model.predict(test_data)))))
+    predictions = sorted(list(map(int, set(model.predict(test_data)+1))))
     print("Predictions:", predictions)
 
-    return predictions
+    return score ,predictions
 
 
 def light_gbm_KFold(train_data, test_data):
 
     # 一列目のラベルを取得
     labels = [row[0] for row in train_data]
-
+    
     # ラベルの個数をカウント
     label_counts = Counter(labels)
 
@@ -232,11 +235,10 @@ def light_gbm_KFold(train_data, test_data):
     data = np.array(balanced_data)
     X = data[:,1:]
     print(X)
-    y = data[:,0]
+    y = data[:,0]-1
     print(y)
 
     FOLD = 3
-
     NUM_ROUND = 100
     # VERBOSE_EVAL = -1
 
@@ -280,7 +282,76 @@ def light_gbm_KFold(train_data, test_data):
     # 最小値のインデックスを取得
     min_index = valid_scores.index(min(valid_scores))
     print("min_index",min_index)
-    predictions = sorted(list(map(int, set(models[min_index].predict(test_data)))))
+    predictions = sorted(list(map(int, set(models[min_index].predict(test_data)+1))))
     print("Predictions:", predictions)
 
-    return predictions
+    return cv_score ,predictions
+
+
+def light_gbm_multi(train_data, test_data):
+
+    # 一列目のラベルを取得
+    labels = [row[0] for row in train_data]
+
+    # ラベルの個数をカウント
+    label_counts = Counter(labels)
+
+    # 一番個数が少ないラベルの数を取得
+    min_label_count = min(label_counts.values())
+
+    # 一番少ないラベルに合わせて他のラベルをフィルタリング
+    balanced_data = []
+    for label in label_counts.keys():
+        filtered_data = [row for row in train_data if row[0] == label][:min_label_count]
+        balanced_data.extend(filtered_data)
+
+    # print("\nBalanced Data:")
+    # for row in balanced_data:
+    #     print(row)
+
+    data = np.array(balanced_data)
+    X = data[:,1:]
+    print(X)
+    y = data[:,0]-1
+    print(y)
+
+    # データ分割
+    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    params = {
+        'objective': 'multiclass',  # 多クラス分類を指定
+        'num_class': 43,  # クラスの数を設定
+        'boosting_type': 'gbdt',
+        'metric': 'multi_logloss',  # 多クラスの対数尤度を使用
+        'num_leaves': 31,
+        'learning_rate': 0.05,
+        'feature_fraction': 0.9
+    }
+
+    # LightGBMモデルを訓練（交差検証を使用）
+    model = lgb.LGBMClassifier(**params, n_estimators=100)  # イテレーション回数はここで指定
+    cv_scores = cross_val_score(model, X, y, cv=3, scoring='accuracy')  # 5分割交差検証
+
+    # 交差検証スコアの平均を表示
+    print(f'*** Cross-Validation Mean Accuracy: {np.mean(cv_scores)} ***')
+
+    # 最終モデルをトレーニングデータ全体で訓練
+    model.fit(X, y)
+
+    # テストデータを予測
+    y_pred = model.predict(X_val)
+
+    # 正解率を計算
+    accuracy = accuracy_score(y_val, y_pred)
+    print(f'*** Accuracy on Validation Data: {accuracy} ***')
+
+    # クラスごとの評価メトリクスを表示
+    # report = classification_report(y_val, y_pred)
+    # print(f'Classification Report:\n{report}')
+
+    # 推論
+    predictions = sorted(list(map(int, set(model.predict(test_data) + 1))))
+    print("Predictions:", predictions)
+
+    return accuracy, predictions
+

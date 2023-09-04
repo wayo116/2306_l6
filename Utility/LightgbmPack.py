@@ -3,7 +3,7 @@ import csv
 import time
 
 from datalists import dlists
-from Utility.dataset import no_dataset_trainval_multi, no_dataset_test_multi, create_random_lists_multi, light_gbm, light_gbm_nogood, light_gbm_KFold
+from Utility.dataset import no_dataset_trainval_multi, no_dataset_test_multi, create_random_lists_multi, light_gbm, light_gbm_nogood, light_gbm_KFold, light_gbm_multi
 
 
 class LightgbmPack():
@@ -64,13 +64,17 @@ class LightgbmPack():
 
         #lightgbmで推論
         if lgbm_model == "light_gbm":
-            predictions = light_gbm(train_data, test_data)
+            score ,predictions = light_gbm(train_data, test_data)
             
         if lgbm_model == "light_gbm_nogood":
-            predictions = light_gbm_nogood(train_data, test_data)
+            score ,predictions = light_gbm_nogood(train_data, test_data)
 
         if lgbm_model == "light_gbm_KFold":
-            predictions = light_gbm_KFold(train_data, test_data)
+            score ,predictions = light_gbm_KFold(train_data, test_data)
+        
+        if lgbm_model == "light_gbm_multi":
+            score ,predictions = light_gbm_multi(train_data, test_data)
+
 
         # %計算
         l1 = saisinkekka_list
