@@ -153,7 +153,7 @@ def no_dataset_test_multi(dlists, target_kaisu_lists, nmasi):
             if tmp != []:
                 # no_dataset.append(tmp)
 
-                list1 = tmp[1:]
+                list1 = tmp[0:]
                 # print("list1",list1)
                 list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(tmp), listsu=nmasi)
                 # list2s = create_random_lists_float(range_start=0, range_end=0, yousosu=len(target_kaisu_list), listsu=nmasi)
@@ -161,7 +161,7 @@ def no_dataset_test_multi(dlists, target_kaisu_lists, nmasi):
                     # print("list2",list2)
                     result = [x + y for x, y in zip(list1, list2)]
                     # print("result",result)
-                    result.insert(0, dlist[dlist_retu])
+                    # result.insert(0, dlist[dlist_retu])
                     # print("result_in",result)
                     no_dataset.append(result)
 
@@ -410,7 +410,7 @@ def light_gbm_multi(train_data, test_data):
     }
 
     # LightGBMモデルを訓練（交差検証を使用）
-    model = lgb.LGBMClassifier(**params, n_estimators=20)  # イテレーション回数はここで指定
+    model = lgb.LGBMClassifier(**params, n_estimators=10)  # イテレーション回数はここで指定
     cv_scores = cross_val_score(model, X, y, cv=3, scoring='accuracy')  # 5分割交差検証
 
     # 交差検証スコアの平均を表示
