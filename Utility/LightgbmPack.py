@@ -46,7 +46,7 @@ class LightgbmPack():
         randomkeisu = params["train_params"]["randomkeisu"]
         target_kaisu_lists = create_random_lists_multi(range_start, range_end, yousosu, multisu, randomkeisu)
 
-        train_val_dlists = dlists[1:]
+        train_val_dlists = dlists[1:500]
         nmasi = params["train_params"]["nmasi"]
         train_data = no_dataset_trainval_multi(train_val_dlists, target_kaisu_lists, nmasi)
 
@@ -58,7 +58,7 @@ class LightgbmPack():
         randomkeisu = params["test_params"]["randomkeisu"]
         target_kaisu_lists = create_random_lists_multi(range_start, range_end, yousosu, multisu, randomkeisu)
 
-        test_dlists = dlists[0:]
+        test_dlists = dlists[0:500]
         nmasi = params["test_params"]["nmasi"]
         test_data = no_dataset_test_multi(test_dlists, target_kaisu_lists, nmasi)
         print("len(test_data)",len(test_data))
