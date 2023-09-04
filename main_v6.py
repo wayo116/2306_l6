@@ -46,15 +46,15 @@ lgbm_obj = LightgbmPack(makecsv=False)
 
 print('\n----vol 1----')
 params = {"train_params":{"range_start": 1,
-                    "range_end":10,
-                    "yousosu":4,
-                    "multisu":3,
+                    "range_end":5,
+                    "yousosu":3,
+                    "multisu":1,
                     "randomkeisu":112,
-                    "nmasi":1},
+                    "nmasi":12},
     "test_params":{"range_start": 1,
-                    "range_end":10,
-                    "yousosu":4,
-                    "multisu":3,
+                    "range_end":5,
+                    "yousosu":3,
+                    "multisu":12,
                     "randomkeisu":112,
                     "nmasi":1}}
 
