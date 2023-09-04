@@ -61,6 +61,7 @@ class LightgbmPack():
         test_dlists = dlists[0:]
         nmasi = params["test_params"]["nmasi"]
         test_data = no_dataset_test_multi(test_dlists, target_kaisu_lists, nmasi)
+        print("len(test_data)",len(test_data))
 
         #lightgbmで推論
         if lgbm_model == "light_gbm":

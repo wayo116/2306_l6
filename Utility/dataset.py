@@ -17,39 +17,66 @@ import os
 
 def no_dataset_trainval_multi(dlists, target_kaisu_lists, nmasi):
 
-    no_dataset = []
-    for dlist_retu in range(6):
+    # no_dataset = []
+    # for dlist_retu in range(6):
 
-        #target_kaisu_list = target_kaisu_lists[dlist_retu]
-        target_kaisu_lists_lists = target_kaisu_lists[dlist_retu]
+    #     #target_kaisu_list = target_kaisu_lists[dlist_retu]
+    #     target_kaisu_lists_lists = target_kaisu_lists[dlist_retu]
         
-        for target_kaisu_list in target_kaisu_lists_lists:
-            for kaisu, dlist in enumerate(dlists):
+    #     for target_kaisu_list in target_kaisu_lists_lists:
+    #         for kaisu, dlist in enumerate(dlists):
     
-                kaisu_limit = len(dlists)-max(target_kaisu_list)
-                # print("kaisu_limit",kaisu_limit)
-                if kaisu >= kaisu_limit:
-                    break
+    #             kaisu_limit = len(dlists)-max(target_kaisu_list)
+    #             # print("kaisu_limit",kaisu_limit)
+    #             if kaisu >= kaisu_limit:
+    #                 break
     
-                tmp = []
-                tmp.append(dlist[dlist_retu])
-                for target_kaisu_youso in target_kaisu_list:
-                    tmp.append(dlists[kaisu+target_kaisu_youso][dlist_retu])
+    #             tmp = []
+    #             tmp.append(dlist[dlist_retu])
+    #             for target_kaisu_youso in target_kaisu_list:
+    #                 tmp.append(dlists[kaisu+target_kaisu_youso][dlist_retu])
 
-                if tmp != []:
-                    # no_dataset.append(tmp)
+    #             if tmp != []:
+    #                 # no_dataset.append(tmp)
     
-                    list1 = tmp[1:]
-                    # print("list1",list1)
-                    list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(target_kaisu_list), listsu=nmasi)
-                    for list2 in list2s:
-                        # print("list2",list2)
-                        result = [x + y for x, y in zip(list1, list2)]
-                        # print("result",result)
-                        result.insert(0, dlist[dlist_retu])
-                        # print("result_in",result)
-                        no_dataset.append(result)
+    #                 list1 = tmp[1:]
+    #                 # print("list1",list1)
+    #                 list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(target_kaisu_list), listsu=nmasi)
+    #                 # list2s = create_random_lists_float(range_start=0, range_end=0, yousosu=len(target_kaisu_list), listsu=nmasi)
+    #                 for list2 in list2s:
+    #                     # print("list2",list2)
+    #                     result = [x + y for x, y in zip(list1, list2)]
+    #                     # print("result",result)
+    #                     result.insert(0, dlist[dlist_retu])
+    #                     # print("result_in",result)
+    #                     no_dataset.append(result)
          
+    # # print("no_dataset",no_dataset)
+    # print("no_dataset_len",len(no_dataset))
+
+
+    no_dataset = []
+    for kaisu, dlist in enumerate(dlists):
+
+        for dlist_retu in range(6):
+
+            kaisu_limit = len(dlists)-25
+            # print("kaisu_limit",kaisu_limit)
+            if kaisu >= kaisu_limit:
+                break
+
+            tmp = []
+            tmp.append(dlist[dlist_retu])
+            std3 = np.std(dlists[kaisu+1:kaisu+1+3, dlist_retu])
+            std5 = np.std(dlists[kaisu+1:kaisu+1+5, dlist_retu])
+            std10 = np.std(dlists[kaisu+1:kaisu+1+10, dlist_retu])
+            std25 = np.std(dlists[kaisu+1:kaisu+1+25, dlist_retu])
+            tmp.append(std3)
+            tmp.append(std5)
+            tmp.append(std10)
+            tmp.append(std25)
+            no_dataset.append(tmp)
+
     # print("no_dataset",no_dataset)
     print("no_dataset_len",len(no_dataset))
 
@@ -58,34 +85,60 @@ def no_dataset_trainval_multi(dlists, target_kaisu_lists, nmasi):
 
 def no_dataset_test_multi(dlists, target_kaisu_lists, nmasi):
 
-    no_dataset = []
-    for dlist_retu in range(6):
+    # no_dataset = []
+    # for dlist_retu in range(6):
 
-        #target_kaisu_list = target_kaisu_lists[dlist_retu]
-        target_kaisu_lists_lists = target_kaisu_lists[dlist_retu]
+    #     #target_kaisu_list = target_kaisu_lists[dlist_retu]
+    #     target_kaisu_lists_lists = target_kaisu_lists[dlist_retu]
 
-        for target_kaisu_list in target_kaisu_lists_lists:
-            tmp = []
-            for target_kaisu_youso in target_kaisu_list:
-                tmp.append(dlists[target_kaisu_youso][dlist_retu])
+    #     for target_kaisu_list in target_kaisu_lists_lists:
+    #         tmp = []
+    #         for target_kaisu_youso in target_kaisu_list:
+    #             tmp.append(dlists[target_kaisu_youso][dlist_retu])
     
-            if tmp != []:
-                # no_dataset.append(tmp)
+    #         if tmp != []:
+    #             # no_dataset.append(tmp)
     
-                # list1 = tmp[1:]
-                list1 = tmp[0:]
-                # print("list1",list1)
-                list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(target_kaisu_list), listsu=nmasi)
-                for list2 in list2s:
-                    # print("list2",list2)
-                    result = [x + y for x, y in zip(list1, list2)]
-                    # print("result",result)
-                    # result.insert(0, dlist[dlist_retu])
-                    # print("result_in",result)
-                    no_dataset.append(result)
+    #             # list1 = tmp[1:]
+    #             list1 = tmp[0:]
+    #             # print("list1",list1)
+    #             list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(target_kaisu_list), listsu=nmasi)
+    #             # list2s = create_random_lists_float(range_start=0, range_end=0, yousosu=len(target_kaisu_list), listsu=nmasi)
+    #             for list2 in list2s:
+    #                 # print("list2",list2)
+    #                 result = [x + y for x, y in zip(list1, list2)]
+    #                 # print("result",result)
+    #                 # result.insert(0, dlist[dlist_retu])
+    #                 # print("result_in",result)
+    #                 no_dataset.append(result)
          
-    # print("no_dataset_test",no_dataset)
-    print("no_dataset_test_len",len(no_dataset))
+    # # print("no_dataset_test",no_dataset)
+    # print("no_dataset_test_len",len(no_dataset))
+
+    no_dataset = []
+    for kaisu, dlist in enumerate(dlists[0:6]):
+        print(dlist)
+        for dlist_retu in range(6):
+
+            kaisu_limit = len(dlists)-25
+            # print("kaisu_limit",kaisu_limit)
+            if kaisu >= kaisu_limit:
+                break
+
+            tmp = []
+            # tmp.append(dlist[dlist_retu])
+            std3 = np.std(dlists[kaisu:kaisu+3, dlist_retu])
+            std5 = np.std(dlists[kaisu:kaisu+5, dlist_retu])
+            std10 = np.std(dlists[kaisu:kaisu+10, dlist_retu])
+            std25 = np.std(dlists[kaisu:kaisu+25, dlist_retu])
+            tmp.append(std3)
+            tmp.append(std5)
+            tmp.append(std10)
+            tmp.append(std25)
+            no_dataset.append(tmp)
+
+    # print("no_dataset",no_dataset)
+    print("no_dataset_len",len(no_dataset))
 
     return no_dataset
 
@@ -323,13 +376,13 @@ def light_gbm_multi(train_data, test_data):
         'num_class': 43,  # クラスの数を設定
         'boosting_type': 'gbdt',
         'metric': 'multi_logloss',  # 多クラスの対数尤度を使用
-        'num_leaves': 31,
-        'learning_rate': 0.05,
+        'num_leaves': 32,
+        'learning_rate': 0.1,
         'feature_fraction': 0.9
     }
 
     # LightGBMモデルを訓練（交差検証を使用）
-    model = lgb.LGBMClassifier(**params, n_estimators=100)  # イテレーション回数はここで指定
+    model = lgb.LGBMClassifier(**params, n_estimators=20)  # イテレーション回数はここで指定
     cv_scores = cross_val_score(model, X, y, cv=3, scoring='accuracy')  # 5分割交差検証
 
     # 交差検証スコアの平均を表示
@@ -352,6 +405,7 @@ def light_gbm_multi(train_data, test_data):
     # 推論
     predictions = sorted(list(map(int, set(model.predict(test_data) + 1))))
     print("Predictions:", predictions)
+    
 
     return accuracy, predictions
 
