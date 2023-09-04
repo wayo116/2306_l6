@@ -76,7 +76,7 @@ def no_dataset_trainval_multi(dlists, target_kaisu_lists, nmasi):
             tmp.append(std5)
             tmp.append(std10)
             tmp.append(std25)
-            
+            tmp.append(min25)
             if tmp != []:
                 # no_dataset.append(tmp)
 
