@@ -21,7 +21,15 @@ with open(csv_dir, "a", newline="") as file:
         "predictions_unique",
         "l1l2_len",
         "predictions_len",
-        "percent" 
+        "percent",
+        "dilist_end",
+        "study_nmasi",
+        "test_nmasi",
+        "bunseki_hani",
+        "test_dlists_hani_end",
+        "num_leaves",
+        "learning_rate",
+        "n_estimators",
         ])
 
 for kaisai in range(1,6):
@@ -41,85 +49,131 @@ for kaisai in range(1,6):
     print("saisinkekka_list",saisinkekka_list)
     print("dlists",dlists[:5])
 
-    dlists_end = 500
-    bunkatu=5
-    predictions_all = []
-    predictions_delall = []
-    lgbm_obj = LightgbmPack()
+    for dilist_end in [50]:
+        for study_nmasi in [50,70,90,130]:
+            for test_nmasi in range(1,20,5):
+                for bunseki_hani in range(4,28,4):
+                    for test_dlists_hani_end in [1,2]:
+                        for num_leaves in range(16,48,16):
+                            for learning_rate in [0.01,0.05,0.1,0.5]:
+                                for n_estimators in range(5,30,5):
+                                    dlists_end = dilist_end
+                                    bunkatu=5
+                                    predictions_all = []
+                                    predictions_delall = []
+                                    lgbm_obj = LightgbmPack()
 
-    print('\n----vol 1----')
-    params = {"dataset_params":{"range_start": -0.1,
-                                "range_end":0.1,
-                                "study_nmasi":6,
-                                "test_nmasi":1,
-                                "bunseki_hani":5,
-                                "test_dlists_hani_end":6},
+                                    print('\n----vol 1----')
+                                    params = {"dataset_params":{"range_start": -0.1,
+                                                                "range_end":0.1,
+                                                                "study_nmasi":study_nmasi,
+                                                                "test_nmasi":test_nmasi,
+                                                                "bunseki_hani":bunseki_hani,
+                                                                "test_dlists_hani_end":test_dlists_hani_end},
 
-                "lgbm_params":{"lgbm_model": "light_gbm_multi",
-                                'num_leaves': 32,
-                                'learning_rate': 0.1,
-                                "n_estimators":10,
-                                "cv":3,}}
+                                                "lgbm_params":{"lgbm_model": "light_gbm_multi",
+                                                                'num_leaves': num_leaves,
+                                                                'learning_rate': learning_rate,
+                                                                "n_estimators":5,
+                                                                "cv":3,}}
 
-    predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
-    predictions_all.extend(predictions)
+                                    predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
+                                    predictions_all.extend(predictions)
 
-    print("saisinkekka_list",saisinkekka_list)
-    predictions_all = sorted(list(map(int, set(predictions_all))))
-    print("predictions_all_set",predictions_all)
+                                    print("saisinkekka_list",saisinkekka_list)
+                                    predictions_all = sorted(list(map(int, set(predictions_all))))
+                                    print("predictions_all_set",predictions_all)
 
-    '''
-    print('\n----vol 1del----')
-    params = {"dataset_params":{"range_start": -0.1,
-                                "range_end":0.1,
-                                "study_nmasi":6,
-                                "test_nmasi":1,
-                                "bunseki_hani":5,
-                                "test_dlists_hani_end":6},
+                                    # dlists_end = 150
+                                    # bunkatu=5
+                                    # predictions_all = []
+                                    # predictions_delall = []
+                                    # lgbm_obj = LightgbmPack()
 
-                "lgbm_params":{"lgbm_model": "light_gbm_multi",
-                                'num_leaves': 32,
-                                'learning_rate': 0.1,
-                                "n_estimators":10,
-                                "cv":3,}}
+                                    # print('\n----vol 1----')
+                                    # params = {"dataset_params":{"range_start": -0.1,
+                                    #                             "range_end":0.1,
+                                    #                             "study_nmasi":200,
+                                    #                             "test_nmasi":20,
+                                    #                             "bunseki_hani":4,
+                                    #                             "test_dlists_hani_end":1},
 
-    predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
-    predictions_delall.extend(predictions)
+                                    #             "lgbm_params":{"lgbm_model": "light_gbm_multi",
+                                    #                             'num_leaves': 32,
+                                    #                             'learning_rate': 0.01,
+                                    #                             "n_estimators":5,
+                                    #                             "cv":3,}}
 
-    print("saisinkekka_list",saisinkekka_list)
-    predictions_delall = sorted(list(map(int, set(predictions_delall))))
-    print("predictions_delall_set",predictions_delall)
-    '''
+                                    # predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
+                                    # predictions_all.extend(predictions)
 
-    predictions_unique = [item for item in predictions_all if item not in predictions_delall]
-    print("predictions_unique",predictions_unique)
+                                    # print("saisinkekka_list",saisinkekka_list)
+                                    # predictions_all = sorted(list(map(int, set(predictions_all))))
+                                    # print("predictions_all_set",predictions_all)
 
-    l1 = saisinkekka_list
-    l2 = predictions_unique
-    l1_l2_and = set(l1) & set(l2)
-    l1l2_len = len(l1_l2_and)
-    predictions_len = len(predictions_unique)
+                                    '''
+                                    print('\n----vol 1del----')
+                                    params = {"dataset_params":{"range_start": -0.1,
+                                                                "range_end":0.1,
+                                                                "study_nmasi":6,
+                                                                "test_nmasi":1,
+                                                                "bunseki_hani":5,
+                                                                "test_dlists_hani_end":6},
 
-    percent = round(l1l2_len/predictions_len*100)
-    print(f'{l1l2_len}/{predictions_len}')
-    print("percent",percent)
-    print("\n")
+                                                "lgbm_params":{"lgbm_model": "light_gbm_multi",
+                                                                'num_leaves': 32,
+                                                                'learning_rate': 0.1,
+                                                                "n_estimators":10,
+                                                                "cv":3,}}
 
-    with open(csv_dir, "a", newline="") as file:
-        writer = csv.writer(file)
-        writer.writerow([kaisai,
-            saisinkekka_list,
-            predictions_unique,
-            l1l2_len,
-            predictions_len,
-            percent,
-            ])
+                                    predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
+                                    predictions_delall.extend(predictions)
 
-    # pred_dlists = combi(predictions_all,6)
+                                    print("saisinkekka_list",saisinkekka_list)
+                                    predictions_delall = sorted(list(map(int, set(predictions_delall))))
+                                    print("predictions_delall_set",predictions_delall)
+                                    '''
 
-    # #shori2は、pred_dlistsには組合せリストを入れる
-    # outlist=Dell6(dlists, pred_dlists, saisinkekka_list, bunkatu).shori2()
-    # #outlists.extend(outlist)
-    # #print('outlist',outlist)
+                                    predictions_unique = [item for item in predictions_all if item not in predictions_delall]
+                                    print("predictions_unique",predictions_unique)
+
+                                    l1 = saisinkekka_list
+                                    l2 = predictions_unique
+                                    l1_l2_and = set(l1) & set(l2)
+                                    l1l2_len = len(l1_l2_and)
+                                    predictions_len = len(predictions_unique)
+
+                                    if l1l2_len > 0 and predictions_len > 0:
+                                        percent = round(l1l2_len/predictions_len*100)
+                                        print(f"{l1l2_len}/{predictions_len}")
+                                    else:
+                                        percent = 0
+                                    print("percent",percent)
+                                    print("\n")
+
+                                    with open(csv_dir, "a", newline="") as file:
+                                        writer = csv.writer(file)
+                                        writer.writerow([kaisai,
+                                            saisinkekka_list,
+                                            predictions_unique,
+                                            l1l2_len,
+                                            predictions_len,
+                                            percent,
+                                            dilist_end,
+                                            study_nmasi,
+                                            test_nmasi,
+                                            bunseki_hani,
+                                            test_dlists_hani_end,
+                                            num_leaves,
+                                            learning_rate,
+                                            n_estimators,
+                                            ])
+
+                                    # pred_dlists = combi(predictions_all,6)
+
+                                    # #shori2は、pred_dlistsには組合せリストを入れる
+                                    # outlist=Dell6(dlists, pred_dlists, saisinkekka_list, bunkatu).shori2()
+                                    # #outlists.extend(outlist)
+                                    # #print('outlist',outlist)
 
 print("処理時間",time.time() - start)
