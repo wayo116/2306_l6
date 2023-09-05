@@ -15,78 +15,43 @@ import csv
 import os
 
 
-def no_dataset_trainval_multi(dlists, target_kaisu_lists, nmasi):
+def no_dataset_trainval_multi(dlists, **dataset_params,):
 
-    # no_dataset = []
-    # for dlist_retu in range(6):
-
-    #     #target_kaisu_list = target_kaisu_lists[dlist_retu]
-    #     target_kaisu_lists_lists = target_kaisu_lists[dlist_retu]
-        
-    #     for target_kaisu_list in target_kaisu_lists_lists:
-    #         for kaisu, dlist in enumerate(dlists):
-    
-    #             kaisu_limit = len(dlists)-max(target_kaisu_list)
-    #             # print("kaisu_limit",kaisu_limit)
-    #             if kaisu >= kaisu_limit:
-    #                 break
-    
-    #             tmp = []
-    #             tmp.append(dlist[dlist_retu])
-    #             for target_kaisu_youso in target_kaisu_list:
-    #                 tmp.append(dlists[kaisu+target_kaisu_youso][dlist_retu])
-
-    #             if tmp != []:
-    #                 # no_dataset.append(tmp)
-    
-    #                 list1 = tmp[1:]
-    #                 # print("list1",list1)
-    #                 list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(target_kaisu_list), listsu=nmasi)
-    #                 # list2s = create_random_lists_float(range_start=0, range_end=0, yousosu=len(target_kaisu_list), listsu=nmasi)
-    #                 for list2 in list2s:
-    #                     # print("list2",list2)
-    #                     result = [x + y for x, y in zip(list1, list2)]
-    #                     # print("result",result)
-    #                     result.insert(0, dlist[dlist_retu])
-    #                     # print("result_in",result)
-    #                     no_dataset.append(result)
-         
-    # # print("no_dataset",no_dataset)
-    # print("no_dataset_len",len(no_dataset))
-
+    range_start = dataset_params["range_start"]
+    range_end = dataset_params["range_end"]
+    nmasi = dataset_params["study_nmasi"]
+    bunseki_hani = dataset_params["bunseki_hani"]
 
     no_dataset = []
     for kaisu, dlist in enumerate(dlists):
 
-        for dlist_retu in range(6):
+        kaisu_limit = len(dlists)-bunseki_hani
+        # print("kaisu_limit",kaisu_limit)
+        if kaisu >= kaisu_limit:
+            break
 
-            kaisu_limit = len(dlists)-5
-            # print("kaisu_limit",kaisu_limit)
-            if kaisu >= kaisu_limit:
-                break
+        for dlist_retu in range(6):
 
             tmp = []
             tmp.append(dlist[dlist_retu])
-            var5 = np.var(dlists[kaisu+1:kaisu+1+5, dlist_retu])
-            med5 = np.median(dlists[kaisu+1:kaisu+1+5, dlist_retu])
-            mean5 = np.mean(dlists[kaisu+1:kaisu+1+5, dlist_retu])
-            std5 = np.std(dlists[kaisu+1:kaisu+1+5, dlist_retu])
-            min5 = np.min(dlists[kaisu+1:kaisu+1+5, dlist_retu])
-            max5 = np.max(dlists[kaisu+1:kaisu+1+5, dlist_retu])
-            tmp.append(var5)
-            tmp.append(med5)
-            tmp.append(mean5)
-            tmp.append(std5)
-            tmp.append(min5)
-            tmp.append(max5)
+            var_n = np.var(dlists[kaisu+1:kaisu+1+bunseki_hani, dlist_retu])
+            med_n = np.median(dlists[kaisu+1:kaisu+1+bunseki_hani, dlist_retu])
+            mean_n = np.mean(dlists[kaisu+1:kaisu+1+bunseki_hani, dlist_retu])
+            std_n = np.std(dlists[kaisu+1:kaisu+1+bunseki_hani, dlist_retu])
+            min_n = np.min(dlists[kaisu+1:kaisu+1+bunseki_hani, dlist_retu])
+            max_n = np.max(dlists[kaisu+1:kaisu+1+bunseki_hani, dlist_retu])
+            tmp.append(var_n)
+            tmp.append(med_n)
+            tmp.append(mean_n)
+            tmp.append(std_n)
+            tmp.append(min_n)
+            tmp.append(max_n)
             
             if tmp != []:
-                # no_dataset.append(tmp)
-
                 list1 = tmp[1:]
                 # print("list1",list1)
-                list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(tmp), listsu=nmasi)
-                # list2s = create_random_lists_float(range_start=0, range_end=0, yousosu=len(target_kaisu_list), listsu=nmasi)
+                list2s = create_random_lists_float(range_start, range_end, yousosu=len(tmp), listsu=nmasi)
+                
                 for list2 in list2s:
                     # print("list2",list2)
                     result = [x + y for x, y in zip(list1, list2)]
@@ -101,70 +66,44 @@ def no_dataset_trainval_multi(dlists, target_kaisu_lists, nmasi):
     return no_dataset
 
 
-def no_dataset_test_multi(dlists, target_kaisu_lists, nmasi):
+def no_dataset_test_multi(dlists, **dataset_params):
 
-    # no_dataset = []
-    # for dlist_retu in range(6):
-
-    #     #target_kaisu_list = target_kaisu_lists[dlist_retu]
-    #     target_kaisu_lists_lists = target_kaisu_lists[dlist_retu]
-
-    #     for target_kaisu_list in target_kaisu_lists_lists:
-    #         tmp = []
-    #         for target_kaisu_youso in target_kaisu_list:
-    #             tmp.append(dlists[target_kaisu_youso][dlist_retu])
-    
-    #         if tmp != []:
-    #             # no_dataset.append(tmp)
-    
-    #             # list1 = tmp[1:]
-    #             list1 = tmp[0:]
-    #             # print("list1",list1)
-    #             list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(target_kaisu_list), listsu=nmasi)
-    #             # list2s = create_random_lists_float(range_start=0, range_end=0, yousosu=len(target_kaisu_list), listsu=nmasi)
-    #             for list2 in list2s:
-    #                 # print("list2",list2)
-    #                 result = [x + y for x, y in zip(list1, list2)]
-    #                 # print("result",result)
-    #                 # result.insert(0, dlist[dlist_retu])
-    #                 # print("result_in",result)
-    #                 no_dataset.append(result)
-         
-    # # print("no_dataset_test",no_dataset)
-    # print("no_dataset_test_len",len(no_dataset))
+    range_start = dataset_params["range_start"]
+    range_end = dataset_params["range_end"]
+    nmasi = dataset_params["test_nmasi"]
+    bunseki_hani = dataset_params["bunseki_hani"]
+    test_dlists_hani_end = dataset_params["test_dlists_hani_end"]
 
     no_dataset = []
-    for kaisu, dlist in enumerate(dlists[0:1]):
-        
-        for dlist_retu in range(6):
+    for kaisu, dlist in enumerate(dlists[0:test_dlists_hani_end]):
 
-            kaisu_limit = len(dlists)-5
-            # print("kaisu_limit",kaisu_limit)
-            if kaisu >= kaisu_limit:
-                break
+        kaisu_limit = len(dlists)-bunseki_hani
+        # print("kaisu_limit",kaisu_limit)
+        if kaisu >= kaisu_limit:
+            break
+
+        for dlist_retu in range(6):
 
             tmp = []
             # tmp.append(dlist[dlist_retu])
-            var5 = np.var(dlists[kaisu:kaisu+5, dlist_retu])
-            med5 = np.median(dlists[kaisu:kaisu+5, dlist_retu])
-            mean5 = np.mean(dlists[kaisu:kaisu+5, dlist_retu])
-            std5 = np.std(dlists[kaisu:kaisu+5, dlist_retu])
-            min5 = np.min(dlists[kaisu:kaisu+5, dlist_retu])
-            max5 = np.max(dlists[kaisu:kaisu+5, dlist_retu])
-            tmp.append(var5)
-            tmp.append(med5)
-            tmp.append(mean5)
-            tmp.append(std5)
-            tmp.append(min5)
-            tmp.append(max5)
+            var_n = np.var(dlists[kaisu:kaisu+bunseki_hani, dlist_retu])
+            med_n = np.median(dlists[kaisu:kaisu+bunseki_hani, dlist_retu])
+            mean_n = np.mean(dlists[kaisu:kaisu+bunseki_hani, dlist_retu])
+            std_n = np.std(dlists[kaisu:kaisu+bunseki_hani, dlist_retu])
+            min_n = np.min(dlists[kaisu:kaisu+bunseki_hani, dlist_retu])
+            max_n = np.max(dlists[kaisu:kaisu+bunseki_hani, dlist_retu])
+            tmp.append(var_n)
+            tmp.append(med_n)
+            tmp.append(mean_n)
+            tmp.append(std_n)
+            tmp.append(min_n)
+            tmp.append(max_n)
 
             if tmp != []:
-                # no_dataset.append(tmp)
-
                 list1 = tmp[0:]
                 # print("list1",list1)
-                list2s = create_random_lists_float(range_start=0.1*-1, range_end=0.1, yousosu=len(tmp), listsu=nmasi)
-                # list2s = create_random_lists_float(range_start=0, range_end=0, yousosu=len(target_kaisu_list), listsu=nmasi)
+                list2s = create_random_lists_float(range_start, range_end, yousosu=len(tmp), listsu=nmasi)
+                
                 for list2 in list2s:
                     # print("list2",list2)
                     result = [x + y for x, y in zip(list1, list2)]
@@ -208,7 +147,12 @@ def create_random_lists_float(range_start, range_end, yousosu, listsu=6):
     return random_lists
 
 
-def light_gbm(train_data, test_data):
+def light_gbm(train_data, test_data, **lgbm_params):
+    num_leaves = lgbm_params["num_leaves"]
+    learning_rate = lgbm_params["learning_rate"]
+    
+    n_estimators = lgbm_params["n_estimators"]
+    cv = lgbm_params["cv"]
 
     # 一列目のラベルを取得
     labels = [row[0] for row in train_data]
@@ -240,7 +184,7 @@ def light_gbm(train_data, test_data):
 
     # モデル
     # max_depth=-1は無制限を意味する
-    model = lgb.LGBMClassifier(force_col_wise=True, n_estimators=100, learning_rate=0.01, max_depth=-1 ,objective='multiclass')
+    model = lgb.LGBMClassifier(force_col_wise=True, n_estimators=n_estimators, learning_rate=learning_rate, max_depth=-1 ,objective='multiclass')
     model.fit(X_train, y_train)
 
     # 評価
@@ -254,8 +198,13 @@ def light_gbm(train_data, test_data):
     return score ,predictions
 
 
-def light_gbm_nogood(train_data, test_data):
-
+def light_gbm_nogood(train_data, test_data, **lgbm_params):
+    num_leaves = lgbm_params["num_leaves"]
+    learning_rate = lgbm_params["learning_rate"]
+    
+    n_estimators = lgbm_params["n_estimators"]
+    cv = lgbm_params["cv"]
+    
     # 一列目のラベルを取得
     labels = [row[0] for row in train_data]
 
@@ -286,7 +235,7 @@ def light_gbm_nogood(train_data, test_data):
 
     # モデル
     # max_depth=-1は無制限を意味する
-    model = lgb.LGBMClassifier(force_col_wise=True, n_estimators=1, learning_rate=1, max_depth=-1 ,objective='multiclass')
+    model = lgb.LGBMClassifier(force_col_wise=True, n_estimators=n_estimators, learning_rate=learning_rate, max_depth=-1 ,objective='multiclass')
     model.fit(X_train, y_train)
 
     # 評価
@@ -300,7 +249,12 @@ def light_gbm_nogood(train_data, test_data):
     return score ,predictions
 
 
-def light_gbm_KFold(train_data, test_data):
+def light_gbm_KFold(train_data, test_data, **lgbm_params):
+    num_leaves = lgbm_params["num_leaves"]
+    learning_rate = lgbm_params["learning_rate"]
+    
+    n_estimators = lgbm_params["n_estimators"]
+    cv = lgbm_params["cv"]
 
     # 一列目のラベルを取得
     labels = [row[0] for row in train_data]
@@ -327,15 +281,15 @@ def light_gbm_KFold(train_data, test_data):
     y = data[:,0]-1
     print(y)
 
-    FOLD = 3
-    NUM_ROUND = 100
+    FOLD = cv
+    NUM_ROUND = n_estimators
     # VERBOSE_EVAL = -1
 
     params = {
         'objective': 'regression',
         'verbose': -1,
-        'num_leaves': 31,  # チューニングが必要
-        'learning_rate': 0.1,  # チューニングが必要
+        'num_leaves': num_leaves,  # チューニングが必要
+        'learning_rate': learning_rate,  # チューニングが必要
     }
 
     valid_scores = []
@@ -377,7 +331,12 @@ def light_gbm_KFold(train_data, test_data):
     return cv_score ,predictions
 
 
-def light_gbm_multi(train_data, test_data):
+def light_gbm_multi(train_data, test_data, **lgbm_params):
+    num_leaves = lgbm_params["num_leaves"]
+    learning_rate = lgbm_params["learning_rate"]
+    
+    n_estimators = lgbm_params["n_estimators"]
+    cv = lgbm_params["cv"]
 
     # 一列目のラベルを取得
     labels = [row[0] for row in train_data]
@@ -412,14 +371,14 @@ def light_gbm_multi(train_data, test_data):
         'num_class': 43,  # クラスの数を設定
         'boosting_type': 'gbdt',
         'metric': 'multi_logloss',  # 多クラスの対数尤度を使用
-        'num_leaves': 32,
-        'learning_rate': 0.1,
+        'num_leaves': num_leaves,
+        'learning_rate': learning_rate,
         'feature_fraction': 0.9
     }
 
     # LightGBMモデルを訓練（交差検証を使用）
-    model = lgb.LGBMClassifier(**params, n_estimators=10)  # イテレーション回数はここで指定
-    cv_scores = cross_val_score(model, X, y, cv=3, scoring='accuracy')  # 5分割交差検証
+    model = lgb.LGBMClassifier(**params, n_estimators=n_estimators)  # イテレーション回数はここで指定
+    cv_scores = cross_val_score(model, X, y, cv=cv, scoring='accuracy')  # 5分割交差検証
 
     # 交差検証スコアの平均を表示
     print(f'*** Cross-Validation Mean Accuracy: {np.mean(cv_scores)} ***')
