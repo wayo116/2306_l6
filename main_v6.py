@@ -22,7 +22,7 @@ from Utility.LightgbmPack import LightgbmPack
 
 start = time.time()
 
-kaisai = 1
+kaisai = 3
 if kaisai == -1:
     #本番
     #最新結果がgitjubに登録済の時
@@ -39,26 +39,27 @@ print("saisinkekka_list",saisinkekka_list)
 print("dlists",dlists[:5])
 
 
+dlists_end = 500
 bunkatu=5
 predictions_all = []
 predictions_delall = []
-lgbm_obj = LightgbmPack(makecsv=False)
+lgbm_obj = LightgbmPack()
 
 print('\n----vol 1----')
-params = {"train_params":{"range_start": 1,
-                    "range_end":5,
-                    "yousosu":3,
-                    "multisu":1,
-                    "randomkeisu":112,
-                    "nmasi":12},
-    "test_params":{"range_start": 1,
-                    "range_end":5,
-                    "yousosu":3,
-                    "multisu":12,
-                    "randomkeisu":112,
-                    "nmasi":1}}
+params = {"dataset_params":{"range_start": -0.1,
+                            "range_end":0.1,
+                            "study_nmasi":6,
+                            "test_nmasi":1,
+                            "bunseki_hani":5,
+                            "test_dlists_hani_end":6},
 
-predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, "light_gbm_multi", **params)
+            "lgbm_params":{"lgbm_model": "light_gbm_multi",
+                            'num_leaves': 32,
+                            'learning_rate': 0.1,
+                            "n_estimators":10,
+                            "cv":3,}}
+
+predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
 predictions_all.extend(predictions)
 
 print("saisinkekka_list",saisinkekka_list)
@@ -67,20 +68,20 @@ print("predictions_all_set",predictions_all)
 
 '''
 print('\n----vol 1del----')
-params = {"train_params":{"range_start": 400,
-                    "range_end":466,
-                    "yousosu":50,
-                    "multisu":1,
-                    "randomkeisu":112,
-                    "nmasi":1},
-    "test_params":{"range_start": 400,
-                    "range_end":466,
-                    "yousosu":50,
-                    "multisu":8,
-                    "randomkeisu":112,
-                    "nmasi":1}}
+params = {"dataset_params":{"range_start": -0.1,
+                            "range_end":0.1,
+                            "study_nmasi":6,
+                            "test_nmasi":1,
+                            "bunseki_hani":5,
+                            "test_dlists_hani_end":6},
 
-predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, "light_gbm_KFold", **params)
+            "lgbm_params":{"lgbm_model": "light_gbm_multi",
+                            'num_leaves': 32,
+                            'learning_rate': 0.1,
+                            "n_estimators":10,
+                            "cv":3,}}
+
+predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
 predictions_delall.extend(predictions)
 
 print("saisinkekka_list",saisinkekka_list)
