@@ -98,8 +98,11 @@ l1_l2_and = set(l1) & set(l2)
 l1l2_len = len(l1_l2_and)
 predictions_len = len(predictions_unique)
 
-percent = round(l1l2_len/predictions_len*100)
-print(f'{l1l2_len}/{predictions_len}')
+if l1l2_len > 0 and predictions_len > 0:
+    percent = round(l1l2_len/predictions_len*100)
+    print(f"{l1l2_len}/{predictions_len}")
+else:
+    percent = 0
 print("percent",percent)
 print("\n")
 
