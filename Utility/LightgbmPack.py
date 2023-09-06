@@ -3,7 +3,7 @@ import csv
 import time
 
 from datalists import dlists
-from Utility.dataset import no_dataset_trainval_multi, no_dataset_test_multi, create_random_lists_multi, light_gbm, light_gbm_nogood, light_gbm_KFold, light_gbm_multi
+from Utility.dataset import no_dataset_trainval_multi, no_dataset_test_multi, create_random_lists_multi, light_gbm, light_gbm_nogood, light_gbm_KFold, light_gbm_multi, light_gbm_v2
 
 
 class LightgbmPack():
@@ -39,6 +39,9 @@ class LightgbmPack():
         
         if lgbm_params["lgbm_model"] == "light_gbm_multi":
             score ,predictions = light_gbm_multi(train_data, test_data, **lgbm_params)
+
+        if lgbm_params["lgbm_model"] == "light_gbm_v2":
+            score ,predictions = light_gbm(train_data, test_data, **lgbm_params)
 
 
         # %計算

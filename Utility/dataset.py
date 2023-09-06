@@ -22,6 +22,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
     nmasi = dataset_params["study_nmasi"]
     bunseki_hani = dataset_params["bunseki_hani"]
 
+    shokichi = 1
     no_dataset = []
     for kaisu, dlist in enumerate(dlists):
 
@@ -34,19 +35,25 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
 
             tmp = []
             tmp.append(dlist[dlist_retu])
-            var_n = np.var(dlists[kaisu+1:kaisu+1+bunseki_hani, dlist_retu])
-            med_n = np.median(dlists[kaisu+1:kaisu+1+bunseki_hani, dlist_retu])
-            mean_n = np.mean(dlists[kaisu+1:kaisu+1+bunseki_hani, dlist_retu])
-            std_n = np.std(dlists[kaisu+1:kaisu+1+bunseki_hani, dlist_retu])
-            min_n = np.min(dlists[kaisu+1:kaisu+1+bunseki_hani, dlist_retu])
-            max_n = np.max(dlists[kaisu+1:kaisu+1+bunseki_hani, dlist_retu])
-            tmp.append(var_n)
-            tmp.append(med_n)
-            tmp.append(mean_n)
-            tmp.append(std_n)
+
+            min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            max_n = np.max(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            range_value = max_n - min_n
+            mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            sum_n = np.sum(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            med_n = np.median(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            std_n = np.std(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            var_n = np.var(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+
             tmp.append(min_n)
             tmp.append(max_n)
-            
+            tmp.append(range_value)
+            tmp.append(mean_n)
+            tmp.append(sum_n)
+            tmp.append(med_n)
+            tmp.append(std_n)
+            tmp.append(var_n)
+
             if tmp != []:
                 list1 = tmp[1:]
                 # print("list1",list1)
@@ -74,6 +81,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
     bunseki_hani = dataset_params["bunseki_hani"]
     test_dlists_hani_end = dataset_params["test_dlists_hani_end"]
 
+    shokichi = 0
     no_dataset = []
     for kaisu, dlist in enumerate(dlists[0:test_dlists_hani_end]):
 
@@ -86,18 +94,24 @@ def no_dataset_test_multi(dlists, **dataset_params):
 
             tmp = []
             # tmp.append(dlist[dlist_retu])
-            var_n = np.var(dlists[kaisu:kaisu+bunseki_hani, dlist_retu])
-            med_n = np.median(dlists[kaisu:kaisu+bunseki_hani, dlist_retu])
-            mean_n = np.mean(dlists[kaisu:kaisu+bunseki_hani, dlist_retu])
-            std_n = np.std(dlists[kaisu:kaisu+bunseki_hani, dlist_retu])
-            min_n = np.min(dlists[kaisu:kaisu+bunseki_hani, dlist_retu])
-            max_n = np.max(dlists[kaisu:kaisu+bunseki_hani, dlist_retu])
-            tmp.append(var_n)
-            tmp.append(med_n)
-            tmp.append(mean_n)
-            tmp.append(std_n)
+
+            min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            max_n = np.max(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            range_value = max_n - min_n
+            mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            sum_n = np.sum(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            med_n = np.median(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            std_n = np.std(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            var_n = np.var(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+
             tmp.append(min_n)
             tmp.append(max_n)
+            tmp.append(range_value)
+            tmp.append(mean_n)
+            tmp.append(sum_n)
+            tmp.append(med_n)
+            tmp.append(std_n)
+            tmp.append(var_n)
 
             if tmp != []:
                 list1 = tmp[0:]
@@ -404,3 +418,62 @@ def light_gbm_multi(train_data, test_data, **lgbm_params):
 
     return accuracy, predictions
 
+
+def light_gbm_v2(train_data, test_data, **lgbm_params):
+    num_leaves = lgbm_params["num_leaves"]
+    learning_rate = lgbm_params["learning_rate"]
+    
+    n_estimators = lgbm_params["n_estimators"]
+    cv = lgbm_params["cv"]
+
+    # 一列目のラベルを取得
+    labels = [row[0] for row in train_data]
+
+    # ラベルの個数をカウント
+    label_counts = Counter(labels)
+
+    # 一番個数が少ないラベルの数を取得
+    min_label_count = min(label_counts.values())
+
+    # 一番少ないラベルに合わせて他のラベルをフィルタリング
+    balanced_data = []
+    for label in label_counts.keys():
+        filtered_data = [row for row in train_data if row[0] == label][:min_label_count]
+        balanced_data.extend(filtered_data)
+
+    # print("\nBalanced Data:")
+    # for row in balanced_data:
+    #     print(row)
+
+    data = np.array(balanced_data)
+    X = data[:,1:]
+    print(X)
+    y = data[:,0]-1
+    print(y)
+
+    # データ分割
+    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    params = {
+        'objective': 'multiclass',  # 多クラス分類を指定
+        'num_class': 43,  # クラスの数を設定
+        'boosting_type': 'gbdt',
+        'metric': 'multi_logloss',  # 多クラスの対数尤度を使用
+        'num_leaves': num_leaves,
+        'learning_rate': learning_rate,
+        'feature_fraction': 0.9
+    }
+
+    # LightGBMモデルを訓練（交差検証を使用）
+    model = lgb.LGBMClassifier(**params, n_estimators=n_estimators)  # イテレーション回数はここで指定
+    model.fit(X_train, y_train)
+
+    # 評価
+    score = model.score(X_val, y_val)
+    print("score", score)
+
+    # 推論
+    predictions = sorted(list(map(int, set(model.predict(test_data)+1))))
+    print("Predictions:", predictions)
+
+    return score ,predictions
