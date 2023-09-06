@@ -39,7 +39,7 @@ print("saisinkekka_list",saisinkekka_list)
 print("dlists",dlists[:5])
 
 
-dlists_end = 500
+dlists_end = 50
 bunkatu=5
 predictions_all = []
 predictions_delall = []
@@ -48,14 +48,14 @@ lgbm_obj = LightgbmPack()
 print('\n----vol 1----')
 params = {"dataset_params":{"range_start": -0.1,
                             "range_end":0.1,
-                            "study_nmasi":50,
+                            "study_nmasi":20,
                             "test_nmasi":1,
                             "bunseki_hani":16,
                             "test_dlists_hani_end":2},
 
             "lgbm_params":{"lgbm_model": "light_gbm_v2",
                             'num_leaves': 16,
-                            'learning_rate': 0.5,
+                            'learning_rate': 0.05,
                             "n_estimators":5,
                             "cv":3,}}
 
