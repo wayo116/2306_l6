@@ -106,11 +106,11 @@ def no_dataset_test_multi(dlists, **dataset_params):
     range_end = dataset_params["range_end"]
     nmasi = dataset_params["test_nmasi"]
     bunseki_hani = dataset_params["bunseki_hani"]
-    test_dlists_hani_end = dataset_params["test_dlists_hani_end"]
+    test_dlists_hani = dataset_params["test_dlists_hani"]
 
     shokichi = 0
     no_dataset = []
-    for kaisu, dlist in enumerate(dlists[test_dlists_hani_end[0]:test_dlists_hani_end[1]]):
+    for kaisu, dlist in enumerate(dlists[test_dlists_hani[0]:test_dlists_hani[1]]):
 
         kaisu_limit = len(dlists)-bunseki_hani
         # print("kaisu_limit",kaisu_limit)
