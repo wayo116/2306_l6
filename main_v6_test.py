@@ -17,8 +17,8 @@ csv_dir = 'result.csv'
 with open(csv_dir, "a", newline="") as file:
     writer = csv.writer(file)
     writer.writerow(["kaisai",
-        "saisinkekka_list",
-        "predictions_unique",
+        # "saisinkekka_list",
+        # "predictions_unique",
         "l1l2_len",
         "predictions_len",
         "percent",
@@ -42,7 +42,7 @@ for kaisai in range(1,6):
     print("dlists",dlists[:5])
 
 
-    dlists_end = 50
+    dlists_end = 500
     bunkatu=5
     predictions_all = []
     predictions_delall = []
@@ -56,10 +56,10 @@ for kaisai in range(1,6):
                                 "bunseki_hani":16,
                                 "test_dlists_hani_end":2},
 
-                "lgbm_params":{"lgbm_model": "light_gbm_multi",
+                "lgbm_params":{"lgbm_model": "light_gbm_v2",
                                 'num_leaves': 16,
                                 'learning_rate': 0.5,
-                                "n_estimators":25,
+                                "n_estimators":5,
                                 "cv":3,}}
 
     predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
@@ -112,8 +112,8 @@ for kaisai in range(1,6):
     with open(csv_dir, "a", newline="") as file:
         writer = csv.writer(file)
         writer.writerow([kaisai,
-            saisinkekka_list,
-            predictions_unique,
+            # saisinkekka_list,
+            # predictions_unique,
             l1l2_len,
             predictions_len,
             percent,
@@ -136,8 +136,8 @@ csv_dir = 'result.csv'
 with open(csv_dir, "a", newline="") as file:
     writer = csv.writer(file)
     writer.writerow(["kaisai",
-        "saisinkekka_list",
-        "predictions_unique",
+        # "saisinkekka_list",
+        # "predictions_unique",
         "l1l2_len",
         "predictions_len",
         "percent",
@@ -169,19 +169,19 @@ for kaisai in range(1,6):
     print("dlists",dlists[:5])
 
 
-    dlists_end = 50
+    # dlists_end = 50
     bunkatu=5
     predictions_all = []
     predictions_delall = []
     lgbm_obj = LightgbmPack()
 
-    for dilist_end in [50]:#50
-        for study_nmasi in [50,90]:#50,90
-            for test_nmasi in [1,6,11]:#1,6,11
+    for dilist_end in [500]:#50
+        for study_nmasi in [50]:#50,90
+            for test_nmasi in [1]:#1,6,11
                 for bunseki_hani in [4,8,16]:#4,8,16
                     for test_dlists_hani_end in [2]:#1,2
-                        for num_leaves in [16,32]:#16,32
-                            for learning_rate in [0.01,0.05,0.5]:#0.01,0.05,0.5
+                        for num_leaves in [16]:#16,32
+                            for learning_rate in [0.5]:#0.01,0.05,0.5
                                 for n_estimators in [5]:#5,10,15,20,25
 
                                     dlists_end = dilist_end
@@ -198,7 +198,7 @@ for kaisai in range(1,6):
                                                                 "bunseki_hani":bunseki_hani,
                                                                 "test_dlists_hani_end":test_dlists_hani_end},
 
-                                                "lgbm_params":{"lgbm_model": "light_gbm_multi",
+                                                "lgbm_params":{"lgbm_model": "light_gbm_v2",
                                                                 'num_leaves': num_leaves,
                                                                 'learning_rate': learning_rate,
                                                                 "n_estimators":5,
@@ -254,8 +254,8 @@ for kaisai in range(1,6):
                                     with open(csv_dir, "a", newline="") as file:
                                         writer = csv.writer(file)
                                         writer.writerow([kaisai,
-                                            saisinkekka_list,
-                                            predictions_unique,
+                                            # saisinkekka_list,
+                                            # predictions_unique,
                                             l1l2_len,
                                             predictions_len,
                                             percent,
