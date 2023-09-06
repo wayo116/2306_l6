@@ -63,6 +63,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
                 'Y': dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]
             }
             df = pd.DataFrame(data)
+            print(df)
             # 相関行列を計算
             correlation_matrix = df.corr()
             # 'X'と'Y'の相関係数を取得
