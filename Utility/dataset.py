@@ -13,6 +13,7 @@ import lightgbm as lgb
 
 import csv
 import os
+import pandas as pd
 
 
 def no_dataset_trainval_multi(dlists, **dataset_params,):
@@ -36,14 +37,37 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp = []
             tmp.append(dlist[dlist_retu])
 
+            # 最小
             min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 最大
             max_n = np.max(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 範囲
             range_value = max_n - min_n
+            # 平均
             mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 合計
             sum_n = np.sum(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 中央
             med_n = np.median(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 標準偏差
             std_n = np.std(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 分散
             var_n = np.var(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # パーセンタイル
+            percentile_25 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 25)
+            percentile_75 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 75)
+
+            # 相関係数
+            data = {
+                'X': dlist,
+                'Y': dlists[kaisu+shokichi:kaisu+shokichi+6, dlist_retu]
+            }
+            df = pd.DataFrame(data)
+            # 相関行列を計算
+            correlation_matrix = df.corr()
+            # 'X'と'Y'の相関係数を取得
+            correlation_xy = correlation_matrix.loc['X', 'Y']
+            # print("correlation_xy",correlation_xy)
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -53,6 +77,9 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp.append(med_n)
             tmp.append(std_n)
             tmp.append(var_n)
+            tmp.append(percentile_25)
+            tmp.append(percentile_75)
+            tmp.append(correlation_xy)
 
             if tmp != []:
                 list1 = tmp[1:]
@@ -95,14 +122,37 @@ def no_dataset_test_multi(dlists, **dataset_params):
             tmp = []
             # tmp.append(dlist[dlist_retu])
 
+            # 最小
             min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 最大
             max_n = np.max(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 範囲
             range_value = max_n - min_n
+            # 平均
             mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 合計
             sum_n = np.sum(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 中央
             med_n = np.median(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 標準偏差
             std_n = np.std(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 分散
             var_n = np.var(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # パーセンタイル
+            percentile_25 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 25)
+            percentile_75 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 75)
+
+            # 相関係数
+            data = {
+                'X': dlist,
+                'Y': dlists[kaisu+shokichi:kaisu+shokichi+6, dlist_retu]
+            }
+            df = pd.DataFrame(data)
+            # 相関行列を計算
+            correlation_matrix = df.corr()
+            # 'X'と'Y'の相関係数を取得
+            correlation_xy = correlation_matrix.loc['X', 'Y']
+            # print("correlation_xy",correlation_xy)
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -112,6 +162,9 @@ def no_dataset_test_multi(dlists, **dataset_params):
             tmp.append(med_n)
             tmp.append(std_n)
             tmp.append(var_n)
+            tmp.append(percentile_25)
+            tmp.append(percentile_75)
+            tmp.append(correlation_xy)
 
             if tmp != []:
                 list1 = tmp[0:]
