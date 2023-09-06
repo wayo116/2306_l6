@@ -22,7 +22,7 @@ from Utility.LightgbmPack import LightgbmPack
 
 start = time.time()
 
-kaisai = 3
+kaisai = 1
 if kaisai == -1:
     #本番
     #最新結果がgitjubに登録済の時
@@ -48,15 +48,15 @@ lgbm_obj = LightgbmPack()
 print('\n----vol 1----')
 params = {"dataset_params":{"range_start": -0.1,
                             "range_end":0.1,
-                            "study_nmasi":6,
+                            "study_nmasi":50,
                             "test_nmasi":1,
-                            "bunseki_hani":5,
-                            "test_dlists_hani_end":6},
+                            "bunseki_hani":16,
+                            "test_dlists_hani_end":2},
 
-            "lgbm_params":{"lgbm_model": "light_gbm_multi",
-                            'num_leaves': 32,
-                            'learning_rate': 0.1,
-                            "n_estimators":10,
+            "lgbm_params":{"lgbm_model": "light_gbm_v2",
+                            'num_leaves': 16,
+                            'learning_rate': 0.5,
+                            "n_estimators":5,
                             "cv":3,}}
 
 predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
@@ -70,15 +70,15 @@ print("predictions_all_set",predictions_all)
 print('\n----vol 1del----')
 params = {"dataset_params":{"range_start": -0.1,
                             "range_end":0.1,
-                            "study_nmasi":6,
+                            "study_nmasi":50,
                             "test_nmasi":1,
-                            "bunseki_hani":5,
-                            "test_dlists_hani_end":6},
+                            "bunseki_hani":16,
+                            "test_dlists_hani_end":2},
 
-            "lgbm_params":{"lgbm_model": "light_gbm_multi",
-                            'num_leaves': 32,
-                            'learning_rate': 0.1,
-                            "n_estimators":10,
+            "lgbm_params":{"lgbm_model": "light_gbm_v2",
+                            'num_leaves': 16,
+                            'learning_rate': 0.5,
+                            "n_estimators":5,
                             "cv":3,}}
 
 predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
