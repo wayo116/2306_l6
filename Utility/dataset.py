@@ -57,18 +57,17 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             percentile_25 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 25)
             percentile_75 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 75)
 
-            # 相関係数
-            data = {
-                'X': [dlist[dlist_retu]]*bunseki_hani,
-                'Y': dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]
-            }
-            df = pd.DataFrame(data)
-            print(df)
-            # 相関行列を計算
-            correlation_matrix = df.corr()
-            # 'X'と'Y'の相関係数を取得
-            correlation_xy = correlation_matrix.loc['X', 'Y']
-            # print("correlation_xy",correlation_xy)
+            # # 相関係数
+            # data = {
+            #     'X': [dlist[dlist_retu]]*bunseki_hani,
+            #     'Y': dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]
+            # }
+            # df = pd.DataFrame(data)
+            # # 相関行列を計算
+            # correlation_matrix = df.corr()
+            # # 'X'と'Y'の相関係数を取得
+            # correlation_xy = correlation_matrix.loc['X', 'Y']
+            # # print("correlation_xy",correlation_xy)
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -80,7 +79,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp.append(var_n)
             tmp.append(percentile_25)
             tmp.append(percentile_75)
-            tmp.append(correlation_xy)
+            # tmp.append(correlation_xy)
 
             if tmp != []:
                 list1 = tmp[1:]
@@ -143,17 +142,17 @@ def no_dataset_test_multi(dlists, **dataset_params):
             percentile_25 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 25)
             percentile_75 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 75)
 
-            # 相関係数
-            data = {
-                'X': [dlist[dlist_retu]]*bunseki_hani,
-                'Y': dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]
-            }
-            df = pd.DataFrame(data)
-            # 相関行列を計算
-            correlation_matrix = df.corr()
-            # 'X'と'Y'の相関係数を取得
-            correlation_xy = correlation_matrix.loc['X', 'Y']
-            # print("correlation_xy",correlation_xy)
+            # # 相関係数
+            # data = {
+            #     'X': [dlist[dlist_retu]]*bunseki_hani,
+            #     'Y': dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]
+            # }
+            # df = pd.DataFrame(data)
+            # # 相関行列を計算
+            # correlation_matrix = df.corr()
+            # # 'X'と'Y'の相関係数を取得
+            # correlation_xy = correlation_matrix.loc['X', 'Y']
+            # # print("correlation_xy",correlation_xy)
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -165,7 +164,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             tmp.append(var_n)
             tmp.append(percentile_25)
             tmp.append(percentile_75)
-            tmp.append(correlation_xy)
+            # tmp.append(correlation_xy)
 
             if tmp != []:
                 list1 = tmp[0:]
