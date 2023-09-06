@@ -59,7 +59,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
 
             # 相関係数
             data = {
-                'X': [dlist_retu]*bunseki_hani,
+                'X': [dlist[dlist_retu]]*bunseki_hani,
                 'Y': dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]
             }
             df = pd.DataFrame(data)
@@ -144,7 +144,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
 
             # 相関係数
             data = {
-                'X': [dlist_retu]*bunseki_hani,
+                'X': [dlist[dlist_retu]]*bunseki_hani,
                 'Y': dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]
             }
             df = pd.DataFrame(data)
