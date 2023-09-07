@@ -516,11 +516,12 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
         'metric': 'multi_logloss',  # 多クラスの対数尤度を使用
         'num_leaves': num_leaves,
         'learning_rate': learning_rate,
-        'feature_fraction': 0.9
+        'feature_fraction': 0.9,
+        'n_estimators': n_estimators
     }
 
     # LightGBMモデルを訓練（交差検証を使用）
-    model = lgb.LGBMClassifier(**params, n_estimators=n_estimators)  # イテレーション回数はここで指定
+    #model = lgb.LGBMClassifier(**params, n_estimators=n_estimators)  # イテレーション回数はここで指定
     #model.fit(X_train, y_train)
     model = lgb.train(params,dtrain)
 
