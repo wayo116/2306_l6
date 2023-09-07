@@ -76,6 +76,8 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # 全体の＊＊を計算
             new_matrix_mean = np.mean(new_matrix)
             new_matrix_var = np.var(new_matrix)
+            new_matrix_min = np.min(new_matrix)
+            new_matrix_max = np.max(new_matrix)
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -90,6 +92,8 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # tmp.append(correlation_xy)
             tmp.append(new_matrix_mean)
             tmp.append(new_matrix_var)
+            tmp.append(new_matrix_min)
+            tmp.append(new_matrix_max)
 
             if tmp != []:
                 list1 = tmp[1:]
@@ -171,6 +175,8 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # 全体の＊＊を計算
             new_matrix_mean = np.mean(new_matrix)
             new_matrix_var = np.var(new_matrix)
+            new_matrix_min = np.min(new_matrix)
+            new_matrix_max = np.max(new_matrix)
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -185,6 +191,8 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # tmp.append(correlation_xy)
             tmp.append(new_matrix_mean)
             tmp.append(new_matrix_var)
+            tmp.append(new_matrix_min)
+            tmp.append(new_matrix_max)
 
             if tmp != []:
                 list1 = tmp[0:]
