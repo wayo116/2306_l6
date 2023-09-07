@@ -506,6 +506,8 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
 
     # データ分割
     X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+    dtrain = lgb.Dataset(X_train, y_train)
+    dvalid = lgb.Dataset(X_val, y_val)
 
     params = {
         'objective': 'multiclass',  # 多クラス分類を指定
@@ -519,7 +521,8 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
 
     # LightGBMモデルを訓練（交差検証を使用）
     model = lgb.LGBMClassifier(**params, n_estimators=n_estimators)  # イテレーション回数はここで指定
-    model.fit(X_train, y_train)
+    #model.fit(X_train, y_train)
+    model = lgb.train(params,dtrain)
 
     # 評価
     score = model.score(X_val, y_val)
