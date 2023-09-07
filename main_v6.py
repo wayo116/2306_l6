@@ -30,7 +30,7 @@ if kaisai == -1:
     dlists = dlists
 elif kaisai == 0:
     #最新結果がcolabにはあるが、gitjubには未登録の時
-    saisinkekka_list=[4,10,18,25,34,38]
+    saisinkekka_list=[6,7,13,18,25,43]
     dlists = dlists
 elif kaisai > 0:
     saisinkekka_list = dlists[kaisai-1]
@@ -39,7 +39,7 @@ print("saisinkekka_list",saisinkekka_list)
 print("dlists",dlists[:5])
 
 
-dlists_end = 50
+dlists_end = 500
 bunkatu=5
 predictions_all = []
 predictions_delall = []
@@ -51,11 +51,10 @@ params = {"dataset_params":{"range_start": -0.1,
                             "study_nmasi":20,
                             "test_nmasi":1,
                             "bunseki_hani":16,
-                            "test_dlists_hani_end":2},
-
-            "lgbm_params":{"lgbm_model": "light_gbm_v2",
+                            "test_dlists_hani":[0,6]},
+                "lgbm_params":{"lgbm_model": "light_gbm_v2",
                             'num_leaves': 16,
-                            'learning_rate': 0.05,
+                            'learning_rate': 0.5,
                             "n_estimators":5,
                             "cv":3,}}
 
@@ -65,29 +64,6 @@ predictions_all.extend(predictions)
 print("saisinkekka_list",saisinkekka_list)
 predictions_all = sorted(list(map(int, set(predictions_all))))
 print("predictions_all_set",predictions_all)
-
-'''
-print('\n----vol 1del----')
-params = {"dataset_params":{"range_start": -0.1,
-                            "range_end":0.1,
-                            "study_nmasi":50,
-                            "test_nmasi":1,
-                            "bunseki_hani":16,
-                            "test_dlists_hani_end":2},
-
-            "lgbm_params":{"lgbm_model": "light_gbm_v2",
-                            'num_leaves': 16,
-                            'learning_rate': 0.5,
-                            "n_estimators":5,
-                            "cv":3,}}
-
-predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
-predictions_delall.extend(predictions)
-
-print("saisinkekka_list",saisinkekka_list)
-predictions_delall = sorted(list(map(int, set(predictions_delall))))
-print("predictions_delall_set",predictions_delall)
-'''
 
 predictions_unique = [item for item in predictions_all if item not in predictions_delall]
 print("\npredictions_unique",predictions_unique)
