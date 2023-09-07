@@ -69,6 +69,14 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # correlation_xy = correlation_matrix.loc['X', 'Y']
             # # print("correlation_xy",correlation_xy)
 
+            # 列を削除した新しい2次元配列を生成
+            matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
+            column_to_remove = dlist_retu
+            new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
+            # 全体の＊＊を計算
+            new_matrix_mean = np.mean(new_matrix)
+            new_matrix_var = np.var(new_matrix)
+
             tmp.append(min_n)
             tmp.append(max_n)
             tmp.append(range_value)
@@ -80,6 +88,8 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp.append(percentile_25)
             tmp.append(percentile_75)
             # tmp.append(correlation_xy)
+            tmp.append(new_matrix_mean)
+            tmp.append(new_matrix_var)
 
             if tmp != []:
                 list1 = tmp[1:]
@@ -154,6 +164,14 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # correlation_xy = correlation_matrix.loc['X', 'Y']
             # # print("correlation_xy",correlation_xy)
 
+            # 列を削除した新しい2次元配列を生成
+            matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
+            column_to_remove = dlist_retu
+            new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
+            # 全体の＊＊を計算
+            new_matrix_mean = np.mean(new_matrix)
+            new_matrix_var = np.var(new_matrix)
+
             tmp.append(min_n)
             tmp.append(max_n)
             tmp.append(range_value)
@@ -165,6 +183,8 @@ def no_dataset_test_multi(dlists, **dataset_params):
             tmp.append(percentile_25)
             tmp.append(percentile_75)
             # tmp.append(correlation_xy)
+            tmp.append(new_matrix_mean)
+            tmp.append(new_matrix_var)
 
             if tmp != []:
                 list1 = tmp[0:]
