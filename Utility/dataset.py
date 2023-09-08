@@ -79,6 +79,16 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             new_matrix_min = np.min(new_matrix)
             new_matrix_max = np.max(new_matrix)
 
+            # 列を削除した新しい2次元配列を生成　ハーフ
+            matrix_h = dlists[kaisu+shokichi:kaisu+shokichi+int(bunseki_hani/2)]
+            column_to_remove = dlist_retu
+            new_matrix_h = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix_h]
+            # 全体の＊＊を計算 ハーフ
+            new_matrix_mean_h = np.mean(new_matrix_h)
+            new_matrix_var_h = np.var(new_matrix_h)
+            new_matrix_min_h = np.min(new_matrix_h)
+            new_matrix_max_h = np.max(new_matrix_h)
+
             tmp.append(min_n)
             tmp.append(max_n)
             tmp.append(range_value)
@@ -90,10 +100,16 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp.append(percentile_25)
             tmp.append(percentile_75)
             # tmp.append(correlation_xy)
+
             tmp.append(new_matrix_mean)
             tmp.append(new_matrix_var)
             tmp.append(new_matrix_min)
             tmp.append(new_matrix_max)
+
+            tmp.append(new_matrix_mean_h)
+            tmp.append(new_matrix_var_h)
+            tmp.append(new_matrix_min_h)
+            tmp.append(new_matrix_max_h)
 
             if tmp != []:
                 list1 = tmp[1:]
@@ -178,6 +194,16 @@ def no_dataset_test_multi(dlists, **dataset_params):
             new_matrix_min = np.min(new_matrix)
             new_matrix_max = np.max(new_matrix)
 
+            # 列を削除した新しい2次元配列を生成　ハーフ
+            matrix_h = dlists[kaisu+shokichi:kaisu+shokichi+int(bunseki_hani/2)]
+            column_to_remove = dlist_retu
+            new_matrix_h = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix_h]
+            # 全体の＊＊を計算 ハーフ
+            new_matrix_mean_h = np.mean(new_matrix_h)
+            new_matrix_var_h = np.var(new_matrix_h)
+            new_matrix_min_h = np.min(new_matrix_h)
+            new_matrix_max_h = np.max(new_matrix_h)
+
             tmp.append(min_n)
             tmp.append(max_n)
             tmp.append(range_value)
@@ -189,10 +215,16 @@ def no_dataset_test_multi(dlists, **dataset_params):
             tmp.append(percentile_25)
             tmp.append(percentile_75)
             # tmp.append(correlation_xy)
+
             tmp.append(new_matrix_mean)
             tmp.append(new_matrix_var)
             tmp.append(new_matrix_min)
             tmp.append(new_matrix_max)
+
+            tmp.append(new_matrix_mean_h)
+            tmp.append(new_matrix_var_h)
+            tmp.append(new_matrix_min_h)
+            tmp.append(new_matrix_max_h)
 
             if tmp != []:
                 list1 = tmp[0:]
