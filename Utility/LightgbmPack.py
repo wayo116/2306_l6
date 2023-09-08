@@ -23,18 +23,18 @@ class LightgbmPack():
         print("len(train_data)",len(train_data))
 
         #テスト用
-        test_data=[]
-        for value in dlists[0]:
-            cnt=0
-            for row in train_data:
-                if cnt < 3:
-                    if row[0] == value:
-                        test_data.append(row[1:])
-                        cnt=cnt+1
+        #test_data=[]
+        #for value in dlists[0]:
+        #    cnt=0
+        #    for row in train_data:
+        #        if cnt < 3:
+        #            if row[0] == value:
+        #                test_data.append(row[1:])
+        #                cnt=cnt+1
 
         #テスト用
-        #test_dlists = dlists[0:dlists_end]
-        #test_data = no_dataset_test_multi(test_dlists, **dataset_params)
+        test_dlists = dlists[0:dlists_end]
+        test_data = no_dataset_test_multi(test_dlists, **dataset_params)
         print("len(test_data)",len(test_data))
 
         #lightgbmで推論
