@@ -27,7 +27,7 @@ class LightgbmPack():
         for value in saisinkekka_list:
             for row in train_data:
                 if row[0] == value:
-                    test_data.append(row)
+                    test_data.append(row[1:])
 
         #テスト用
         #test_dlists = dlists[0:dlists_end]
