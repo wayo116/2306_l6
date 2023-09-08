@@ -24,10 +24,13 @@ class LightgbmPack():
 
         #テスト用
         test_data=[]
-        for value in saisinkekka_list:
+        for value in dlists[0]:
+            cnt=0
             for row in train_data:
-                if row[0] == value:
-                    test_data.append(row[1:])
+                if cnt < 3:
+                    if row[0] == value:
+                        test_data.append(row[1:])
+                        cnt=cnt+1
 
         #テスト用
         #test_dlists = dlists[0:dlists_end]
