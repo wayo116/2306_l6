@@ -18,8 +18,8 @@ import pandas as pd
 
 def no_dataset_trainval_multi(dlists, **dataset_params,):
 
-    range_start = dataset_params["range_start"]
-    range_end = dataset_params["range_end"]
+    range_start = dataset_params["study_range_start"]
+    range_end = dataset_params["study_range_end"]
     nmasi = dataset_params["study_nmasi"]
     bunseki_hani = dataset_params["bunseki_hani"]
 
