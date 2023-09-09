@@ -268,7 +268,7 @@ def create_random_lists_float(range_start, range_end, yousosu, listsu=6):
     for cnt in range(listsu):
         random.seed(cnt+1)
         #random_list = [round(random.uniform(range_start, range_end), 2) for _ in range(yousosu)]
-        random_list = [round(random.uniform(range_start, range_end),2]*yousosu
+        random_list = [round(random.uniform(range_start, range_end),2)]*yousosu
         random_lists.append(random_list)
 
     # print("random_lists",random_lists)
