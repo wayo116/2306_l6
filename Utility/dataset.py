@@ -132,8 +132,8 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
 
 def no_dataset_test_multi(dlists, **dataset_params):
 
-    range_start = dataset_params["range_start"]
-    range_end = dataset_params["range_end"]
+    range_start = dataset_params["test_range_start"]
+    range_end = dataset_params["test_range_end"]
     nmasi = dataset_params["test_nmasi"]
     bunseki_hani = dataset_params["bunseki_hani"]
     test_dlists_hani = dataset_params["test_dlists_hani"]
@@ -267,7 +267,8 @@ def create_random_lists_float(range_start, range_end, yousosu, listsu=6):
     random_lists = []
     for cnt in range(listsu):
         random.seed(cnt+1)
-        random_list = [round(random.uniform(range_start, range_end), 2) for _ in range(yousosu)]
+        #random_list = [round(random.uniform(range_start, range_end), 2) for _ in range(yousosu)]
+        random_list = [round(random.uniform(range_start, range_end),2]*yousosu
         random_lists.append(random_list)
 
     # print("random_lists",random_lists)
