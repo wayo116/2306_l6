@@ -587,7 +587,7 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     model = lgb.train(params,dtrain)
 
     # 評価
-    score = model.score(X_val, y_val)
+    score = model.score(dvalid)
     print("score", score)
 
     # 推論
