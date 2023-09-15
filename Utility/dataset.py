@@ -15,6 +15,8 @@ import csv
 import os
 import pandas as pd
 
+from sklearn.manifold import TSNE
+
 
 def no_dataset_trainval_multi(dlists, **dataset_params,):
 
@@ -89,6 +91,9 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             new_matrix_min_h = np.min(new_matrix_h)
             new_matrix_max_h = np.max(new_matrix_h)
 
+            tsne = TSNE(n_components = 2) # n_componentsは低次元データの次元数
+            X_tsne = tsne.fit_transform(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+
             tmp.append(min_n)
             tmp.append(max_n)
             tmp.append(range_value)
@@ -110,6 +115,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp.append(new_matrix_var_h)
             tmp.append(new_matrix_min_h)
             tmp.append(new_matrix_max_h)
+            tmp.append(X_tsne[0,1])
 
             if tmp != []:
                 list1 = tmp[1:]
@@ -204,6 +210,9 @@ def no_dataset_test_multi(dlists, **dataset_params):
             new_matrix_min_h = np.min(new_matrix_h)
             new_matrix_max_h = np.max(new_matrix_h)
 
+            tsne = TSNE(n_components = 2) # n_componentsは低次元データの次元数
+            X_tsne = tsne.fit_transform(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+
             tmp.append(min_n)
             tmp.append(max_n)
             tmp.append(range_value)
@@ -225,6 +234,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             tmp.append(new_matrix_var_h)
             tmp.append(new_matrix_min_h)
             tmp.append(new_matrix_max_h)
+            tmp.append(X_tsne[0,1])
 
             if tmp != []:
                 list1 = tmp[0:]
