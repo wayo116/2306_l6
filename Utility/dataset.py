@@ -115,7 +115,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp.append(new_matrix_var_h)
             tmp.append(new_matrix_min_h)
             tmp.append(new_matrix_max_h)
-            tmp.append(X_tsne[:,1])
+            tmp.extend(X_tsne[:,1])
 
             if tmp != []:
                 list1 = tmp[1:]
@@ -234,7 +234,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             tmp.append(new_matrix_var_h)
             tmp.append(new_matrix_min_h)
             tmp.append(new_matrix_max_h)
-            tmp.append(X_tsne[:,1])
+            tmp.extend(X_tsne[:,1])
 
             if tmp != []:
                 list1 = tmp[0:]
