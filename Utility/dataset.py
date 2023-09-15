@@ -91,7 +91,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             new_matrix_min_h = np.min(new_matrix_h)
             new_matrix_max_h = np.max(new_matrix_h)
 
-            tsne = TSNE(n_components = 2,perplexity=bunseki_hani) # n_componentsは低次元データの次元数
+            tsne = TSNE(n_components = 2,perplexity=0) # n_componentsは低次元データの次元数
             X_tsne = tsne.fit_transform(np.array([dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]]))
 
             tmp.append(min_n)
@@ -210,7 +210,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             new_matrix_min_h = np.min(new_matrix_h)
             new_matrix_max_h = np.max(new_matrix_h)
 
-            tsne = TSNE(n_components = 2,perplexity=bunseki_hani) # n_componentsは低次元データの次元数
+            tsne = TSNE(n_components = 2,perplexity=0) # n_componentsは低次元データの次元数
             X_tsne = tsne.fit_transform(np.array([dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]]))
 
             tmp.append(min_n)
