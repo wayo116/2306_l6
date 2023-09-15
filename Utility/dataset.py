@@ -16,6 +16,7 @@ import os
 import pandas as pd
 
 from sklearn.manifold import TSNE
+import umap
 
 
 def no_dataset_trainval_multi(dlists, **dataset_params,):
@@ -91,8 +92,11 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             new_matrix_min_h = np.min(new_matrix_h)
             new_matrix_max_h = np.max(new_matrix_h)
 
-            tsne = TSNE(n_components = 2,perplexity=5) # n_componentsは低次元データの次元数
-            X_tsne = tsne.fit_transform(matrix)
+            #tsne = TSNE(n_components = 2,perplexity=5) # n_componentsは低次元データの次元数
+            #X_tsne = tsne.fit_transform(matrix)
+            
+            reducer = umap.UMAP(n_neighbors=15, min_dist=0.1, n_components=2)
+            embedding = reducer.fit_transform(matrix)
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -115,7 +119,8 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp.append(new_matrix_var_h)
             tmp.append(new_matrix_min_h)
             tmp.append(new_matrix_max_h)
-            tmp.extend(X_tsne[:,1])
+            #tmp.extend(X_tsne[:,1])
+            tmp.extend(embedding[:,1])
 
             if tmp != []:
                 list1 = tmp[1:]
