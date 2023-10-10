@@ -330,10 +330,10 @@ class Dell6:
         outlist1=self.notkako_xdel(self.kako_pm1(self.dlists, '前回数字±1'), outlist1, 10, '前回数字±1、2個以上含む')
         self.check(outlist1, self.saisinkekka)
         outlist1=self.notkako_xdel(self.kako_sm1(self.dlists, '前回数字下1桁'), outlist1, 10, '前回数字下1桁、2個以上含む')
-        self.check(outlist1, self.saisinkekka)
-        outlist1=self.notkako_xdel(self.kako_most(self.dlists, '過去24回数字、3回出現'), outlist1, 10, '過去24回数字、3回出現、2個以上含む')
-        self.check(outlist1, self.saisinkekka)
-        outlist1=self.notkako_xdel(self.kako_pattern(self.dlists[:,:], '過去数字、パターン'), outlist1, 9, '過去数字、パターン、含む')
+        #self.check(outlist1, self.saisinkekka)
+        #outlist1=self.notkako_xdel(self.kako_most(self.dlists, '過去24回数字、3回出現'), outlist1, 10, '過去24回数字、3回出現、2個以上含む')
+        #self.check(outlist1, self.saisinkekka)
+        #outlist1=self.notkako_xdel(self.kako_pattern(self.dlists[:,:], '過去数字、パターン'), outlist1, 9, '過去数字、パターン、含む')
         
         #dlen=self.get_outlist(outlist1, '準重複削除')
 
