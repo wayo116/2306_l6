@@ -41,6 +41,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
 
             tmp = []
             tmp.append(dlist[dlist_retu])
+            tmp.append(dlist[kaisu+shokichi:kaisu+shokichi+1, dlist_retu])
 
             # 最小
             min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
@@ -164,6 +165,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
 
             tmp = []
             # tmp.append(dlist[dlist_retu])
+            tmp.append(dlist[kaisu+shokichi:kaisu+shokichi+1, dlist_retu])
 
             # 最小
             min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
