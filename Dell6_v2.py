@@ -308,8 +308,8 @@ class Dell6:
         outlist1=self.pred_dlists
         outlist1=self.notkako_xdel(self.kako_sum(self.dlists, '合計範囲'), outlist1, 5, '合計範囲内')
         self.check(outlist1, self.saisinkekka)
-        outlist1=self.notkako_xdel(self.kako_minmax(self.dlists[:24,:], '最小最大'), outlist1, 6, '最小最大内')
-        self.check(outlist1, self.saisinkekka)
+        #outlist1=self.notkako_xdel(self.kako_minmax(self.dlists[:24,:], '最小最大'), outlist1, 6, '最小最大内')
+        #self.check(outlist1, self.saisinkekka)
         outlist1=self.notkako_xdel(0, outlist1, 3, '連番、0〜2個含む')
         self.check(outlist1, self.saisinkekka)
         outlist1=self.notkako_xdel(0, outlist1, 7, '3〜6連番、含まない')
