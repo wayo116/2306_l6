@@ -8,7 +8,7 @@ Original file is located at
 """
 
 !git clone https://wayo116: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@github.com/wayo116/2306_l6.git
-
+#!pip install umap-learn
 import os
 import csv
 import time
@@ -22,7 +22,7 @@ from Utility.LightgbmPack import LightgbmPack
 
 start = time.time()
 
-kaisai = 1
+kaisai = -1
 if kaisai == -1:
     #本番
     #最新結果がgitjubに登録済の時
@@ -30,7 +30,7 @@ if kaisai == -1:
     dlists = dlists
 elif kaisai == 0:
     #最新結果がcolabにはあるが、gitjubには未登録の時
-    saisinkekka_list=[6,7,13,18,25,43]
+    saisinkekka_list=[4,9,15,21,26,33]
     dlists = dlists
 elif kaisai > 0:
     saisinkekka_list = dlists[kaisai-1]
@@ -39,23 +39,25 @@ print("saisinkekka_list",saisinkekka_list)
 print("dlists",dlists[:5])
 
 
-dlists_end = 500
+dlists_end = 1500
 bunkatu=5
 predictions_all = []
 predictions_delall = []
 lgbm_obj = LightgbmPack()
 
 print('\n----vol 1----')
-params = {"dataset_params":{"range_start": -0.1,
-                            "range_end":0.1,
-                            "study_nmasi":20,
+params = {"dataset_params":{"study_range_start":0,
+                            "study_range_end":1,
+                            "study_nmasi":10,
+                            "test_range_start":0,
+                            "test_range_end":1,
                             "test_nmasi":1,
                             "bunseki_hani":16,
-                            "test_dlists_hani":[0,6]},
-                "lgbm_params":{"lgbm_model": "light_gbm_v2",
-                            'num_leaves': 16,
-                            'learning_rate': 0.5,
-                            "n_estimators":5,
+                            "test_dlists_hani":[0,3]},
+             "lgbm_params":{"lgbm_model":"light_gbm_v2",
+                            'num_leaves':31,
+                            'learning_rate':0.1,
+                            "n_estimators":100,
                             "cv":3,}}
 
 predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
