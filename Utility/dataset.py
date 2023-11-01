@@ -102,7 +102,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             pca_result = pca.fit_transform(matrix)
 
             w = np.array([5,4,3,2,1])
-            kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+5, dlist_retu]),weight=w)
+            kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+5, dlist_retu]),weights=w)
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -231,7 +231,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             pca_result = pca.fit_transform(matrix)
 
             w = np.array([5,4,3,2,1])
-            kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+5, dlist_retu]),weight=w)
+            kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+5, dlist_retu]),weights=w)
 
             tmp.append(min_n)
             tmp.append(max_n)
