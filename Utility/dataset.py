@@ -101,6 +101,9 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             pca = PCA(n_components=1)
             pca_result = pca.fit_transform(matrix)
 
+            w = np.array([5,4,3,2,1])
+            kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+5, dlist_retu]),weight=w)
+
             tmp.append(min_n)
             tmp.append(max_n)
             tmp.append(range_value)
@@ -124,6 +127,8 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp.append(new_matrix_max_h)
             #tmp.extend(X_tsne[:,1])
             tmp.extend(pca_result[:,0])
+
+            tmp.append(kaju_ave)
 
             if tmp != []:
                 list1 = tmp[1:]
@@ -225,6 +230,9 @@ def no_dataset_test_multi(dlists, **dataset_params):
             pca = PCA(n_components=1)
             pca_result = pca.fit_transform(matrix)
 
+            w = np.array([5,4,3,2,1])
+            kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+5, dlist_retu]),weight=w)
+
             tmp.append(min_n)
             tmp.append(max_n)
             tmp.append(range_value)
@@ -248,6 +256,8 @@ def no_dataset_test_multi(dlists, **dataset_params):
             tmp.append(new_matrix_max_h)
             #tmp.extend(X_tsne[:,1]
             tmp.extend(pca_result[:,0])
+
+            tmp.append(kaju_ave)
 
             if tmp != []:
                 list1 = tmp[0:]
