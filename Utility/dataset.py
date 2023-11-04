@@ -32,7 +32,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
     no_dataset = []
     for kaisu, dlist in enumerate(dlists):
 
-        kaisu_limit = len(dlists)-100
+        kaisu_limit = len(dlists)-50
         # print("kaisu_limit",kaisu_limit)
         if kaisu >= kaisu_limit:
             break
@@ -116,8 +116,8 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             ed=50
             sted3 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
-            st=90
-            ed=100
+            st=8
+            ed=35
             sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
             tmp.append(min_n)
@@ -266,8 +266,8 @@ def no_dataset_test_multi(dlists, **dataset_params):
             ed=50
             sted3 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
-            st=90
-            ed=100
+            st=8
+            ed=35
             sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
             tmp.append(min_n)
