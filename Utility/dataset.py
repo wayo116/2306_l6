@@ -108,6 +108,14 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             ed=18
             sted1 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
+            st=10
+            ed=24
+            sted2 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
+
+            st=35
+            ed=50
+            sted3 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
+
             tmp.append(min_n)
             tmp.append(max_n)
             tmp.append(range_value)
@@ -135,6 +143,8 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp.append(kaju_ave)
 
             tmp.extend(sted1)
+            tmp.extend(sted2)
+            tmp.extend(sted3)
 
             if tmp != []:
                 list1 = tmp[1:]
@@ -243,6 +253,14 @@ def no_dataset_test_multi(dlists, **dataset_params):
             ed=18
             sted1 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
+            st=10
+            ed=24
+            sted2 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
+
+            st=35
+            ed=50
+            sted3 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
+
             tmp.append(min_n)
             tmp.append(max_n)
             tmp.append(range_value)
@@ -270,6 +288,8 @@ def no_dataset_test_multi(dlists, **dataset_params):
             tmp.append(kaju_ave)
 
             tmp.extend(sted1)
+            tmp.extend(sted2)
+            tmp.extend(sted3)
 
             if tmp != []:
                 list1 = tmp[0:]
