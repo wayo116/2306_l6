@@ -106,7 +106,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
 
             st=1
             ed=18
-            sted1 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu])
+            sted1 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -241,7 +241,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
 
             st=1
             ed=18
-            sted1 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu])
+            sted1 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
             tmp.append(min_n)
             tmp.append(max_n)
