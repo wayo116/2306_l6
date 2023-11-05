@@ -270,7 +270,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             ed=35
             sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
-            tmp.append(min_n)
+            #tmp.append(min_n)
             #tmp.append(max_n)
             #tmp.append(sum_n)
             #tmp.append(med_n)
