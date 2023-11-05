@@ -655,7 +655,7 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
         'learning_rate': learning_rate,
         'feature_fraction': 0.9,
         'n_estimators': n_estimators,
-        'max_depth'： max_depth,
+        'max_depth': max_depth,
     }
 
     # LightGBMモデルを訓練（交差検証を使用）
