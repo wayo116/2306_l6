@@ -32,7 +32,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
     no_dataset = []
     for kaisu, dlist in enumerate(dlists):
 
-        kaisu_limit = len(dlists)-100
+        kaisu_limit = len(dlists)-50
         # print("kaisu_limit",kaisu_limit)
         if kaisu >= kaisu_limit:
             break
@@ -55,10 +55,10 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # sum_n = np.sum(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 中央
             # med_n = np.median(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
-            # # 標準偏差
-            # std_n = np.std(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
-            # # 分散
-            # var_n = np.var(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 標準偏差
+            std_n = np.std(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 分散
+            var_n = np.var(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # パーセンタイル
             # percentile_25 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 25)
             # percentile_75 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 75)
@@ -75,15 +75,15 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # # correlation_xy = correlation_matrix.loc['X', 'Y']
             # # # print("correlation_xy",correlation_xy)
 
-            # # 列を削除した新しい2次元配列を生成
-            # matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
-            # column_to_remove = dlist_retu
-            # new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
-            # # 全体の＊＊を計算
-            # new_matrix_mean = np.mean(new_matrix)
-            # new_matrix_var = np.var(new_matrix)
-            # new_matrix_min = np.min(new_matrix)
-            # new_matrix_max = np.max(new_matrix)
+            # 列を削除した新しい2次元配列を生成
+            matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
+            column_to_remove = dlist_retu
+            new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
+            # 全体の＊＊を計算
+            new_matrix_mean = np.mean(new_matrix)
+            new_matrix_var = np.var(new_matrix)
+            new_matrix_min = np.min(new_matrix)
+            new_matrix_max = np.max(new_matrix)
 
             # # 列を削除した新しい2次元配列を生成　ハーフ
             # matrix_h = dlists[kaisu+shokichi:kaisu+shokichi+int(bunseki_hani/2)]
@@ -101,8 +101,14 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # pca = PCA(n_components=1)
             # pca_result = pca.fit_transform(matrix)
 
+            lists = list(range(1, bunseki_hani))
+            values = lists[::-1]
+            # 合計値を計算
+            total = sum(values)
+            # 各値を100%に対する割合に変換
+            w = [(value / total) * 100 for value in values]
             # w = np.array([5,4,3,2,1])
-            # kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+5, dlist_retu]),weights=w)
+            kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]),weights=w)
 
             # # st=1
             # # ed=18
@@ -116,9 +122,9 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # # ed=50
             # # sted3 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
-            st=0
-            ed=100
-            sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
+            # st=0
+            # ed=50
+            # sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
             # tmp.append(min_n)
             # tmp.append(max_n)
@@ -126,16 +132,16 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # tmp.append(mean_n)
             # tmp.append(sum_n)
             # tmp.append(med_n)
-            # tmp.append(std_n)
-            # tmp.append(var_n)
+            tmp.append(std_n)
+            tmp.append(var_n)
             # tmp.append(percentile_25)
             # tmp.append(percentile_75)
             # # tmp.append(correlation_xy)
 
-            # tmp.append(new_matrix_mean)
-            # tmp.append(new_matrix_var)
-            # tmp.append(new_matrix_min)
-            # tmp.append(new_matrix_max)
+            tmp.append(new_matrix_mean)
+            tmp.append(new_matrix_var)
+            tmp.append(new_matrix_min)
+            tmp.append(new_matrix_max)
 
             # tmp.append(new_matrix_mean_h)
             # tmp.append(new_matrix_var_h)
@@ -144,12 +150,12 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # # tmp.extend(X_tsne[:,1])
             # tmp.extend(pca_result[:,0])
 
-            # tmp.append(kaju_ave)
+            tmp.append(kaju_ave)
 
             # #tmp.extend(sted1)
             # #tmp.extend(sted2)
             # #tmp.extend(sted3)
-            tmp.extend(sted4)
+            # tmp.extend(sted4)
 
             if tmp != []:
                 list1 = tmp[1:]
@@ -205,10 +211,10 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # sum_n = np.sum(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 中央
             # med_n = np.median(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
-            # # 標準偏差
-            # std_n = np.std(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
-            # # 分散
-            # var_n = np.var(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 標準偏差
+            std_n = np.std(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 分散
+            var_n = np.var(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # パーセンタイル
             # percentile_25 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 25)
             # percentile_75 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 75)
@@ -225,15 +231,15 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # # correlation_xy = correlation_matrix.loc['X', 'Y']
             # # # print("correlation_xy",correlation_xy)
 
-            # # 列を削除した新しい2次元配列を生成
-            # matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
-            # column_to_remove = dlist_retu
-            # new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
-            # # 全体の＊＊を計算
-            # new_matrix_mean = np.mean(new_matrix)
-            # new_matrix_var = np.var(new_matrix)
-            # new_matrix_min = np.min(new_matrix)
-            # new_matrix_max = np.max(new_matrix)
+            # 列を削除した新しい2次元配列を生成
+            matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
+            column_to_remove = dlist_retu
+            new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
+            # 全体の＊＊を計算
+            new_matrix_mean = np.mean(new_matrix)
+            new_matrix_var = np.var(new_matrix)
+            new_matrix_min = np.min(new_matrix)
+            new_matrix_max = np.max(new_matrix)
 
             # # 列を削除した新しい2次元配列を生成　ハーフ
             # matrix_h = dlists[kaisu+shokichi:kaisu+shokichi+int(bunseki_hani/2)]
@@ -251,8 +257,14 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # pca = PCA(n_components=1)
             # pca_result = pca.fit_transform(matrix)
 
+            lists = list(range(1, bunseki_hani))
+            values = lists[::-1]
+            # 合計値を計算
+            total = sum(values)
+            # 各値を100%に対する割合に変換
+            w = [(value / total) * 100 for value in values]
             # w = np.array([5,4,3,2,1])
-            # kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+5, dlist_retu]),weights=w)
+            kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]),weights=w)
 
             # # st=1
             # # ed=18
@@ -266,9 +278,9 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # # ed=50
             # # sted3 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
-            st=0
-            ed=100
-            sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
+            # st=0
+            # ed=50
+            # sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
             # tmp.append(min_n)
             # tmp.append(max_n)
@@ -276,16 +288,16 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # tmp.append(mean_n)
             # tmp.append(sum_n)
             # tmp.append(med_n)
-            # tmp.append(std_n)
-            # tmp.append(var_n)
+            tmp.append(std_n)
+            tmp.append(var_n)
             # tmp.append(percentile_25)
             # tmp.append(percentile_75)
             # # tmp.append(correlation_xy)
 
-            # tmp.append(new_matrix_mean)
-            # tmp.append(new_matrix_var)
-            # tmp.append(new_matrix_min)
-            # tmp.append(new_matrix_max)
+            tmp.append(new_matrix_mean)
+            tmp.append(new_matrix_var)
+            tmp.append(new_matrix_min)
+            tmp.append(new_matrix_max)
 
             # tmp.append(new_matrix_mean_h)
             # tmp.append(new_matrix_var_h)
@@ -294,12 +306,12 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # # tmp.extend(X_tsne[:,1])
             # tmp.extend(pca_result[:,0])
 
-            # tmp.append(kaju_ave)
+            tmp.append(kaju_ave)
 
             # #tmp.extend(sted1)
             # #tmp.extend(sted2)
             # #tmp.extend(sted3)
-            tmp.extend(sted4)
+            # tmp.extend(sted4)
 
             if tmp != []:
                 list1 = tmp[0:]
@@ -672,4 +684,5 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     print("Predictions:", predictions)
 
     return score ,predictions
+
 
