@@ -245,9 +245,9 @@ def no_dataset_test_multi(dlists, **dataset_params):
             new_matrix_min_h = np.min(new_matrix_h)
             new_matrix_max_h = np.max(new_matrix_h)
 
-            #tsne = TSNE(n_components = 2,perplexity=1) # n_componentsは低次元データの次元数
+            #tsne = TSNE(n_components = 2,perplexity=5) # n_componentsは低次元データの次元数
             #X_tsne = tsne.fit_transform(matrix)
-
+            
             pca = PCA(n_components=1)
             pca_result = pca.fit_transform(matrix)
 
@@ -272,6 +272,8 @@ def no_dataset_test_multi(dlists, **dataset_params):
 
             tmp.append(min_n)
             tmp.append(max_n)
+            tmp.append(range_value)
+            tmp.append(mean_n)
             tmp.append(sum_n)
             tmp.append(med_n)
             tmp.append(std_n)
