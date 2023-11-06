@@ -156,7 +156,8 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # #tmp.extend(sted2)
             # #tmp.extend(sted3)
             # tmp.extend(sted4)
-
+            tmp = [round(tmp[n], 2) for n in range(len(tmp))]
+            
             if tmp != []:
                 list1 = tmp[1:]
                 # print("list1",list1)
@@ -312,7 +313,8 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # #tmp.extend(sted2)
             # #tmp.extend(sted3)
             # tmp.extend(sted4)
-
+            tmp = [round(tmp[n], 2) for n in range(len(tmp))]
+            
             if tmp != []:
                 list1 = tmp[0:]
                 # print("list1",list1)
