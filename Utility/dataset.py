@@ -101,7 +101,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # pca = PCA(n_components=1)
             # pca_result = pca.fit_transform(matrix)
 
-            lists = list(range(1, bunseki_hani))
+            lists = list(range(1, bunseki_hani+1))
             values = lists[::-1]
             # 合計値を計算
             total = sum(values)
@@ -257,7 +257,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # pca = PCA(n_components=1)
             # pca_result = pca.fit_transform(matrix)
 
-            lists = list(range(1, bunseki_hani))
+            lists = list(range(1, bunseki_hani+1))
             values = lists[::-1]
             # 合計値を計算
             total = sum(values)
