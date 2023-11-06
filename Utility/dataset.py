@@ -106,7 +106,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # 合計値を計算
             total = sum(values)
             # 各値を100%に対する割合に変換
-            w = [(value / total) * 100 for value in values]
+            w = np.array([(value / total) * 100 for value in values])
             # w = np.array([5,4,3,2,1])
             kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]),weights=w)
 
@@ -262,7 +262,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # 合計値を計算
             total = sum(values)
             # 各値を100%に対する割合に変換
-            w = [(value / total) * 100 for value in values]
+            w = np.array([(value / total) * 100 for value in values])
             # w = np.array([5,4,3,2,1])
             kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]),weights=w)
 
