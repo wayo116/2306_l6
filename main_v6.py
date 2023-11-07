@@ -22,7 +22,7 @@ from Utility.LightgbmPack import LightgbmPack
 
 start = time.time()
 
-kaisai = -1
+kaisai = 8
 if kaisai == -1:
     #本番
     #最新結果がgitjubに登録済の時
@@ -30,7 +30,7 @@ if kaisai == -1:
     dlists = dlists
 elif kaisai == 0:
     #最新結果がcolabにはあるが、gitjubには未登録の時
-    saisinkekka_list=[4,9,15,21,26,33]
+    saisinkekka_list=[8,11,15,31,33,38]
     dlists = dlists
 elif kaisai > 0:
     saisinkekka_list = dlists[kaisai-1]
@@ -39,7 +39,7 @@ print("saisinkekka_list",saisinkekka_list)
 print("dlists",dlists[:5])
 
 
-dlists_end = 1500
+dlists_end = 350
 bunkatu=5
 predictions_all = []
 predictions_delall = []
@@ -47,17 +47,18 @@ lgbm_obj = LightgbmPack()
 
 print('\n----vol 1----')
 params = {"dataset_params":{"study_range_start":0,
-                            "study_range_end":1,
+                            "study_range_end":0.1,
                             "study_nmasi":10,
-                            "test_range_start":0,
-                            "test_range_end":1,
-                            "test_nmasi":1,
-                            "bunseki_hani":16,
-                            "test_dlists_hani":[0,3]},
+                            "test_range_start":-0.1,
+                            "test_range_end":0.1,
+                            "test_nmasi":10,
+                            "bunseki_hani":6,
+                            "test_dlists_hani":[0,1]},
              "lgbm_params":{"lgbm_model":"light_gbm_v2",
-                            'num_leaves':31,
-                            'learning_rate':0.1,
+                            'num_leaves':4,
+                            'learning_rate':0.05,
                             "n_estimators":100,
+                            "max_depth":1,
                             "cv":3,}}
 
 predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
