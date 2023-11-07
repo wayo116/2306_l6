@@ -58,7 +58,8 @@ params = {"dataset_params":{"study_range_start":0,
                             'num_leaves':4,
                             'learning_rate':0.05,
                             "n_estimators":100,
-                            "max_depth":1,
+                            "max_depth":3,
+                            "random_seed":777,
                             "cv":3,}}
 
 predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
