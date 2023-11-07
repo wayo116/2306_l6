@@ -629,6 +629,7 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     n_estimators = lgbm_params["n_estimators"]
     cv = lgbm_params["cv"]
     max_depth = lgbm_params["max_depth"]
+    random_seed = lgbm_params["random_seed"]
 
     # 一列目のラベルを取得
     labels = [row[0] for row in train_data]
@@ -670,6 +671,7 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
         'feature_fraction': 0.9,
         'n_estimators': n_estimators,
         'max_depth': max_depth,
+        'random_seed': random_seed,
     }
 
     # LightGBMモデルを訓練（交差検証を使用）
