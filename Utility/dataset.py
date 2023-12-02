@@ -43,14 +43,14 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp.append(dlist[dlist_retu])
             # tmp.append(int(dlists[kaisu+shokichi:kaisu+shokichi+1, dlist_retu]))
 
-            # # 最小
-            # min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
-            # # 最大
-            # max_n = np.max(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 最小
+            min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 最大
+            max_n = np.max(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 範囲
             # range_value = max_n - min_n
-            # # 平均
-            # mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 平均
+            mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 合計
             # sum_n = np.sum(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 中央
@@ -126,10 +126,10 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # ed=50
             # sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
-            # tmp.append(min_n)
-            # tmp.append(max_n)
+            tmp.append(min_n)
+            tmp.append(max_n)
             # tmp.append(range_value)
-            # tmp.append(mean_n)
+            tmp.append(mean_n)
             # tmp.append(sum_n)
             # tmp.append(med_n)
             tmp.append(std_n)
@@ -200,14 +200,14 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # # tmp.append(dlist[dlist_retu])
             # tmp.append(int(dlists[kaisu+shokichi:kaisu+shokichi+1, dlist_retu]))
 
-            # # 最小
-            # min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
-            # # 最大
-            # max_n = np.max(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 最小
+            min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 最大
+            max_n = np.max(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 範囲
             # range_value = max_n - min_n
-            # # 平均
-            # mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 平均
+            mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 合計
             # sum_n = np.sum(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 中央
@@ -283,10 +283,10 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # ed=50
             # sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
-            # tmp.append(min_n)
-            # tmp.append(max_n)
+            tmp.append(min_n)
+            tmp.append(max_n)
             # tmp.append(range_value)
-            # tmp.append(mean_n)
+            tmp.append(mean_n)
             # tmp.append(sum_n)
             # tmp.append(med_n)
             tmp.append(std_n)
