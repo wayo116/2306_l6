@@ -126,6 +126,13 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # ed=50
             # sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
+            # 2次元配列を一次元配列に変換
+            two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
+            flat_array = np.array(two_dimensional_array).flatten()
+            # 一次元配列をランダムに順番を変える
+            randomized_array = list(np.random.permutation(flat_array))
+
+
             tmp.append(min_n)
             tmp.append(max_n)
             # tmp.append(range_value)
@@ -156,6 +163,9 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # #tmp.extend(sted2)
             # #tmp.extend(sted3)
             # tmp.extend(sted4)
+
+            tmp.extend(randomized_array)
+
             tmp = [round(tmp[n], 2) for n in range(len(tmp))]
             
             if tmp != []:
@@ -283,6 +293,13 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # ed=50
             # sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
+            # 2次元配列を一次元配列に変換
+            two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
+            flat_array = np.array(two_dimensional_array).flatten()
+            # 一次元配列をランダムに順番を変える
+            randomized_array = list(np.random.permutation(flat_array))
+
+
             tmp.append(min_n)
             tmp.append(max_n)
             # tmp.append(range_value)
@@ -313,6 +330,9 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # #tmp.extend(sted2)
             # #tmp.extend(sted3)
             # tmp.extend(sted4)
+            
+            tmp.extend(randomized_array)
+            
             tmp = [round(tmp[n], 2) for n in range(len(tmp))]
             
             if tmp != []:
