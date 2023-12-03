@@ -22,6 +22,7 @@ from sklearn.decomposition import PCA
 
 
 def no_dataset_trainval_multi(dlists, **dataset_params,):
+    random.seed(1)
 
     range_start = dataset_params["study_range_start"]
     range_end = dataset_params["study_range_end"]
@@ -188,6 +189,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
 
 
 def no_dataset_test_multi(dlists, **dataset_params):
+    random.seed(1)
 
     range_start = dataset_params["test_range_start"]
     range_end = dataset_params["test_range_end"]
