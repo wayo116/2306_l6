@@ -48,8 +48,8 @@ lgbm_obj = LightgbmPack()
 params = {"dataset_params":{"study_range_start":0,
                             "study_range_end":0.1,
                             "study_nmasi":10,
-                            "test_range_start":-2,
-                            "test_range_end":2,
+                            "test_range_start":-3,
+                            "test_range_end":3,
                             "test_nmasi":10,
                             "bunseki_hani":6,
                             "test_dlists_hani":[0,1]},
@@ -83,19 +83,19 @@ print("percent",percent)
 print("\n")
 
 
-# print('\n----vol 2----')
-# dlists_end = 1500
+print('\n----vol 2----')
+dlists_end = 1500
 predictions_delall = []
-# lgbm_obj = LightgbmPack()
-'''
+lgbm_obj = LightgbmPack()
+
 params = {"dataset_params":{"study_range_start":0,
                             "study_range_end":0.1,
                             "study_nmasi":10,
-                            "test_range_start":-3,
-                            "test_range_end":3,
+                            "test_range_start":-1,
+                            "test_range_end":1,
                             "test_nmasi":10,
                             "bunseki_hani":6,
-                            "test_dlists_hani":[100,101]},
+                            "test_dlists_hani":[0,1]},
              "lgbm_params":{"lgbm_model":"light_gbm_v2",
                             'num_leaves':4,
                             'learning_rate':0.05,
@@ -124,7 +124,7 @@ else:
     percent = 0
 print("percent",percent)
 print("\n")
-'''
+
 
 print('\n----vol 1 2----')
 predictions_unique = [item for item in predictions_all if item not in predictions_delall]
