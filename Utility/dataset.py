@@ -27,9 +27,10 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
     range_end = dataset_params["study_range_end"]
     nmasi = dataset_params["study_nmasi"]
     bunseki_hani = dataset_params["bunseki_hani"]
+    flat_hani = dataset_params["flat_hani"]
 
     random.seed(42)  # 乱数のシードを42に設定
-    shuffle_list = list(range(0, 6*bunseki_hani))
+    shuffle_list = list(range(0, 6*flat_hani))
     random.shuffle(shuffle_list)
     #print("shuffle_list",shuffle_list)
 
@@ -132,7 +133,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
             # 2次元配列を一次元配列に変換
-            two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
+            two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+flat_hani]
             flat_array = np.array(two_dimensional_array).flatten()
             #print("flat_array",flat_array)
             # 一次元配列をランダムに順番を変える
@@ -200,10 +201,11 @@ def no_dataset_test_multi(dlists, **dataset_params):
     range_end = dataset_params["test_range_end"]
     nmasi = dataset_params["test_nmasi"]
     bunseki_hani = dataset_params["bunseki_hani"]
+    flat_hani = dataset_params["flat_hani"]
     test_dlists_hani = dataset_params["test_dlists_hani"]
 
     random.seed(42)  # 乱数のシードを42に設定
-    shuffle_list = list(range(0, 6*bunseki_hani))
+    shuffle_list = list(range(0, 6*flat_hani))
     random.shuffle(shuffle_list)
     #print("shuffle_list",shuffle_list)
 
@@ -306,7 +308,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
             # 2次元配列を一次元配列に変換
-            two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
+            two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+flat_hani]
             flat_array = np.array(two_dimensional_array).flatten()
             #print("flat_array",flat_array)
             # 一次元配列をランダムに順番を変える
