@@ -22,7 +22,7 @@ from Utility.LightgbmPack import LightgbmPack
 
 start = time.time()
 
-kaisai = 8
+kaisai = 1
 if kaisai == -1:
     #本番
     #最新結果がgitjubに登録済の時
@@ -30,7 +30,7 @@ if kaisai == -1:
     dlists = dlists
 elif kaisai == 0:
     #最新結果がcolabにはあるが、gitjubには未登録の時
-    saisinkekka_list=[8,11,15,31,33,38]
+    saisinkekka_list=[11,15,17,33,36,41]
     dlists = dlists
 elif kaisai > 0:
     saisinkekka_list = dlists[kaisai-1]
@@ -38,19 +38,18 @@ elif kaisai > 0:
 print("saisinkekka_list",saisinkekka_list)
 print("dlists",dlists[:5])
 
-
-dlists_end = 350
 bunkatu=5
-predictions_all = []
-predictions_delall = []
-lgbm_obj = LightgbmPack()
 
 print('\n----vol 1----')
+dlists_end = 1500
+predictions_all = []
+lgbm_obj = LightgbmPack()
+
 params = {"dataset_params":{"study_range_start":0,
                             "study_range_end":0.1,
                             "study_nmasi":10,
-                            "test_range_start":-0.1,
-                            "test_range_end":0.1,
+                            "test_range_start":-2,
+                            "test_range_end":2,
                             "test_nmasi":10,
                             "bunseki_hani":6,
                             "test_dlists_hani":[0,1]},
@@ -69,6 +68,65 @@ print("saisinkekka_list",saisinkekka_list)
 predictions_all = sorted(list(map(int, set(predictions_all))))
 print("predictions_all_set",predictions_all)
 
+l1 = saisinkekka_list
+l2 = predictions_all
+l1_l2_and = set(l1) & set(l2)
+l1l2_len = len(l1_l2_and)
+predictions_len = len(predictions_all)
+
+if l1l2_len > 0 and predictions_len > 0:
+    percent = round(l1l2_len/predictions_len*100)
+    print(f"{l1l2_len}/{predictions_len}")
+else:
+    percent = 0
+print("percent",percent)
+print("\n")
+
+
+# print('\n----vol 2----')
+# dlists_end = 1500
+predictions_delall = []
+# lgbm_obj = LightgbmPack()
+'''
+params = {"dataset_params":{"study_range_start":0,
+                            "study_range_end":0.1,
+                            "study_nmasi":10,
+                            "test_range_start":-3,
+                            "test_range_end":3,
+                            "test_nmasi":10,
+                            "bunseki_hani":6,
+                            "test_dlists_hani":[100,101]},
+             "lgbm_params":{"lgbm_model":"light_gbm_v2",
+                            'num_leaves':4,
+                            'learning_rate':0.05,
+                            "n_estimators":100,
+                            "max_depth":3,
+                            "random_seed":777,
+                            "cv":3,}}
+
+predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
+predictions_delall.extend(predictions)
+
+print("saisinkekka_list",saisinkekka_list)
+predictions_delall = sorted(list(map(int, set(predictions_delall))))
+print("predictions_delall_set",predictions_delall)
+
+l1 = saisinkekka_list
+l2 = predictions_delall
+l1_l2_and = set(l1) & set(l2)
+l1l2_len = len(l1_l2_and)
+predictions_len = len(predictions_delall)
+
+if l1l2_len > 0 and predictions_len > 0:
+    percent = round(l1l2_len/predictions_len*100)
+    print(f"{l1l2_len}/{predictions_len}")
+else:
+    percent = 0
+print("percent",percent)
+print("\n")
+'''
+
+print('\n----vol 1 2----')
 predictions_unique = [item for item in predictions_all if item not in predictions_delall]
 print("\npredictions_unique",predictions_unique)
 
