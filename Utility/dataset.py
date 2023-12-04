@@ -31,7 +31,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
     random.seed(42)  # 乱数のシードを42に設定
     numbers = list(range(0, 6*bunseki_hani))
     shuffle_list = random.shuffle(numbers)
-    print("flat_array",flat_array)
+    print("shuffle_list",shuffle_list)
 
     shokichi = 1
     no_dataset = []
