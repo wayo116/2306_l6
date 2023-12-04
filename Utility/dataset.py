@@ -22,7 +22,10 @@ from sklearn.decomposition import PCA
 
 
 def no_dataset_trainval_multi(dlists, **dataset_params,):
-
+    random.seed(42)  # 乱数のシードを42に設定
+    numbers = list(range(0, 6*bunseki_hani))
+    shuffle_list = random.shuffle(numbers)
+    
     range_start = dataset_params["study_range_start"]
     range_end = dataset_params["study_range_end"]
     nmasi = dataset_params["study_nmasi"]
@@ -130,9 +133,9 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
             flat_array = np.array(two_dimensional_array).flatten()
             # 一次元配列をランダムに順番を変える
-            random.seed(42)
-            randomized_array = list(np.random.permutation(flat_array).tolist())
-
+            randomized_array = []
+            for ii in shuffle_list:
+            randomized_array.extend(flat_array[ii])
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -189,6 +192,9 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
 
 
 def no_dataset_test_multi(dlists, **dataset_params):
+    random.seed(42)  # 乱数のシードを42に設定
+    numbers = list(range(0, 6*bunseki_hani))
+    shuffle_list = random.shuffle(numbers)
 
     range_start = dataset_params["test_range_start"]
     range_end = dataset_params["test_range_end"]
@@ -298,8 +304,9 @@ def no_dataset_test_multi(dlists, **dataset_params):
             two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
             flat_array = np.array(two_dimensional_array).flatten()
             # 一次元配列をランダムに順番を変える
-            random.seed(42)
-            randomized_array = list(np.random.permutation(flat_array).tolist())
+            randomized_array = []
+            for ii in shuffle_list:
+            randomized_array.extend(flat_array[ii])
 
 
             tmp.append(min_n)
