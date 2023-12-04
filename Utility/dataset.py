@@ -131,7 +131,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             flat_array = np.array(two_dimensional_array).flatten()
             # 一次元配列をランダムに順番を変える
             random.seed(42)
-            randomized_array = list(np.random.permutation(flat_array))
+            randomized_array = list(np.random.permutation(flat_array).tolist())
 
 
             tmp.append(min_n)
@@ -299,7 +299,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             flat_array = np.array(two_dimensional_array).flatten()
             # 一次元配列をランダムに順番を変える
             random.seed(42)
-            randomized_array = list(np.random.permutation(flat_array))
+            randomized_array = list(np.random.permutation(flat_array).tolist())
 
 
             tmp.append(min_n)
