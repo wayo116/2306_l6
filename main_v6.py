@@ -22,7 +22,7 @@ from Utility.LightgbmPack import LightgbmPack
 
 start = time.time()
 
-kaisai = 1
+kaisai = 5
 if kaisai == -1:
     #本番
     #最新結果がgitjubに登録済の時
@@ -41,8 +41,9 @@ print("dlists",dlists[:5])
 bunkatu=5
 
 print('\n----vol 1----')
-dlists_end = 1500
+dlists_end = 350
 predictions_all = []
+predictions_delall = []
 lgbm_obj = LightgbmPack()
 
 params = {"dataset_params":{"study_range_start":0,
@@ -52,6 +53,7 @@ params = {"dataset_params":{"study_range_start":0,
                             "test_range_end":3,
                             "test_nmasi":10,
                             "bunseki_hani":6,
+                            "flat_hani":25,
                             "test_dlists_hani":[0,1]},
              "lgbm_params":{"lgbm_model":"light_gbm_v2",
                             'num_leaves':4,
@@ -83,47 +85,50 @@ print("percent",percent)
 print("\n")
 
 
-print('\n----vol 2----')
-dlists_end = 1500
-predictions_delall = []
-lgbm_obj = LightgbmPack()
+delall = False
+if delall == True:
+    print('\n----vol 2----')
+    dlists_end = 350
+    predictions_delall = []
+    lgbm_obj = LightgbmPack()
 
-params = {"dataset_params":{"study_range_start":0,
-                            "study_range_end":0.1,
-                            "study_nmasi":10,
-                            "test_range_start":-1,
-                            "test_range_end":1,
-                            "test_nmasi":10,
-                            "bunseki_hani":6,
-                            "test_dlists_hani":[0,1]},
-             "lgbm_params":{"lgbm_model":"light_gbm_v2",
-                            'num_leaves':4,
-                            'learning_rate':0.05,
-                            "n_estimators":100,
-                            "max_depth":3,
-                            "random_seed":777,
-                            "cv":3,}}
+    params = {"dataset_params":{"study_range_start":0,
+                                "study_range_end":0.1,
+                                "study_nmasi":10,
+                                "test_range_start":-0.1,
+                                "test_range_end":0.1,
+                                "test_nmasi":10,
+                                "bunseki_hani":12,
+                                "flat_hani":25,
+                                "test_dlists_hani":[0,1]},
+                "lgbm_params":{"lgbm_model":"light_gbm_v2",
+                                'num_leaves':4,
+                                'learning_rate':0.05,
+                                "n_estimators":100,
+                                "max_depth":3,
+                                "random_seed":777,
+                                "cv":3,}}
 
-predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
-predictions_delall.extend(predictions)
+    predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
+    predictions_delall.extend(predictions)
 
-print("saisinkekka_list",saisinkekka_list)
-predictions_delall = sorted(list(map(int, set(predictions_delall))))
-print("predictions_delall_set",predictions_delall)
+    print("saisinkekka_list",saisinkekka_list)
+    predictions_delall = sorted(list(map(int, set(predictions_delall))))
+    print("predictions_delall_set",predictions_delall)
 
-l1 = saisinkekka_list
-l2 = predictions_delall
-l1_l2_and = set(l1) & set(l2)
-l1l2_len = len(l1_l2_and)
-predictions_len = len(predictions_delall)
+    l1 = saisinkekka_list
+    l2 = predictions_delall
+    l1_l2_and = set(l1) & set(l2)
+    l1l2_len = len(l1_l2_and)
+    predictions_len = len(predictions_delall)
 
-if l1l2_len > 0 and predictions_len > 0:
-    percent = round(l1l2_len/predictions_len*100)
-    print(f"{l1l2_len}/{predictions_len}")
-else:
-    percent = 0
-print("percent",percent)
-print("\n")
+    if l1l2_len > 0 and predictions_len > 0:
+        percent = round(l1l2_len/predictions_len*100)
+        print(f"{l1l2_len}/{predictions_len}")
+    else:
+        percent = 0
+    print("percent",percent)
+    print("\n")
 
 
 print('\n----vol 1 2----')
@@ -143,6 +148,7 @@ else:
     percent = 0
 print("percent",percent)
 print("\n")
+
 
 pred_dlists = combi(predictions_unique,6)
 
