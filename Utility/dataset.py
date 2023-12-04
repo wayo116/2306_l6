@@ -22,14 +22,15 @@ from sklearn.decomposition import PCA
 
 
 def no_dataset_trainval_multi(dlists, **dataset_params,):
-    random.seed(42)  # 乱数のシードを42に設定
-    numbers = list(range(0, 6*bunseki_hani))
-    shuffle_list = random.shuffle(numbers)
     
     range_start = dataset_params["study_range_start"]
     range_end = dataset_params["study_range_end"]
     nmasi = dataset_params["study_nmasi"]
     bunseki_hani = dataset_params["bunseki_hani"]
+
+    random.seed(42)  # 乱数のシードを42に設定
+    numbers = list(range(0, 6*bunseki_hani))
+    shuffle_list = random.shuffle(numbers)
 
     shokichi = 1
     no_dataset = []
@@ -192,15 +193,16 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
 
 
 def no_dataset_test_multi(dlists, **dataset_params):
-    random.seed(42)  # 乱数のシードを42に設定
-    numbers = list(range(0, 6*bunseki_hani))
-    shuffle_list = random.shuffle(numbers)
 
     range_start = dataset_params["test_range_start"]
     range_end = dataset_params["test_range_end"]
     nmasi = dataset_params["test_nmasi"]
     bunseki_hani = dataset_params["bunseki_hani"]
     test_dlists_hani = dataset_params["test_dlists_hani"]
+
+    random.seed(42)  # 乱数のシードを42に設定
+    numbers = list(range(0, 6*bunseki_hani))
+    shuffle_list = random.shuffle(numbers)
 
     shokichi = 0
     no_dataset = []
