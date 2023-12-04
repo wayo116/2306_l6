@@ -138,7 +138,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # 一次元配列をランダムに順番を変える
             randomized_array = []
             for ii in shuffle_list:
-                randomized_array.extend(flat_array[ii])
+                randomized_array.append(flat_array[ii])
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -312,7 +312,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # 一次元配列をランダムに順番を変える
             randomized_array = []
             for ii in shuffle_list:
-                randomized_array.extend(flat_array[ii])
+                randomized_array.append(flat_array[ii])
 
 
             tmp.append(min_n)
