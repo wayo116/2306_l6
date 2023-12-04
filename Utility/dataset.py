@@ -37,8 +37,11 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
     shokichi = 1
     no_dataset = []
     for kaisu, dlist in enumerate(dlists):
-
-        kaisu_limit = len(dlists)-bunseki_hani
+        if bunseki_hani >= flat_hani:
+            kaisu_limit = len(dlists)-bunseki_hani
+        else:
+            kaisu_limit = len(dlists)-flat_hani
+            
         # print("kaisu_limit",kaisu_limit)
         if kaisu >= kaisu_limit:
             break
@@ -213,7 +216,11 @@ def no_dataset_test_multi(dlists, **dataset_params):
     no_dataset = []
     for kaisu, dlist in enumerate(dlists[test_dlists_hani[0]:test_dlists_hani[1]]):
 
-        kaisu_limit = len(dlists)-bunseki_hani
+        if bunseki_hani >= flat_hani:
+            kaisu_limit = len(dlists)-bunseki_hani
+        else:
+            kaisu_limit = len(dlists)-flat_hani
+            
         # print("kaisu_limit",kaisu_limit)
         if kaisu >= kaisu_limit:
             break
