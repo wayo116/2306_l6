@@ -25,7 +25,7 @@ def datalists_check(dlists, hani, kosu):
     for n in range(1,kosu+1):
         idx = np.where(cntlist==np.sort(cntlist)[-n])[0]
         print("idx",idx[0])
-        cntlists.extend(cntlists[idx[0]])
+        cntlists.extend(cntlist[idx[0]])
     print("cntlists",cntlists)
     return cntlists
     
