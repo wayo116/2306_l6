@@ -23,7 +23,8 @@ def datalists_check(dlists, hani, kosu):
     #print("del_datalists",dlists[np.argmax(cntlist)])
     #return dlists[np.argmax(cntlist)]
     for n in range(1,kosu+1):
-        cntlists.extend(cntlists[int(np.where(cntlist==np.sort(cntlist)[-n]))])
+        idx = np.where(cntlist==np.sort(cntlist)[-n])
+        cntlists.extend(cntlists[idx.astype(int)])
     print("cntlists",cntlists)
     return cntlists
     
