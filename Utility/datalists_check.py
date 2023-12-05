@@ -27,8 +27,8 @@ def datalists_check(dlists, hani, kosu):
         print("idx",idx[0])
         print("dlists",dlists[idx[0]])
         cntlists.extend(dlists[idx[0]])
-    print("cntlists",cntlists)
-    return cntlists
+    print("cntlists",list(set(cntlists)))
+    return list(set(cntlists))
     
 
 # datalists_check(dlists,10)")
