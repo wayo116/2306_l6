@@ -1,10 +1,11 @@
 # from datalists import dlists
 import numpy as np
 
-def datalists_check(dlists, hani):
+def datalists_check(dlists, hani, kosu):
     # print(dlists[0:5])
     dlists = dlists[:hani]
     cntlist = [0] * (len(dlists) + 1)
+    cntlists =[]
     for kaisu in range(len(dlists)):
         # print("kaisu",kaisu)
 
@@ -19,7 +20,11 @@ def datalists_check(dlists, hani):
                 # print("dlists[kaisu_ikou]",dlists[kaisu_ikou])
                 cntlist[nankaimae] = cntlist[nankaimae] + 1
 
-    print("del_datalists",dlists[np.argmax(cntlist)])
-    return dlists[np.argmax(cntlist)]
+    #print("del_datalists",dlists[np.argmax(cntlist)])
+    #return dlists[np.argmax(cntlist)]
+    for n in range(1,kosu+1):
+        cntlists.extend(np.where(cntlist==np.sort(cntlist)[-n]))
+    return cntlists
+    
 
 # datalists_check(dlists,10)
