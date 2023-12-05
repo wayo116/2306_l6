@@ -193,7 +193,8 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
                     no_dataset.append(result)
 
     # print("no_dataset",no_dataset)
-    print("no_dataset_len",len(no_dataset))
+    print("no_dataset_rows",len(no_dataset))
+    print("no_dataset_columns",len(no_dataset[0]))
 
     return no_dataset
 
@@ -373,7 +374,8 @@ def no_dataset_test_multi(dlists, **dataset_params):
                     no_dataset.append(result)
 
     # print("no_dataset",no_dataset)
-    print("no_dataset_len",len(no_dataset))
+    print("no_dataset_rows",len(no_dataset))
+    print("no_dataset_columns",len(no_dataset[0]))
 
     return no_dataset
 
