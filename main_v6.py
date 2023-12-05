@@ -19,10 +19,11 @@ from datalists import dlists
 from Utility.inner_outer import combi
 from Dell6_v2 import Dell6
 from Utility.LightgbmPack import LightgbmPack
+from Utility.datalists_check import datalists_check
 
 start = time.time()
 
-kaisai = 5
+kaisai = 3
 if kaisai == -1:
     #本番
     #最新結果がgitjubに登録済の時
@@ -130,6 +131,7 @@ if delall == True:
     print("percent",percent)
     print("\n")
 
+predictions_delall.extend(datalists_check(dlists,500))
 
 print('\n----vol 1 2----')
 predictions_unique = [item for item in predictions_all if item not in predictions_delall]
