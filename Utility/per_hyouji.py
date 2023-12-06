@@ -1,4 +1,4 @@
-def per_hyouji(saisin,pred)
+def per_hyouji(saisin,pred):
     s_and_p = set(saisin) & set(pred)
     s_and_p_len = len(s_and_p)
     pred_len = len(pred)
