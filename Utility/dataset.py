@@ -19,6 +19,7 @@ import pandas as pd
 #import umap
 from sklearn.decomposition import PCA
 
+from scipy import stats
 
 
 def no_dataset_trainval_multi(dlists, **dataset_params,):
@@ -141,8 +142,11 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             #print("flat_array",flat_array)
             # 一次元配列をランダムに順番を変える
             randomized_array = []
-            for ii in shuffle_list:
-                randomized_array.append(flat_array[ii])
+            #for ii in shuffle_list:
+            #    randomized_array.append(flat_array[ii])
+            z = stats.zscore(flat_array)
+            z_abs = np.abs(z)
+            randomized_array.extend([min(z_abs),max(z_abs)])
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -321,8 +325,11 @@ def no_dataset_test_multi(dlists, **dataset_params):
             #print("flat_array",flat_array)
             # 一次元配列をランダムに順番を変える
             randomized_array = []
-            for ii in shuffle_list:
-                randomized_array.append(flat_array[ii])
+            #for ii in shuffle_list:
+            #    randomized_array.append(flat_array[ii])
+            z = stats.zscore(flat_array)
+            z_abs = np.abs(z)
+            randomized_array.extend([min(z_abs),max(z_abs)])
 
 
             tmp.append(min_n)
