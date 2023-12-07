@@ -24,80 +24,111 @@ from Utility.per_hyouji import per_hyouji
 
 start = time.time()
 
-kaisai = 1
+kekka_matomes = []
+
+kaisai = 3
 if kaisai == -1:
-    #本番
-    #最新結果がgitjubに登録済の時
-    saisinkekka_list=[99,99,99,99,99,99]
-    dlists = dlists
+    st = -1
+    ed = 0
 elif kaisai == 0:
-    #最新結果がcolabにはあるが、gitjubには未登録の時
-    saisinkekka_list=[1,8,23,30,36,41]
-    dlists = dlists
+    st = 0
+    ed = 1
 elif kaisai > 0:
-    saisinkekka_list = dlists[kaisai-1]
-    dlists = dlists[kaisai:]
-print("saisinkekka_list",saisinkekka_list)
-print("dlists",dlists[:5])
+    st = 1
+    ed = kaisai + 1
 
-bunkatu=5
+dlists_shoki = dlists
 
-print('\n----vol 1----')
-dlists_end = 350
-predictions_all = []
-lgbm_obj = LightgbmPack()
+for kaisai in range(st,ed):
+    print("\nkaisai",kaisai)
+    dlists = dlists_shoki
+    if kaisai == -1:
+        #本番
+        #最新結果がgitjubに登録済の時
+        saisinkekka_list=[99,99,99,99,99,99]
+        dlists = dlists_shoki
+    elif kaisai == 0:
+        #最新結果がcolabにはあるが、gitjubには未登録の時
+        saisinkekka_list=[1,8,23,30,36,41]
+        dlists = dlists_shoki
+    elif kaisai > 0:
+        saisinkekka_list = dlists_shoki[kaisai-1]
+        dlists = dlists_shoki[kaisai:]
+    print("saisinkekka_list",saisinkekka_list)
+    print("dlists",dlists[:5])
 
-params = {"dataset_params":{"study_range_start":0,
-                            "study_range_end":0.1,
-                            "study_nmasi":10,
-                            "test_range_start":-5,
-                            "test_range_end":5,
-                            "test_nmasi":10,
-                            "bunseki_hani":6,
-                            "flat_hani":18,
-                            "test_dlists_hani":[0,1]},
-             "lgbm_params":{"lgbm_model":"light_gbm_v2",
-                            'num_leaves':4,
-                            'learning_rate':0.05,
-                            "n_estimators":100,
-                            "max_depth":3,
-                            "random_seed":777,
-                            "cv":3,}}
+    bunkatu=5
 
-predictions = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
-predictions_all.extend(predictions)
+    print('\n----vol 1----')
+    # 初期値
+    dlists_end = 350
+    predictions_all = []
+    lgbm_obj = LightgbmPack()
+    params = {"dataset_params":{"study_range_start":0,
+                                "study_range_end":0.1,
+                                "study_nmasi":10,
+                                "test_range_start":-3,
+                                "test_range_end":3,
+                                "test_nmasi":10,
+                                "bunseki_hani":10,
+                                "flat_hani":4,
+                                "test_dlists_hani":[0,1]},
+                "lgbm_params":{"lgbm_model":"light_gbm_v2",
+                                'num_leaves':4,
+                                'learning_rate':0.05,
+                                "n_estimators":100,
+                                "max_depth":3,
+                                "random_seed":42,
+                                "cv":3,}}
 
-print("saisinkekka_list",saisinkekka_list)
-predictions_all = sorted(list(map(int, set(predictions_all))))
-print("predictions_all",predictions_all)
+    # 処理
+    predictions_all = lgbm_obj.lightgbmpack(kaisai, saisinkekka_list, dlists, dlists_end, **params)
 
-per_hyouji(saisinkekka_list,predictions_all)
-
-
-print('\n----vol 2----')
-predictions_delall = []
-
-print("saisinkekka_list",saisinkekka_list)
-predictions_delall.extend(datalists_check(dlists,len(dlists),2))
-print("predictions_delall",predictions_delall)
-
-per_hyouji(saisinkekka_list,predictions_delall)
+    # 表示
+    print("saisinkekka_list",saisinkekka_list)
+    predictions_all = sorted(list(map(int, set(predictions_all))))
+    print("predictions_all",predictions_all)
+    per_hyouji(saisinkekka_list,predictions_all)
 
 
-print('\n----vol 1 2----')
-print("saisinkekka_list",saisinkekka_list)
-predictions_unique = [item for item in predictions_all if item not in predictions_delall]
-print("predictions_unique",predictions_unique)
+    print('\n----vol 2----')
+    # 初期値
+    predictions_delall = []
 
-per_hyouji(saisinkekka_list,predictions_unique)
+    # 処理
+    predictions_delall = datalists_check(dlists,len(dlists),2)
+
+    # 表示
+    print("saisinkekka_list",saisinkekka_list)
+    predictions_delall = sorted(list(map(int, set(predictions_delall))))
+    print("predictions_delall",predictions_delall)
+    per_hyouji(saisinkekka_list,predictions_delall)
 
 
-pred_dlists = combi(predictions_unique,6)
+    print('\n----vol 1 2----')
+    # 初期値
+    predictions_unique = []
 
-#shori2は、pred_dlistsには組合せリストを入れる
-outlist=Dell6(dlists, pred_dlists, saisinkekka_list, bunkatu).shori2()
-#outlists.extend(outlist)
-#print('outlist',outlist)
+    # 処理
+    predictions_unique = [item for item in predictions_all if item not in predictions_delall]
+
+    # 表示
+    print("saisinkekka_list",saisinkekka_list)
+    predictions_unique = sorted(list(map(int, set(predictions_unique))))
+    print("predictions_unique",predictions_unique)
+    wariai, percent = per_hyouji(saisinkekka_list,predictions_unique)
+
+    pred_dlists = combi(predictions_unique,6)
+
+    #shori2は、pred_dlistsには組合せリストを入れる
+    outlist, kankin =Dell6(dlists, pred_dlists, saisinkekka_list, bunkatu).shori2()
+    #outlists.extend(outlist)
+    #print('outlist',outlist)
+
+    kekka_matomes.append([kaisai, wariai, percent, kankin])
+
+for kekka_matome in kekka_matomes:
+    print(kekka_matome)
 
 print("処理時間",time.time() - start)
 
