@@ -146,7 +146,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             #    randomized_array.append(flat_array[ii])
             z = stats.zscore(flat_array)
             z_abs = np.abs(z)
-            randomized_array.extend([min(z_abs),max(z_abs)])
+            randomized_array.extend(z_abs)
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -329,7 +329,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             #    randomized_array.append(flat_array[ii])
             z = stats.zscore(flat_array)
             z_abs = np.abs(z)
-            randomized_array.extend([min(z_abs),max(z_abs)])
+            randomized_array.extend(z_abs)
 
 
             tmp.append(min_n)
