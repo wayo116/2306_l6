@@ -345,5 +345,5 @@ class Dell6:
         #self.check(outlist1, self.saisinkekka)
         
         outlist2=self.get_outlist2(outlist1, '**') 
-        self.check(outlist2, self.saisinkekka)
-        return outlist2
+        kankin = self.check(outlist2, self.saisinkekka)
+        return outlist2, kankin
