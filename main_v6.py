@@ -26,7 +26,7 @@ start = time.time()
 
 kekka_matomes = []
 
-kaisai = 3
+kaisai = 10
 if kaisai == -1:
     st = -1
     ed = 0
@@ -70,8 +70,8 @@ for kaisai in range(st,ed):
                                 "test_range_start":-3,
                                 "test_range_end":3,
                                 "test_nmasi":10,
-                                "bunseki_hani":10,
-                                "flat_hani":4,
+                                "bunseki_hani":6,
+                                "flat_hani":1,
                                 "test_dlists_hani":[0,1]},
                 "lgbm_params":{"lgbm_model":"light_gbm_v2",
                                 'num_leaves':4,
@@ -127,8 +127,11 @@ for kaisai in range(st,ed):
 
     kekka_matomes.append([kaisai, wariai, percent, kankin])
 
+goukei = 0
 for kekka_matome in kekka_matomes:
+    goukei = goukei + kekka_matome[3]
     print(kekka_matome)
+print("goukei",goukei)
 
 print("処理時間",time.time() - start)
 
