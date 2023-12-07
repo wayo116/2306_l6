@@ -61,23 +61,23 @@ for kaisai in range(st,ed):
 
     print('\n----vol 1----')
     # 初期値
-    dlists_end = 350
+    dlists_end = 600
     predictions_all = []
     lgbm_obj = LightgbmPack()
-    params = {"dataset_params":{"study_range_start":0,
-                                "study_range_end":0.1,
-                                "study_nmasi":10,
+    params = {"dataset_params":{"study_range_start":-0.01,
+                                "study_range_end":0.01,
+                                "study_nmasi":3,
                                 "test_range_start":-3,
                                 "test_range_end":3,
                                 "test_nmasi":10,
-                                "bunseki_hani":6,
-                                "flat_hani":1,
+                                "bunseki_hani":8,
+                                "flat_hani":4,
                                 "test_dlists_hani":[0,1]},
                 "lgbm_params":{"lgbm_model":"light_gbm_v2",
-                                'num_leaves':4,
+                                'num_leaves':256,
                                 'learning_rate':0.05,
-                                "n_estimators":100,
-                                "max_depth":3,
+                                "n_estimators":32,
+                                "max_depth":-1,
                                 "random_seed":42,
                                 "cv":3,}}
 
@@ -92,17 +92,23 @@ for kaisai in range(st,ed):
 
 
     print('\n----vol 2----')
+    delall = 0
+
     # 初期値
     predictions_delall = []
 
-    # 処理
-    predictions_delall = datalists_check(dlists,len(dlists),2)
+    if delall:
+        # 初期値
+        predictions_delall = []
 
-    # 表示
-    print("saisinkekka_list",saisinkekka_list)
-    predictions_delall = sorted(list(map(int, set(predictions_delall))))
-    print("predictions_delall",predictions_delall)
-    per_hyouji(saisinkekka_list,predictions_delall)
+        # 処理
+        predictions_delall = datalists_check(dlists,len(dlists),2)
+
+        # 表示
+        print("saisinkekka_list",saisinkekka_list)
+        predictions_delall = sorted(list(map(int, set(predictions_delall))))
+        print("predictions_delall",predictions_delall)
+        per_hyouji(saisinkekka_list,predictions_delall)
 
 
     print('\n----vol 1 2----')
