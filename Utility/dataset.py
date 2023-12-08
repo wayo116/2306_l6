@@ -451,11 +451,11 @@ def light_gbm(train_data, test_data, **lgbm_params):
     print(y)
 
     # データの分割
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
     
     # LightGBM用のデータセットに変換
     train_data = lgb.Dataset(X_train, label=y_train)
-    test_data = lgb.Dataset(X_test, label=y_test)
+    val_data = lgb.Dataset(X_val, label=y_val)
     
     # LightGBMのハイパーパラメータの設定
     params = {
@@ -468,17 +468,18 @@ def light_gbm(train_data, test_data, **lgbm_params):
     model = lgb.train(params, train_data)
     
     # テストデータでの予測
-    y_pred = model.predict(X_test)
-    print("y_pred",y_pred)
-    y_pred_class = np.argmax(y_pred, axis=1) + 1 # 予測結果のクラスの値を調整
+    predictions = model.predict(test_data)
+    print("predictions",predictions)
+    
+    y_pred_class = np.argmax(model.predict(X_val), axis=1) + 1 # 予測結果のクラスの値を調整
     print("y_pred_class",y_pred_class)
-    y_test += 1 # テストデータのクラスの値を調整
-    print("y_test",y_test)
+    y_val += 1 # テストデータのクラスの値を調整
+    print("y_val",y_val)
     # 精度の評価
-    accuracy = accuracy_score(y_test, y_pred_class)
+    accuracy = accuracy_score(y_val, y_pred_class)
     print('Accuracy:', accuracy)
 
-    return accuracy ,y_pred_class
+    return accuracy ,predictions
 
 
 def light_gbm_nogood(train_data, test_data, **lgbm_params):
