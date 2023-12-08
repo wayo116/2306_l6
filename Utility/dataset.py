@@ -755,7 +755,7 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     # print("score", score)
     preds_X_val = model.predict(X_val)
     preds_X_val = np.argmax(preds_X_val, axis=1) + 1 # 予測結果のクラスの値を調整
-    accuracy = accuracy_score(y_val, preds_X_val)
+    accuracy = accuracy_score(y_val+1, preds_X_val)
     print("accuracy",accuracy)
 
     # 推論
