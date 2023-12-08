@@ -1,1 +1,36 @@
+-----------------------------------------------------------
+# 初期値
+    dlists_end = 450
+    predictions_all = []
+    lgbm_obj = LightgbmPack()
+    params = {"dataset_params":{"study_range_start":-0.01,
+                                "study_range_end":0.01,
+                                "study_nmasi":5,
+                                "test_range_start":-0.01,
+                                "test_range_end":1,
+                                "test_nmasi":10,
+                                "bunseki_hani":8,
+                                "flat_hani":4,
+                                "test_dlists_hani":[0,1]},
+                "lgbm_params":{"lgbm_model":"light_gbm_v2",
+                                'num_leaves':61,
+                                'learning_rate':0.05,
+                                "num_iterations":64,
+                                "max_depth":-1,
+                                "random_seed":42,
+                                "cv":3,}}
 
+[1, '2/15', 13, -0.08]
+[2, '3/14', 21, -0.08]
+[3, '4/19', 21, -0.08]
+[4, '1/16', 6, -0.08]
+[5, '2/16', 12, -0.08]
+[6, '4/17', 24, -0.1]
+[7, '2/19', 11, -0.08]
+[8, '6/17', 35, 0.12000000000000001]
+[9, '1/16', 6, -0.08]
+[10, '1/18', 6, -0.1]
+goukei -0.6399999999999999
+処理時間 222.14306592941284
+
+-----------------------------------------------------------
