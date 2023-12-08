@@ -53,7 +53,7 @@ class LightgbmPack():
             score ,predictions = light_gbm_multi(train_data, test_data, **lgbm_params)
 
         if lgbm_params["lgbm_model"] == "light_gbm_v2":
-            score ,predictions = light_gbm(train_data, test_data, **lgbm_params)
+            score ,predictions = light_gbm_v2(train_data, test_data, **lgbm_params)
 
 
         # %計算
