@@ -759,10 +759,15 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     print("accuracy",accuracy)
 
     # 推論
-    print("****",model.predict(test_data)+1)
-    predictions = sorted(list(map(int, set(model.predict(test_data)+1))))
-    print("Predictions:", predictions)
+    # predictions = sorted(list(map(int, set(model.predict(test_data)+1))))
+    # print("Predictions:", predictions)
+    predictions = model.predict(test_data)
+    print("predictions",predictions)
+    
+    predictions = np.argmax(predictions, axis=1) + 1 # 予測結果のクラスの値を調整
+    print("predictions",predictions)
 
     return accuracy ,predictions
+
 
 
