@@ -474,10 +474,15 @@ def light_gbm(train_data, test_data, **lgbm_params):
     predictions = np.argmax(predictions, axis=1) + 1 # 予測結果のクラスの値を調整
     print("predictions",predictions)
 
-    score = model.score(dvalid)
-    print("score", score)
+    # 検証
+    preds_val = model.predict(X_val)
+    print("preds_val",preds_val)
     
-    return score ,predictions
+    preds_val = np.argmax(preds_val, axis=1) + 1 # 予測結果のクラスの値を調整
+    print("preds_val",preds_val)
+    accuracy = accuracy_score(y_val, preds_val)
+    
+    return accuracy ,predictions
 
 
 def light_gbm_nogood(train_data, test_data, **lgbm_params):
