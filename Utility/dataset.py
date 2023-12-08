@@ -697,7 +697,7 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     num_leaves = lgbm_params["num_leaves"]
     learning_rate = lgbm_params["learning_rate"]
     
-    n_estimators = lgbm_params["n_estimators"]
+    num_iterations = lgbm_params["num_iterations"]
     cv = lgbm_params["cv"]
     max_depth = lgbm_params["max_depth"]
     random_seed = lgbm_params["random_seed"]
@@ -740,7 +740,7 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
         'num_leaves': num_leaves,
         'learning_rate': learning_rate,
         'feature_fraction': 0.9,
-        'n_estimators': n_estimators,
+        'num_iterations': num_iterations,
         'max_depth': max_depth,
         'random_seed': random_seed,
     }
@@ -753,9 +753,9 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     # 評価
     # score = model.score(dvalid)
     # print("score", score)
-    preds_val = model.predict(X_val)
-    preds_val = np.argmax(preds_val, axis=1) + 1 # 予測結果のクラスの値を調整
-    accuracy = accuracy_score(y_val, preds_val)
+    preds_X_val = model.predict(X_val)
+    preds_X_val = np.argmax(preds_X_val, axis=1) + 1 # 予測結果のクラスの値を調整
+    accuracy = accuracy_score(y_val, preds_X_val)
     print("accuracy",accuracy)
 
     # 推論
