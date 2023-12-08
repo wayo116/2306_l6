@@ -755,6 +755,7 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     print("score", score)
 
     # 推論
+    print("****",model.predict(test_data)+1)
     predictions = sorted(list(map(int, set(model.predict(test_data)+1))))
     print("Predictions:", predictions)
 
