@@ -9,7 +9,7 @@ import lightgbm as lgb
 from sklearn.metrics import mean_absolute_error, accuracy_score, classification_report
 # from sklearn.preprocessing import StandardScaler, OneHotEncoder
 # from sklearn.compose import ColumnTransformer
-import lightgbm as lgb
+# import lightgbm as lgb
 #import optuna.integration.lightgbm as lgb
 
 import csv
@@ -450,23 +450,32 @@ def light_gbm(train_data, test_data, **lgbm_params):
     y = data[:,0]-1
     print(y)
 
-    # データ分割
-    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+    # データの分割
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    
+    # LightGBM用のデータセットに変換
+    train_data = lgb.Dataset(X_train, label=y_train)
+    test_data = lgb.Dataset(X_test, label=y_test)
+    
+    # LightGBMのハイパーパラメータの設定
+    params = {
+        'objective': 'multiclass', # 多クラス分類
+        'num_class': 43, # クラスの数
+        'metric': 'multi_logloss' # 損失関数にmulti_loglossを使用
+    }
+    
+    # LightGBMモデルの学習
+    model = lgb.train(params, train_data, num_boost_round=1000, valid_sets=[train_data, test_data], early_stopping_rounds=10)
+    
+    # テストデータでの予測
+    y_pred = model.predict(X_test)
+    y_pred_class = np.argmax(y_pred, axis=1) + 1 # 予測結果のクラスの値を調整
+    y_test += 1 # テストデータのクラスの値を調整
+    # 精度の評価
+    accuracy = accuracy_score(y_test, y_pred_class)
+    print('Accuracy:', accuracy)
 
-    # モデル
-    # max_depth=-1は無制限を意味する
-    model = lgb.LGBMClassifier(force_col_wise=True, n_estimators=n_estimators, learning_rate=learning_rate, max_depth=-1 ,objective='multiclass')
-    model.fit(X_train, y_train)
-
-    # 評価
-    score = model.score(X_val, y_val)
-    print("score", score)
-
-    # 推論
-    predictions = sorted(list(map(int, set(model.predict(test_data)+1))))
-    print("Predictions:", predictions)
-
-    return score ,predictions
+    return accuracy ,y_pred_class
 
 
 def light_gbm_nogood(train_data, test_data, **lgbm_params):
