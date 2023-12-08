@@ -465,7 +465,7 @@ def light_gbm(train_data, test_data, **lgbm_params):
     }
     
     # LightGBMモデルの学習
-    model = lgb.train(params, train_data, num_boost_round=1000, valid_sets=[train_data, test_data], early_stopping_rounds=10)
+    model = lgb.train(params, train_data)
     
     # テストデータでの予測
     y_pred = model.predict(X_test)
