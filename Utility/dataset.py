@@ -743,7 +743,7 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
         'num_iterations': num_iterations,
         'max_depth': max_depth,
         'random_seed': random_seed,
-        'force_row_wise': true,
+        'force_row_wise': True,
     }
 
     # LightGBMモデルを訓練（交差検証を使用）
