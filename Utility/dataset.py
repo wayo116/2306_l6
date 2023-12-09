@@ -743,6 +743,7 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
         'num_iterations': num_iterations,
         'max_depth': max_depth,
         'random_seed': random_seed,
+        'force_row_wise': true,
     }
 
     # LightGBMモデルを訓練（交差検証を使用）
@@ -762,7 +763,7 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     # predictions = sorted(list(map(int, set(model.predict(test_data)+1))))
     # print("Predictions:", predictions)
     predictions = model.predict(test_data)
-    print("predictions",predictions)
+    #print("predictions",predictions)
     
     predictions = np.argmax(predictions, axis=1) + 1 # 予測結果のクラスの値を調整
     print("predictions",predictions)
