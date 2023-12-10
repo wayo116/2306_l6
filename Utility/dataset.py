@@ -768,6 +768,8 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     predictions = np.argmax(predictions, axis=1) + 1 # 予測結果のクラスの値を調整
     print("predictions",predictions)
 
+    print(model.params)
+
     return accuracy ,predictions
 
 
