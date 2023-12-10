@@ -5,12 +5,12 @@ import numpy as np
 from collections import Counter
 
 from sklearn.model_selection import train_test_split, KFold, cross_val_score
-import lightgbm as lgb
+#import lightgbm as lgb
 from sklearn.metrics import mean_absolute_error, accuracy_score, classification_report
 # from sklearn.preprocessing import StandardScaler, OneHotEncoder
 # from sklearn.compose import ColumnTransformer
 # import lightgbm as lgb
-#import optuna.integration.lightgbm as lgb
+import optuna.integration.lightgbm as lgb
 
 import csv
 import os
