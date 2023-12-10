@@ -749,7 +749,7 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     # LightGBMモデルを訓練（交差検証を使用）
     #model = lgb.LGBMClassifier(**params, n_estimators=n_estimators)  # イテレーション回数はここで指定
     #model.fit(X_train, y_train)
-    model = lgb.train(params,dtrain)
+    model = lgb.train(params,dtrain, valid_sets=[dtrain, dvalid],)
 
     # 評価
     # score = model.score(dvalid)
