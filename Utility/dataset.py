@@ -10,7 +10,7 @@ from sklearn.metrics import mean_absolute_error, accuracy_score, classification_
 # from sklearn.preprocessing import StandardScaler, OneHotEncoder
 # from sklearn.compose import ColumnTransformer
 # import lightgbm as lgb
-import optuna.integration.lightgbm as lgb
+#import optuna.integration.lightgbm as lgb
 
 import csv
 import os
@@ -693,7 +693,7 @@ def light_gbm_multi(train_data, test_data, **lgbm_params):
     return accuracy, predictions
 
 
-def light_gbm_v2(train_data, test_data, **lgbm_params):
+def light_gbm_v2(train_data, test_data, optuna_flag, **lgbm_params):
     num_leaves = lgbm_params["num_leaves"]
     learning_rate = lgbm_params["learning_rate"]
     
@@ -749,26 +749,30 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     # LightGBMモデルを訓練（交差検証を使用）
     #model = lgb.LGBMClassifier(**params, n_estimators=n_estimators)  # イテレーション回数はここで指定
     #model.fit(X_train, y_train)
-    model = lgb.train(params,dtrain, valid_sets=[dtrain, dvalid],)
+    if optuna_flag == 0:
+        import optuna.integration.lightgbm as lgb
+        model = lgb.train(params,dtrain, valid_sets=[dtrain, dvalid],)
+        print("best.params", model.params)
+    else:
+        import lightgbm as lgb
+        model = lgb.train(params,dtrain, valid_sets=[dtrain, dvalid],)
 
-    # 評価
-    # score = model.score(dvalid)
-    # print("score", score)
-    preds_X_val = model.predict(X_val)
-    preds_X_val = np.argmax(preds_X_val, axis=1) + 1 # 予測結果のクラスの値を調整
-    accuracy = accuracy_score(y_val+1, preds_X_val)
-    print("accuracy",accuracy)
-
-    # 推論
-    # predictions = sorted(list(map(int, set(model.predict(test_data)+1))))
-    # print("Predictions:", predictions)
-    predictions = model.predict(test_data)
-    #print("predictions",predictions)
+        # 評価
+        # score = model.score(dvalid)
+        # print("score", score)
+        preds_X_val = model.predict(X_val)
+        preds_X_val = np.argmax(preds_X_val, axis=1) + 1 # 予測結果のクラスの値を調整
+        accuracy = accuracy_score(y_val+1, preds_X_val)
+        print("accuracy",accuracy)
     
-    predictions = np.argmax(predictions, axis=1) + 1 # 予測結果のクラスの値を調整
-    print("predictions",predictions)
-
-    print(model.params)
+        # 推論
+        # predictions = sorted(list(map(int, set(model.predict(test_data)+1))))
+        # print("Predictions:", predictions)
+        predictions = model.predict(test_data)
+        #print("predictions",predictions)
+        
+        predictions = np.argmax(predictions, axis=1) + 1 # 予測結果のクラスの値を調整
+        print("predictions",predictions)
 
     return accuracy ,predictions
 
