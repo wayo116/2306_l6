@@ -188,7 +188,7 @@ class LightgbmPack():
         start = time.time()
 
         dataset_params = params["dataset_params"]
-        lgbm_models = params["lgbm_models"]
+        lgbm_model = params["lgbm_model"]
         lgbm_params = params["lgbm_params"]
 
         #学習検証用
@@ -212,10 +212,10 @@ class LightgbmPack():
         print("len(test_data)",len(test_data))
 
         #lightgbmで推論
-        if lgbm_models["lgbm_gbm"] == "light_gbm":
+        if lgbm_model["model_type"] == "light_gbm":
             score ,predictions = light_gbm(train_data, test_data, **lgbm_params)
             
-        if lgbm_models["lgbm_gbm_optuna"] == "light_gbm_optuna":
+        if lgbm_model["model_type"] == "light_gbm_optuna":
             score ,predictions = light_gbm_optuna(train_data, test_data, **lgbm_params)
 
         # %計算
