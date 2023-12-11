@@ -693,7 +693,7 @@ def light_gbm_multi(train_data, test_data, **lgbm_params):
     return accuracy, predictions
 
 
-def light_gbm_v2(train_data, test_data, optuna_flag, **lgbm_params):
+def light_gbm_v2(train_data, test_data, **lgbm_params):
     num_leaves = lgbm_params["num_leaves"]
     learning_rate = lgbm_params["learning_rate"]
     
