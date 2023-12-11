@@ -703,6 +703,10 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     random_seed = lgbm_params["random_seed"]
 
     optuna_flag = lgbm_params["optuna_flag"]
+    if optuna_flag == 0:
+        import optuna.integration.lightgbm as lgb
+    else:
+        import lightgbm as lgb
 
     # 一列目のラベルを取得
     labels = [row[0] for row in train_data]
@@ -752,11 +756,11 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     #model = lgb.LGBMClassifier(**params, n_estimators=n_estimators)  # イテレーション回数はここで指定
     #model.fit(X_train, y_train)
     if optuna_flag == 0:
-        import optuna.integration.lightgbm as lgb
+        #import optuna.integration.lightgbm as lgb
         model = lgb.train(params,dtrain, valid_sets=[dtrain, dvalid],)
         print("best.params", model.params)
     else:
-        import lightgbm as lgb
+        #import lightgbm as lgb
         model = lgb.train(params,dtrain, valid_sets=[dtrain, dvalid],)
 
         # 評価
