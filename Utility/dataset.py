@@ -702,6 +702,8 @@ def light_gbm_v2(train_data, test_data, optuna_flag, **lgbm_params):
     max_depth = lgbm_params["max_depth"]
     random_seed = lgbm_params["random_seed"]
 
+    optuna_flag = lgbm_params["optuna_flag"]
+
     # 一列目のラベルを取得
     labels = [row[0] for row in train_data]
 
