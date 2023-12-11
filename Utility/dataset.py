@@ -78,15 +78,15 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # # correlation_xy = correlation_matrix.loc['X', 'Y']
             # # # print("correlation_xy",correlation_xy)
 
-            # 列を削除した新しい2次元配列を生成
-            matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
-            column_to_remove = dlist_retu
-            new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
-            # 全体の＊＊を計算
-            new_matrix_mean = np.mean(new_matrix)
-            new_matrix_var = np.var(new_matrix)
-            new_matrix_min = np.min(new_matrix)
-            new_matrix_max = np.max(new_matrix)
+            ## 列を削除した新しい2次元配列を生成
+            #matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
+            #column_to_remove = dlist_retu
+            #new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
+            ## 全体の＊＊を計算
+            #new_matrix_mean = np.mean(new_matrix)
+            #new_matrix_var = np.var(new_matrix)
+            #new_matrix_min = np.min(new_matrix)
+            #new_matrix_max = np.max(new_matrix)
 
             # # 列を削除した新しい2次元配列を生成　ハーフ
             # matrix_h = dlists[kaisu+shokichi:kaisu+shokichi+int(bunseki_hani/2)]
@@ -129,17 +129,17 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # ed=50
             # sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
-            # 2次元配列を一次元配列に変換
-            two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+flat_hani]
-            flat_array = np.array(two_dimensional_array).flatten()
-            #print("flat_array",flat_array)
-            # 一次元配列をランダムに順番を変える
-            randomized_array = []
-            #for ii in shuffle_list:
-            #    randomized_array.append(flat_array[ii])
-            z = stats.zscore(flat_array)
-            z_abs = np.abs(z)
-            randomized_array.extend(z_abs)
+            ## 2次元配列を一次元配列に変換
+            #two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+flat_hani]
+            #flat_array = np.array(two_dimensional_array).flatten()
+            ##print("flat_array",flat_array)
+            ## 一次元配列をランダムに順番を変える
+            #randomized_array = []
+            ##for ii in shuffle_list:
+            ##    randomized_array.append(flat_array[ii])
+            #z = stats.zscore(flat_array)
+            #z_abs = np.abs(z)
+            #randomized_array.extend(z_abs)
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -153,10 +153,10 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # tmp.append(percentile_75)
             # # tmp.append(correlation_xy)
 
-            tmp.append(new_matrix_mean)
-            tmp.append(new_matrix_var)
-            tmp.append(new_matrix_min)
-            tmp.append(new_matrix_max)
+            #tmp.append(new_matrix_mean)
+            #tmp.append(new_matrix_var)
+            #tmp.append(new_matrix_min)
+            #tmp.append(new_matrix_max)
 
             # tmp.append(new_matrix_mean_h)
             # tmp.append(new_matrix_var_h)
@@ -172,7 +172,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # #tmp.extend(sted3)
             # tmp.extend(sted4)
 
-            tmp.extend(randomized_array)
+            #tmp.extend(randomized_array)
 
             tmp = [round(tmp[n], 2) for n in range(len(tmp))]
             
@@ -261,15 +261,15 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # # correlation_xy = correlation_matrix.loc['X', 'Y']
             # # # print("correlation_xy",correlation_xy)
 
-            # 列を削除した新しい2次元配列を生成
-            matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
-            column_to_remove = dlist_retu
-            new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
+            ## 列を削除した新しい2次元配列を生成
+            #matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
+            #column_to_remove = dlist_retu
+            #new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
             # 全体の＊＊を計算
-            new_matrix_mean = np.mean(new_matrix)
-            new_matrix_var = np.var(new_matrix)
-            new_matrix_min = np.min(new_matrix)
-            new_matrix_max = np.max(new_matrix)
+            #new_matrix_mean = np.mean(new_matrix)
+            #new_matrix_var = np.var(new_matrix)
+            #new_matrix_min = np.min(new_matrix)
+            #new_matrix_max = np.max(new_matrix)
 
             # # 列を削除した新しい2次元配列を生成　ハーフ
             # matrix_h = dlists[kaisu+shokichi:kaisu+shokichi+int(bunseki_hani/2)]
@@ -312,17 +312,17 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # ed=50
             # sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
 
-            # 2次元配列を一次元配列に変換
-            two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+flat_hani]
-            flat_array = np.array(two_dimensional_array).flatten()
-            #print("flat_array",flat_array)
-            # 一次元配列をランダムに順番を変える
-            randomized_array = []
-            #for ii in shuffle_list:
-            #    randomized_array.append(flat_array[ii])
-            z = stats.zscore(flat_array)
-            z_abs = np.abs(z)
-            randomized_array.extend(z_abs)
+            ## 2次元配列を一次元配列に変換
+            #two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+flat_hani]
+            #flat_array = np.array(two_dimensional_array).flatten()
+            ##print("flat_array",flat_array)
+            ## 一次元配列をランダムに順番を変える
+            #randomized_array = []
+            ##for ii in shuffle_list:
+            ##    randomized_array.append(flat_array[ii])
+            #z = stats.zscore(flat_array)
+            #z_abs = np.abs(z)
+            #randomized_array.extend(z_abs)
 
 
             tmp.append(min_n)
@@ -337,10 +337,10 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # tmp.append(percentile_75)
             # # tmp.append(correlation_xy)
 
-            tmp.append(new_matrix_mean)
-            tmp.append(new_matrix_var)
-            tmp.append(new_matrix_min)
-            tmp.append(new_matrix_max)
+            #tmp.append(new_matrix_mean)
+            #tmp.append(new_matrix_var)
+            #tmp.append(new_matrix_min)
+            #tmp.append(new_matrix_max)
 
             # tmp.append(new_matrix_mean_h)
             # tmp.append(new_matrix_var_h)
@@ -356,7 +356,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # #tmp.extend(sted3)
             # tmp.extend(sted4)
             
-            tmp.extend(randomized_array)
+            #tmp.extend(randomized_array)
             
             tmp = [round(tmp[n], 2) for n in range(len(tmp))]
             
