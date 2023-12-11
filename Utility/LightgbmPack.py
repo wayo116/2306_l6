@@ -189,6 +189,7 @@ class LightgbmPack():
 
         dataset_params = params["dataset_params"]
         lgbm_model = params["lgbm_model"]
+        print("lgbm_model",lgbm_model)
         lgbm_params = params["lgbm_params"]
 
         #学習検証用
