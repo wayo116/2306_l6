@@ -759,7 +759,9 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
         #import optuna.integration.lightgbm as lgb
         model = lgb.train(params,dtrain, valid_sets=[dtrain, dvalid],)
         print("best.params", model.params)
-        return accuracy=0 ,predictions=0
+        accuracy = 0
+        predictions = 0
+        return accuracy ,predictions
     else:
         #import lightgbm as lgb
         model = lgb.train(params,dtrain, valid_sets=[dtrain, dvalid],)
