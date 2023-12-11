@@ -703,7 +703,7 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     random_seed = lgbm_params["random_seed"]
 
     optuna_flag = lgbm_params["optuna_flag"]
-    if optuna_flag == 0:
+    if optuna_flag:
         import optuna.integration.lightgbm as lgb
     else:
         import lightgbm as lgb
@@ -755,10 +755,11 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
     # LightGBMモデルを訓練（交差検証を使用）
     #model = lgb.LGBMClassifier(**params, n_estimators=n_estimators)  # イテレーション回数はここで指定
     #model.fit(X_train, y_train)
-    if optuna_flag == 0:
+    if optuna_flag:
         #import optuna.integration.lightgbm as lgb
         model = lgb.train(params,dtrain, valid_sets=[dtrain, dvalid],)
         print("best.params", model.params)
+        accuracy=0 ,predictions=0
     else:
         #import lightgbm as lgb
         model = lgb.train(params,dtrain, valid_sets=[dtrain, dvalid],)
@@ -780,7 +781,7 @@ def light_gbm_v2(train_data, test_data, **lgbm_params):
         predictions = np.argmax(predictions, axis=1) + 1 # 予測結果のクラスの値を調整
         print("predictions",predictions)
 
-    return accuracy ,predictions
+        return accuracy ,predictions
 
 
 
