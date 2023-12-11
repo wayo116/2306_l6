@@ -212,6 +212,7 @@ class LightgbmPack():
         print("len(test_data)",len(test_data))
 
         #lightgbmで推論
+        predictions = []
         if lgbm_model["model_type"] == "light_gbm":
             score ,predictions = light_gbm(train_data, test_data, **lgbm_params)
             
