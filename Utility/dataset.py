@@ -22,6 +22,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
     nmasi = dataset_params["study_nmasi"]
     bunseki_hani = dataset_params["bunseki_hani"]
     flat_hani = dataset_params["flat_hani"]
+    z_thresh = dataset_params["z_thresh"]
 
     random.seed(42)  # 乱数のシードを42に設定
     shuffle_list = list(range(0, 6*flat_hani))
@@ -189,7 +190,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
                     # print("result_in",result)
                     no_dataset.append(result)
                     
-    no_dataset = remove_outliers(no_dataset, 1)
+    no_dataset = remove_outliers(no_dataset, z_thresh)
     # print("no_dataset",no_dataset)
     print("no_dataset_rows",len(no_dataset))
     print("no_dataset_columns",len(no_dataset[0]))
@@ -411,7 +412,7 @@ def create_random_lists_float(range_start, range_end, yousosu, listsu=6):
     return random_lists
 
 
-def remove_outliers(train_data, threshold):
+def remove_outliers(train_data, z_thresh):
     re_train_data = []
     train_data = np.array(train_data)
     # ラベル毎に、Zスコアが指定された閾値以上の列を含む外れ値を削除する
@@ -422,8 +423,8 @@ def remove_outliers(train_data, threshold):
         
         z_scores = np.abs((nolabel_train_data - np.mean(nolabel_train_data, axis=0)) / np.std(nolabel_train_data, axis=0))
         print("z_scores",z_scores)
-        outliers = np.any(z_scores > threshold, axis=1)
+        outliers = np.any(z_scores > z_thresh, axis=1)
         re_train_data.append(nolabel_train_data[~outliers])
 
-    return list(re_train_data)
+    return re_train_data
     
