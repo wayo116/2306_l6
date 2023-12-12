@@ -10,7 +10,7 @@ Original file is located at
 !git clone https://wayo116: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@github.com/wayo116/2306_l6.git
 #!pip install umap-learn
 
-optuna_flag = 1
+optuna_flag = 0
 if optuna_flag:
     !pip install optuna
     model_type = "light_gbm_optuna"
@@ -35,7 +35,7 @@ start = time.time()
 
 kekka_matomes = []
 
-kaisai = 1
+kaisai = 10
 if kaisai == -1:
     st = -1
     ed = 0
@@ -70,55 +70,38 @@ for kaisai in range(st,ed):
 
     print('\n----vol 1----')
     # 初期値
-    dlists_end = 400
+    dlists_end = 1500
     predictions_all = []
     lgbm_obj = LightgbmPack()
     params = {"dataset_params":{"study_range_start":-0.1,
                                 "study_range_end":0.1,
-                                "study_nmasi":10,
+                                "study_nmasi":1,
                                 "test_range_start":-0.1,
                                 "test_range_end":0.1,
                                 "test_nmasi":10,
-                                "bunseki_hani":6,
-                                "flat_hani":4,
+                                "bunseki_hani":3,
+                                "flat_hani":0,
+                                "z_thresh":1,
                                 "test_dlists_hani":[0,1],},
 
                 "lgbm_model":{"model_type":model_type,},
-
-                # "lgbm_params":{'objective': 'multiclass',
-                #                 'num_class': 43,
-                #                 'boosting_type': 'gbdt',
-                #                 'metric': 'multi_logloss',
-                #                 'num_leaves': 2,
-                #                 'learning_rate': 0.01,
-                #                 'feature_fraction': 0.4,
-                #                 'max_depth': 7,
-                #                 'random_seed': 42,
-                #                 'force_row_wise': True,
-                #                 'feature_pre_filter': False,
-                #                 'lambda_l1': 1.7168191049237774e-08,
-                #                 'lambda_l2': 0.2449418272769189,
-                #                 'bagging_fraction': 0.9394624777248779,
-                #                 'bagging_freq': 3,
-                #                 'min_child_samples': 100,
-                #                 'num_iterations': 100,},
 
                 "lgbm_params":{'objective': 'multiclass',
                                 'num_class': 43,
                                 'boosting_type': 'gbdt',
                                 'metric': 'multi_logloss',
-                                'num_leaves': 31,
+                                'num_leaves': 4,
                                 'learning_rate': 0.1,
                                 'feature_fraction': 1,
-                                'max_depth': -1,
+                                'max_depth': 3,
                                 'random_seed': 42,
-                                'force_row_wise': False,
-                                'feature_pre_filter': True,
+                                'force_row_wise': True,
+                                'feature_pre_filter': False,
                                 'lambda_l1': 0,
                                 'lambda_l2': 0,
                                 'bagging_fraction': 1,
-                                'bagging_freq': 0,
-                                'min_child_samples': 20,
+                                'bagging_freq': 1,
+                                'min_child_samples': 2,
                                 'num_iterations': 100,},
               }
 
