@@ -112,8 +112,10 @@ class LightgbmPack():
         data = np.array(balanced_data)
         X = data[:,1:]
         print(X)
+        print(len(X))
         y = data[:,0]-1
         print(y)
+        print(len(y))
     
         # データ分割
         X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.1, random_state=42)
@@ -206,8 +208,10 @@ class LightgbmPack():
         data = np.array(balanced_data)
         X = data[:,1:]
         print(X)
+        print(len(X))
         y = data[:,0]-1
         print(y)
+        print(len(y))
     
         # データ分割
         X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.1, random_state=42)
