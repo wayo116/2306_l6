@@ -424,6 +424,7 @@ def remove_outliers(train_data, z_thresh):
         z_scores = np.abs((nolabel_train_data - np.mean(nolabel_train_data, axis=0)) / np.std(nolabel_train_data, axis=0))
         print("z_scores",z_scores)
         outliers = np.any(z_scores > z_thresh, axis=1)
+        print("outliers",outliers)
         re_train_data.append(prelabel_train_data[~outliers])
 
     return re_train_data
