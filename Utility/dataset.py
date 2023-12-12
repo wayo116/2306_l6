@@ -188,7 +188,8 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
                     result.insert(0, dlist[dlist_retu])
                     # print("result_in",result)
                     no_dataset.append(result)
-
+                    
+    no_dataset = remove_outliers(no_dataset, 1)
     # print("no_dataset",no_dataset)
     print("no_dataset_rows",len(no_dataset))
     print("no_dataset_columns",len(no_dataset[0]))
@@ -408,4 +409,19 @@ def create_random_lists_float(range_start, range_end, yousosu, listsu=6):
 
     # print("random_lists",random_lists)
     return random_lists
+
+
+def remove_outliers(train_data, threshold):
+    re_train_data = []
+    train_data = np.array(train_data)
+    # ラベル毎に、Zスコアが指定された閾値以上の列を含む外れ値を削除する
+    for prelabel in range(43):
+        prelabel_train_data = train_data[train_data[:, 0] == prelabel + 1, :]
+
+        z_scores = np.abs((prelabel_train_data - np.mean(prelabel_train_data, axis=0)) / np.std(prelabel_train_data, axis=0))
+        print("z_scores",z_scores)
+        outliers = np.any(z_scores > threshold, axis=1)
+        re_train_data.append(prelabel_train_data[~outliers])
+
+    return list(re_train_data)
     
