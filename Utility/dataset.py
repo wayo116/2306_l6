@@ -419,14 +419,14 @@ def remove_outliers(train_data, z_thresh):
     for prelabel in range(43):
         prelabel_train_data = train_data[train_data[:, 0] == prelabel + 1, :]
         nolabel_train_data = prelabel_train_data[:,1:]
-        print("nolabel_train_data",nolabel_train_data)
+        #print("nolabel_train_data",nolabel_train_data)
         
         z_scores = np.abs((nolabel_train_data - np.mean(nolabel_train_data, axis=0)) / np.std(nolabel_train_data, axis=0))
-        print("z_scores",z_scores)
+        #print("z_scores",z_scores)
         outliers = np.any(z_scores > z_thresh, axis=1)
-        print("outliers",outliers)
+        #print("outliers",outliers)
         for one_array_data in prelabel_train_data[~outliers]:
             re_train_data.append(one_array_data.tolist())
-    print("re_train_data",re_train_data)
+    #print("re_train_data",re_train_data)
     return re_train_data
     
