@@ -1,41 +1,56 @@
 -----------------------------------------------------------
 # 初期値
-    dlists_end = 450
+    dlists_end = 300
     predictions_all = []
     lgbm_obj = LightgbmPack()
-    params = {"dataset_params":{"study_range_start":-0.01,
-                                "study_range_end":0.01,
-                                "study_nmasi":5,
-                                "test_range_start":-0.01,
+    params = {"dataset_params":{"study_range_start":-0.1,
+                                "study_range_end":0.1,
+                                "study_nmasi":100,
+                                "test_range_start":-1,
                                 "test_range_end":1,
                                 "test_nmasi":10,
-                                "bunseki_hani":8,
-                                "flat_hani":4,
-                                "test_dlists_hani":[0,1]},
-                "lgbm_params":{"lgbm_model":"light_gbm_v2",
-                                'num_leaves':61,
-                                'learning_rate':0.05,
-                                "num_iterations":64,
-                                "max_depth":-1,
-                                "random_seed":42,
-                                "cv":3,}}
+                                "bunseki_hani":3,
+                                "flat_hani":0,
+                                "z_thresh":2,
+                                "test_dlists_hani":[0,1],},
 
-[1, '2/15', 13, -0.08]
-[2, '3/14', 21, -0.08]
-[3, '4/19', 21, -0.08]
-[4, '1/16', 6, -0.08]
-[5, '2/16', 12, -0.08]
-[6, '4/17', 24, -0.1]
-[7, '2/19', 11, -0.08]
-[8, '6/17', 35, 0.12000000000000001]
-[9, '1/16', 6, -0.08]
+                "lgbm_model":{"model_type":model_type,},
+
+                "lgbm_params":{'objective': 'multiclass',
+                                'num_class': 43,
+                                'boosting_type': 'gbdt',
+                                'metric': 'multi_logloss',
+                                'num_leaves': 4,
+                                'learning_rate': 0.1,
+                                'feature_fraction': 1,
+                                'max_depth': 3,
+                                'random_seed': 42,
+                                'force_row_wise': True,
+                                'feature_pre_filter': False,
+                                'lambda_l1': 0,
+                                'lambda_l2': 0,
+                                'bagging_fraction': 1,
+                                'bagging_freq': 1,
+                                'min_child_samples': 2,
+                                'num_iterations': 100,},
+              }
+
+----Dell6:デストラクタ----
+[1, '3/14', 21, -0.1]
+[2, '2/19', 11, -0.08]
+[3, '4/18', 22, 0.8]
+[4, '2/13', 15, -0.1]
+[5, '2/15', 13, -0.08]
+[6, '2/17', 12, -0.08]
+[7, '4/19', 21, -0.08]
+[8, '2/18', 11, -0.08]
+[9, '5/16', 31, 0.9]
 [10, '1/18', 6, -0.1]
-goukei -0.6399999999999999
-処理時間 222.14306592941284
+goukei 1.0
+処理時間 416.11084485054016
 
 -----------------------------------------------------------
-
-dlists_end = 1500
+    dlists_end = 1500
     predictions_all = []
     lgbm_obj = LightgbmPack()
     params = {"dataset_params":{"study_range_start":-0.1,
@@ -84,3 +99,41 @@ goukei 0.08000000000000004
 処理時間 269.6779696941376
 
 -----------------------------------------------------------
+# 初期値
+    dlists_end = 450
+    predictions_all = []
+    lgbm_obj = LightgbmPack()
+    params = {"dataset_params":{"study_range_start":-0.01,
+                                "study_range_end":0.01,
+                                "study_nmasi":5,
+                                "test_range_start":-0.01,
+                                "test_range_end":1,
+                                "test_nmasi":10,
+                                "bunseki_hani":8,
+                                "flat_hani":4,
+                                "test_dlists_hani":[0,1]},
+                "lgbm_params":{"lgbm_model":"light_gbm_v2",
+                                'num_leaves':61,
+                                'learning_rate':0.05,
+                                "num_iterations":64,
+                                "max_depth":-1,
+                                "random_seed":42,
+                                "cv":3,}}
+
+[1, '2/15', 13, -0.08]
+[2, '3/14', 21, -0.08]
+[3, '4/19', 21, -0.08]
+[4, '1/16', 6, -0.08]
+[5, '2/16', 12, -0.08]
+[6, '4/17', 24, -0.1]
+[7, '2/19', 11, -0.08]
+[8, '6/17', 35, 0.12000000000000001]
+[9, '1/16', 6, -0.08]
+[10, '1/18', 6, -0.1]
+goukei -0.6399999999999999
+処理時間 222.14306592941284
+
+-----------------------------------------------------------
+
+
+
