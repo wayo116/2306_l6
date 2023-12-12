@@ -417,7 +417,7 @@ def remove_outliers(train_data, z_thresh):
     train_data = np.array(train_data)
     # ラベル毎に、Zスコアが指定された閾値以上の列を含む外れ値を削除する
     for prelabel in range(43):
-        prelabel_train_data = list(train_data[train_data[:, 0] == prelabel + 1, :])
+        prelabel_train_data = train_data[train_data[:, 0] == prelabel + 1, :]
         nolabel_train_data = prelabel_train_data[:,1:]
         print("nolabel_train_data",nolabel_train_data)
         
