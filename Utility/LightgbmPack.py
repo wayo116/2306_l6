@@ -116,7 +116,7 @@ class LightgbmPack():
         print(y)
     
         # データ分割
-        X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+        X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.1, random_state=42)
         dtrain = lgb.Dataset(X_train, y_train)
         dvalid = lgb.Dataset(X_val, y_val)
     
@@ -210,7 +210,7 @@ class LightgbmPack():
         print(y)
     
         # データ分割
-        X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+        X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.1, random_state=42)
         dtrain = lgb.Dataset(X_train, y_train)
         dvalid = lgb.Dataset(X_val, y_val)
     
