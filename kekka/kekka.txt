@@ -34,3 +34,53 @@ goukei -0.6399999999999999
 処理時間 222.14306592941284
 
 -----------------------------------------------------------
+
+dlists_end = 1500
+    predictions_all = []
+    lgbm_obj = LightgbmPack()
+    params = {"dataset_params":{"study_range_start":-0.1,
+                                "study_range_end":0.1,
+                                "study_nmasi":10,
+                                "test_range_start":-1,
+                                "test_range_end":1,
+                                "test_nmasi":10,
+                                "bunseki_hani":3,
+                                "flat_hani":0,
+                                "z_thresh":2,
+                                "test_dlists_hani":[0,1],},
+
+                "lgbm_model":{"model_type":model_type,},
+
+                "lgbm_params":{'objective': 'multiclass',
+                                'num_class': 43,
+                                'boosting_type': 'gbdt',
+                                'metric': 'multi_logloss',
+                                'num_leaves': 4,
+                                'learning_rate': 0.1,
+                                'feature_fraction': 1,
+                                'max_depth': 3,
+                                'random_seed': 42,
+                                'force_row_wise': True,
+                                'feature_pre_filter': False,
+                                'lambda_l1': 0,
+                                'lambda_l2': 0,
+                                'bagging_fraction': 1,
+                                'bagging_freq': 1,
+                                'min_child_samples': 2,
+                                'num_iterations': 100,},
+              }
+
+[1, '2/13', 15, -0.08]
+[2, '4/13', 31, 0.020000000000000004]
+[3, '3/19', 16, -0.1]
+[4, '3/17', 18, -0.1]
+[5, '4/18', 22, 0.8]
+[6, '1/14', 7, -0.1]
+[7, '2/19', 11, -0.1]
+[8, '1/15', 7, -0.08]
+[9, '3/16', 19, -0.08]
+[10, '3/17', 18, -0.1]
+goukei 0.08000000000000004
+処理時間 269.6779696941376
+
+-----------------------------------------------------------
