@@ -1,3 +1,54 @@
+
+-----------------------------------------------------------
+# 初期値
+    dlists_end = 300
+    predictions_all = []
+    lgbm_obj = LightgbmPack()
+    params = {"dataset_params":{"study_range_start":-0.1,
+                                "study_range_end":0.1,
+                                "study_nmasi":100,
+                                "test_range_start":-1.2,
+                                "test_range_end":1.2,
+                                "test_nmasi":10,
+                                "bunseki_hani":3,
+                                "flat_hani":0,
+                                "z_thresh":2,
+                                "test_dlists_hani":[0,1],},
+
+                "lgbm_model":{"model_type":model_type,},
+
+                "lgbm_params":{'objective': 'multiclass',
+                                'num_class': 43,
+                                'boosting_type': 'gbdt',
+                                'metric': 'multi_logloss',
+                                'num_leaves': 4,
+                                'learning_rate': 0.1,
+                                'feature_fraction': 1,
+                                'max_depth': 3,
+                                'random_seed': 42,
+                                'force_row_wise': True,
+                                'feature_pre_filter': False,
+                                'lambda_l1': 0,
+                                'lambda_l2': 0,
+                                'bagging_fraction': 1,
+                                'bagging_freq': 1,
+                                'min_child_samples': 2,
+                                'num_iterations': 100,},
+              }
+
+[1, '5/19', 26, 0.020000000000000004]
+[2, '3/19', 16, -0.08]
+[3, '2/21', 10, -0.1]
+[4, '3/18', 17, -0.1]
+[5, '2/14', 14, -0.1]
+[6, '2/17', 12, -0.1]
+[7, '2/18', 11, -0.1]
+[8, '4/19', 21, -0.08]
+[9, '2/19', 11, -0.08]
+[10, '5/19', 26, 30.2]
+goukei 29.48
+処理時間 408.6413493156433
+
 -----------------------------------------------------------
 # 初期値
     dlists_end = 300
