@@ -209,7 +209,7 @@ dlists_end = 250
                                 'num_iterations': 100,},
               }
 
-        predictions_delall = datalists_check(dlists,len(dlists),2)
+predictions_delall = datalists_check(dlists,len(dlists),2)
 
 ----Dell6:デストラクタ----
 [1, '3/25', 12, -0.08]
