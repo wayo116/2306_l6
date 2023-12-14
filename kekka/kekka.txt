@@ -174,6 +174,59 @@ goukei 22.88000000000006
 
 -----------------------------------------------------------
 
+# 初期値
+    dlists_end = 100
+    predictions_all = []
+    lgbm_obj = LightgbmPack()
+    params = {"dataset_params":{"study_range_start":-0.01,
+                                "study_range_end":0.01,
+                                "study_nmasi":100,
+                                "test_range_start":-5,
+                                "test_range_end":5,
+                                "test_nmasi":14,
+                                "bunseki_hani":3,
+                                "flat_hani":0,
+                                "z_thresh":2,
+                                "test_dlists_hani":[0,1],},
+
+                "lgbm_model":{"model_type":model_type,},
+
+                "lgbm_params":{'objective': 'multiclass',
+                                'num_class': 43,
+                                'boosting_type': 'gbdt',
+                                'metric': 'multi_logloss',
+                                'num_leaves': 4,
+                                'learning_rate': 0.1,
+                                'feature_fraction': 1,
+                                'max_depth': 3,
+                                'random_seed': 777,
+                                'force_row_wise': True,
+                                'feature_pre_filter': False,
+                                'lambda_l1': 0,
+                                'lambda_l2': 0,
+                                'bagging_fraction': 1,
+                                'bagging_freq': 1,
+                                'min_child_samples': 2,
+                                'num_iterations': 100,},
+              }
+
+predictions_delall = datalists_check(dlists,len(dlists),1)
+
+----Dell6:デストラクタ----
+[1, '3/20', 15, -0.08]
+[2, '1/24', 4, -0.1]
+[3, '2/22', 9, -0.08]
+[4, '4/23', 17, 0.1]
+[5, '3/18', 17, -0.08]
+[6, '3/25', 12, -0.1]
+[7, '3/20', 15, -0.1]
+[8, '4/20', 20, -0.1]
+[9, '2/22', 9, -0.08]
+[10, '6/25', 24, 29.92]
+goukei 29.3
+処理時間 165.23398756980896
+-----------------------------------------------------------
+
 dlists_end = 250
     predictions_all = []
     lgbm_obj = LightgbmPack()
