@@ -180,7 +180,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             if tmp != []:
                 list1 = tmp[1:]
                 # print("list1",list1)
-                list2s = create_random_lists_float(range_start, range_end, yousosu=len(tmp), listsu=nmasi)
+                list2s = create_random_lists_float(range_start, range_end, yousosu=len(tmp), random_select=2, listsu=nmasi)
                 
                 for list2 in list2s:
                     # print("list2",list2)
@@ -365,7 +365,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             if tmp != []:
                 list1 = tmp[0:]
                 # print("list1",list1)
-                list2s = create_random_lists_float(range_start, range_end, yousosu=len(tmp), listsu=nmasi)
+                list2s = create_random_lists_float(range_start, range_end, yousosu=len(tmp), random_select=1, listsu=nmasi)
                 
                 for list2 in list2s:
                     # print("list2",list2)
@@ -399,13 +399,15 @@ def create_random_lists_multi(range_start, range_end, yousosu, multisu, randomke
     return random_lists
 
 
-def create_random_lists_float(range_start, range_end, yousosu, listsu=6):
+def create_random_lists_float(range_start, range_end, yousosu, random_select, listsu=6):
     
     random_lists = []
     for cnt in range(listsu):
         random.seed(cnt+1)
-        random_list = [round(random.uniform(range_start, range_end), 2) for _ in range(yousosu)]
-        #random_list = [round(random.uniform(range_start, range_end),2)]*yousosu
+        if random_select == 1:
+            random_list = [round(random.uniform(range_start, range_end), 2) for _ in range(yousosu)]
+        if random_select == 2:
+            random_list = [round(random.uniform(range_start, range_end),2)]*yousosu
         random_lists.append(random_list)
 
     # print("random_lists",random_lists)
