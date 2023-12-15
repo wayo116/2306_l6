@@ -414,6 +414,49 @@ goukei -0.6399999999999999
 処理時間 222.14306592941284
 
 -----------------------------------------------------------
+dlists_end = 100
+    predictions_all = []
+    lgbm_obj = LightgbmPack()
+    params = {"dataset_params":{"study_range_start":-0.01,
+                                "study_range_end":0.01,
+                                "study_nmasi":10,
+                                "test_range_start":-1,
+                                "test_range_end":1,
+                                "test_nmasi":3,
+                                "bunseki_hani":4,
+                                "flat_hani":0,
+                                "z_thresh":2,
+                                "test_dlists_hani":[0,1],},
+
+                "lgbm_model":{"model_type":model_type,},
+
+                "lgbm_params":{'objective': 'multiclass',
+                                'num_class': 43,
+                                'boosting_type': 'gbdt',
+                                'metric': 'multi_logloss',
+                                'num_leaves': 4,
+                                'learning_rate': 0.1,
+                                'feature_fraction': 1,
+                                'max_depth': 6,
+                                'random_seed': 777,
+                                'force_row_wise': True,
+                                'feature_pre_filter': False,
+                                'lambda_l1': 0,
+                                'lambda_l2': 0.8,
+                                'bagging_fraction': 1,
+                                'bagging_freq': 0,
+                                'min_child_samples': 2,
+                                'num_iterations': 10,},
+              }
 
 
+[1, '2/12', 17, -0.08]
+[2, '3/10', 30, -0.08]
+[3, '2/11', 18, -0.08]
+[4, '6/11', 55, 0.92]
+[5, '2/12', 17, -0.1]
+goukei 0.5800000000000001
+処理時間 2.326312780380249
+
+-----------------------------------------------------------
 
