@@ -214,8 +214,9 @@ def no_dataset_test_multi(dlists, **dataset_params):
 
     shokichi = 0
     no_dataset = []
-    for kaisu, dlist in enumerate(dlists[test_dlists_hani[0]:test_dlists_hani[1]]):
-
+    #for kaisu, dlist in enumerate(dlists[test_dlists_hani[0]:test_dlists_hani[1]]):
+    for kaisu in test_dlists_hani:
+        dlist = dlists[kaisu]
         if bunseki_hani >= flat_hani:
             kaisu_limit = len(dlists)-bunseki_hani
         else:
