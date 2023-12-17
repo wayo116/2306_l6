@@ -432,4 +432,21 @@ def remove_outliers(train_data, z_thresh):
             re_train_data.append(one_array_data.tolist())
     #print("re_train_data",re_train_data)
     return re_train_data
-    
+
+def compe_bool(value1, value2, thresh):
+    if thresh == None:
+        if value1 > value2:
+            result_bool = 1
+        else:
+            result_bool = 0
+
+    else:
+        if value1 > thresh:
+            result_bool = 1
+        else:
+            result_bool = 0
+
+    return result_bool
+
+
+
