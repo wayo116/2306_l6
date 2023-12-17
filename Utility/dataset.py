@@ -52,7 +52,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # 最大
             max_n = np.max(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # 範囲
-            range_value = max_n - min_n
+            #range_value = max_n - min_n
             # 平均
             mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # 合計
@@ -145,7 +145,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp.append(min_n)
             tmp.append(max_n)
             tmp.append(range_value)
-            tmp.append(mean_n)
+            #tmp.append(mean_n)
             tmp.append(sum_n)
             tmp.append(med_n)
             tmp.append(std_n)
@@ -238,7 +238,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # 範囲
             range_value = max_n - min_n
             # 平均
-            mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            #mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # 合計
             sum_n = np.sum(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # 中央
@@ -330,7 +330,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             tmp.append(min_n)
             tmp.append(max_n)
             tmp.append(range_value)
-            tmp.append(mean_n)
+            #tmp.append(mean_n)
             tmp.append(sum_n)
             tmp.append(med_n)
             tmp.append(std_n)
