@@ -200,6 +200,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp_bool.append(med_dainari_mean)
 
             list3_nmasi = [tmp_bool.copy() for _ in range(nmasi)]
+            print("list3_nmasi",list3_nmasi)
 
             # for list1_3_nmasi in np.concatenate((list1_nmasi,list3_nmasi), axis = 1):
             #     no_dataset.append(list1_3_nmasi)
@@ -474,7 +475,7 @@ def compe_bool(value1, value2, thresh):
         else:
             result_bool = 0
 
-    print("result_bool",[result_bool])
+    # print("result_bool",[result_bool])
     return [result_bool]
 
 
