@@ -190,7 +190,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
                     result.insert(0, dlist[dlist_retu])
                     # print("result_in",result)
                     list1_nmasi.append(result)
-                print("list1_nmasi",list1_nmasi)
+                # print("list1_nmasi",list1_nmasi)
 
             ###
             tmp_bool = []
@@ -201,10 +201,10 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp_bool.append(med_dainari_mean)
 
             list3_nmasi = [tmp_bool.copy() for _ in range(nmasi)]
-            print("list3_nmasi",list3_nmasi)
+            # print("list3_nmasi",list3_nmasi)
 
-            # for list1_3_nmasi in np.concatenate((list1_nmasi,list3_nmasi), axis = 1):
-            #     no_dataset.append(list1_3_nmasi)
+            for list1_3_nmasi in np.concatenate((np.array(list1_nmasi),np.array(list3_nmasi)), axis = 1):
+                no_dataset.append(list1_3_nmasi)
                     
     no_dataset = remove_outliers(no_dataset, z_thresh)
     # print("no_dataset",no_dataset)
@@ -392,6 +392,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
                     # result.insert(0, dlist[dlist_retu])
                     # print("result_in",result)
                     list1_nmasi.append(result)
+                # print("list1_nmasi",list1_nmasi)
 
             ###
             tmp_bool = []
@@ -402,8 +403,9 @@ def no_dataset_test_multi(dlists, **dataset_params):
             tmp_bool.append(med_dainari_mean)
 
             list3_nmasi = [tmp_bool.copy() for _ in range(nmasi)]
+            # print("list3_nmasi",list3_nmasi)
 
-            for list1_3_nmasi in np.concatenate((list1_nmasi,list3_nmasi), axis = 1):
+            for list1_3_nmasi in np.concatenate((np.array(list1_nmasi),np.array(list3_nmasi)), axis = 1):
                 no_dataset.append(list1_3_nmasi)
             
     # print("no_dataset",no_dataset)
