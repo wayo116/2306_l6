@@ -203,10 +203,10 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             max_shounari_43 = compe_bool(max_n, None, 43)
             # 文字含む
             moji = []
-            for youso in dlists[kaisu+shokichi]:
+            for youso in dlists[kaisu+shokichi+1]:
                 str_youso = str(youso)
-                str_label = str(dlist[dlist_retu])
-                if str_label.find(str_youso) != -1:
+                str_base = str(dlists[kaisu+shokichi, dlist_retu])
+                if str_base.find(str_youso) != -1:
                     moji.append(1)
                 else:
                     moji.append(0)
@@ -422,10 +422,10 @@ def no_dataset_test_multi(dlists, **dataset_params):
             max_shounari_43 = compe_bool(max_n, None, 43)
             # 文字含む
             moji = []
-            for youso in dlists[kaisu+shokichi]:
+            for youso in dlists[kaisu+shokichi+1]:
                 str_youso = str(youso)
-                str_label = str(dlist[dlist_retu])
-                if str_label.find(str_youso) != -1:
+                str_base = str(dlists[kaisu+shokichi, dlist_retu])
+                if str_base.find(str_youso) != -1:
                     moji.append(1)
                 else:
                     moji.append(0)
