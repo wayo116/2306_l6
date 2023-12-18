@@ -205,15 +205,15 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             moji = []
             for youso in dlists[kaisu+shokichi+1]:
                 base_digits = decompose_to_digits(dlists[kaisu+shokichi, dlist_retu])
-                print("base_digits",base_digits)
+                # print("base_digits",base_digits)
                 youso_digits = decompose_to_digits(youso)
-                print("youso_digits",youso_digits)
+                # print("youso_digits",youso_digits)
                 # リストが一部含まれているかを判定
                 if any(item in base_digits for item in youso_digits):
                     moji.append(1)
                 else:
                     moji.append(0)
-            print("moji",moji)
+            # print("moji",moji)
                 
             tmp_bool.append(med_dainari_mean)
             tmp_bool.append(min_dainari_1)
@@ -448,7 +448,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             for list1_3_nmasi in np.concatenate((np.array(list1_nmasi),np.array(list3_nmasi)), axis = 1):
                 no_dataset.append(list1_3_nmasi.tolist())
             
-    print("no_dataset",no_dataset)
+    # print("no_dataset",no_dataset)
     print("no_dataset_rows",len(no_dataset))
     print("no_dataset_columns",len(no_dataset[0]))
 
