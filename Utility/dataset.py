@@ -204,14 +204,14 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # 文字含む
             moji = []
             for youso in dlists[kaisu+shokichi+1]:
-                str_youso = str(youso)
-                str_base = str(dlists[kaisu+shokichi, dlist_retu])
-                if str_base.find(str_youso) != -1:
+                base_digits = decompose_to_digits(dlists[kaisu+shokichi, dlist_retu])
+                youso_digits = decompose_to_digits(youso)
+                # リストが一部含まれているかを判定
+                if any(item in base_digits for item in youso_digits):
                     moji.append(1)
                 else:
                     moji.append(0)
                 
-
             tmp_bool.append(med_dainari_mean)
             tmp_bool.append(min_dainari_1)
             tmp_bool.append(max_shounari_43)
@@ -423,9 +423,10 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # 文字含む
             moji = []
             for youso in dlists[kaisu+shokichi+1]:
-                str_youso = str(youso)
-                str_base = str(dlists[kaisu+shokichi, dlist_retu])
-                if str_base.find(str_youso) != -1:
+                base_digits = decompose_to_digits(dlists[kaisu+shokichi, dlist_retu])
+                youso_digits = decompose_to_digits(youso)
+                # リストが一部含まれているかを判定
+                if any(item in base_digits for item in youso_digits):
                     moji.append(1)
                 else:
                     moji.append(0)
@@ -498,6 +499,7 @@ def remove_outliers(train_data, z_thresh):
     #print("re_train_data",re_train_data)
     return re_train_data
 
+
 def compe_bool(value1, value2, thresh):
     if thresh == None:
         if value1 > value2:
@@ -513,6 +515,11 @@ def compe_bool(value1, value2, thresh):
 
     # print("result_bool",result_bool)
     return result_bool
+
+
+# 各数字を一桁ずつのリストに分解する関数
+def decompose_to_digits(number):
+    return [int(digit) for digit in str(number)]
 
 
 
