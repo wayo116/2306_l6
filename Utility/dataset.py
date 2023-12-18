@@ -201,7 +201,8 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
 
             list3_nmasi = [tmp_bool.copy() for _ in range(nmasi)]
 
-            no_dataset = np.concatenate((list1_nmasi,list3_nmasi), axis = 1) 
+            for list1_3_nmasi in np.concatenate((list1_nmasi,list3_nmasi), axis = 1):
+                no_dataset.append(list1_3_nmasi)
                     
     no_dataset = remove_outliers(no_dataset, z_thresh)
     # print("no_dataset",no_dataset)
@@ -400,7 +401,8 @@ def no_dataset_test_multi(dlists, **dataset_params):
 
             list3_nmasi = [tmp_bool.copy() for _ in range(nmasi)]
 
-            no_dataset = np.concatenate((list1_nmasi,list3_nmasi), axis = 1) 
+            for list1_3_nmasi in np.concatenate((list1_nmasi,list3_nmasi), axis = 1):
+                no_dataset.append(list1_3_nmasi)
             
     # print("no_dataset",no_dataset)
     print("no_dataset_rows",len(no_dataset))
