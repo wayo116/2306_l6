@@ -190,6 +190,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
                     result.insert(0, dlist[dlist_retu])
                     # print("result_in",result)
                     list1_nmasi.append(result)
+                print("list1_nmasi",list1_nmasi)
 
             ###
             tmp_bool = []
