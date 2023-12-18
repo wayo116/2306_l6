@@ -201,10 +201,21 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             min_dainari_1 = compe_bool(min_n, None, 1)
             # 43＞最大値
             max_shounari_43 = compe_bool(max_n, None, 43)
+            # 文字含む
+            moji = []
+            for youso in dlists[kaisu+shokichi]:
+                str_youso = str(youso)
+                str_label = str(dlist[dlist_retu])
+                if str_label.find(str_youso) != -1:
+                    moji.append(1)
+                else:
+                    moji.append(0)
+                
 
             tmp_bool.append(med_dainari_mean)
             tmp_bool.append(min_dainari_1)
             tmp_bool.append(max_shounari_43)
+            tmp_bool.extend(moji)
 
             list3_nmasi = [tmp_bool.copy() for _ in range(nmasi)]
             # print("list3_nmasi",list3_nmasi)
@@ -409,10 +420,20 @@ def no_dataset_test_multi(dlists, **dataset_params):
             min_dainari_1 = compe_bool(min_n, None, 1)
             # 43＞最大値
             max_shounari_43 = compe_bool(max_n, None, 43)
+            # 文字含む
+            moji = []
+            for youso in dlists[kaisu+shokichi]:
+                str_youso = str(youso)
+                str_label = str(dlist[dlist_retu])
+                if str_label.find(str_youso) != -1:
+                    moji.append(1)
+                else:
+                    moji.append(0)
 
             tmp_bool.append(med_dainari_mean)
             tmp_bool.append(min_dainari_1)
             tmp_bool.append(max_shounari_43)
+            tmp_bool.extend(moji)
 
             list3_nmasi = [tmp_bool.copy() for _ in range(nmasi)]
             # print("list3_nmasi",list3_nmasi)
