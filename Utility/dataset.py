@@ -54,7 +54,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # 範囲
             range_value = max_n - min_n
             # 平均
-            #mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # 合計
             sum_n = np.sum(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # 中央
@@ -145,7 +145,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp.append(min_n)
             tmp.append(max_n)
             tmp.append(range_value)
-            #tmp.append(mean_n)
+            tmp.append(mean_n)
             tmp.append(sum_n)
             tmp.append(med_n)
             tmp.append(std_n)
@@ -189,6 +189,18 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
                     result.insert(0, dlist[dlist_retu])
                     # print("result_in",result)
                     no_dataset.append(result)
+
+            ###
+            tmp_bool = []
+            
+            # 中央値＞平均
+            med_dainari_mean = compe_bool(med_n, mean_n, None)
+
+            tmp_bool.append(med_dainari_mean)
+
+            list3s = [tmp_bool.copy() for _ in range(nmasi)]
+
+            no_dataset = np.concatenate((no_dataset,list3s), axis = 1) 
                     
     no_dataset = remove_outliers(no_dataset, z_thresh)
     # print("no_dataset",no_dataset)
@@ -239,7 +251,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # 範囲
             range_value = max_n - min_n
             # 平均
-            #mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # 合計
             sum_n = np.sum(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # 中央
@@ -331,7 +343,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             tmp.append(min_n)
             tmp.append(max_n)
             tmp.append(range_value)
-            #tmp.append(mean_n)
+            tmp.append(mean_n)
             tmp.append(sum_n)
             tmp.append(med_n)
             tmp.append(std_n)
@@ -376,6 +388,18 @@ def no_dataset_test_multi(dlists, **dataset_params):
                     # print("result_in",result)
                     no_dataset.append(result)
 
+            ###
+            tmp_bool = []
+            
+            # 中央値＞平均
+            med_dainari_mean = compe_bool(med_n, mean_n, None)
+
+            tmp_bool.append(med_dainari_mean)
+
+            list3s = [tmp_bool.copy() for _ in range(nmasi)]
+
+            no_dataset = np.concatenate((no_dataset,list3s), axis = 1) 
+            
     # print("no_dataset",no_dataset)
     print("no_dataset_rows",len(no_dataset))
     print("no_dataset_columns",len(no_dataset[0]))
@@ -446,7 +470,7 @@ def compe_bool(value1, value2, thresh):
         else:
             result_bool = 0
 
-    return result_bool
+    return [result_bool]
 
 
 
