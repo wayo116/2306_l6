@@ -197,8 +197,14 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             
             # 中央値＞平均
             med_dainari_mean = compe_bool(med_n, mean_n, None)
+            # 最小値＞1
+            min_dainari_1 = compe_bool(min_n, None, 1)
+            # 43＞最大値
+            max_shounari_43 = compe_bool(max_n, None, 43)
 
             tmp_bool.append(med_dainari_mean)
+            tmp_bool.append(min_dainari_1)
+            tmp_bool.append(max_shounari_43)
 
             list3_nmasi = [tmp_bool.copy() for _ in range(nmasi)]
             # print("list3_nmasi",list3_nmasi)
@@ -399,8 +405,14 @@ def no_dataset_test_multi(dlists, **dataset_params):
             
             # 中央値＞平均
             med_dainari_mean = compe_bool(med_n, mean_n, None)
+            # 最小値＞1
+            min_dainari_1 = compe_bool(min_n, None, 1)
+            # 43＞最大値
+            max_shounari_43 = compe_bool(max_n, None, 43)
 
             tmp_bool.append(med_dainari_mean)
+            tmp_bool.append(min_dainari_1)
+            tmp_bool.append(max_shounari_43)
 
             list3_nmasi = [tmp_bool.copy() for _ in range(nmasi)]
             # print("list3_nmasi",list3_nmasi)
