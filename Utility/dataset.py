@@ -475,8 +475,8 @@ def compe_bool(value1, value2, thresh):
         else:
             result_bool = 0
 
-    # print("result_bool",[result_bool])
-    return [result_bool]
+    # print("result_bool",result_bool)
+    return result_bool
 
 
 
