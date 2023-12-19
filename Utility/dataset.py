@@ -47,18 +47,18 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp.append(dlist[dlist_retu])
             # tmp.append(int(dlists[kaisu+shokichi:kaisu+shokichi+1, dlist_retu]))
 
-            # # 最小
-            # min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
-            # # 最大
-            # max_n = np.max(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 最小
+            min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 最大
+            max_n = np.max(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 範囲
             # range_value = max_n - min_n
-            # # 平均
-            # mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 平均
+            mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 合計
             # sum_n = np.sum(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
-            # # 中央
-            # med_n = np.median(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 中央
+            med_n = np.median(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 標準偏差
             # std_n = np.std(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 分散
@@ -268,18 +268,18 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # # tmp.append(dlist[dlist_retu])
             # tmp.append(int(dlists[kaisu+shokichi:kaisu+shokichi+1, dlist_retu]))
 
-            # # 最小
-            # min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
-            # # 最大
-            # max_n = np.max(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 最小
+            min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 最大
+            max_n = np.max(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 範囲
             # range_value = max_n - min_n
-            # # 平均
-            # mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 平均
+            mean_n = np.mean(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 合計
             # sum_n = np.sum(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
-            # # 中央
-            # med_n = np.median(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
+            # 中央
+            med_n = np.median(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 標準偏差
             # std_n = np.std(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # # 分散
