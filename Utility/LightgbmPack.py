@@ -88,7 +88,7 @@ class LightgbmPack():
         bagging_fraction = lgbm_params["bagging_fraction"]
         bagging_freq = lgbm_params["bagging_freq"]
         min_data_in_leaf = lgbm_params["min_data_in_leaf"]
-        num_iterations = lgbm_params["num_iterations"]
+        n_estimators = lgbm_params["n_estimators"]
     
         # 一列目のラベルを取得
         labels = [row[0] for row in train_data]
@@ -139,7 +139,7 @@ class LightgbmPack():
             'bagging_fraction': bagging_fraction,
             'bagging_freq': bagging_freq,
             'min_data_in_leaf': min_data_in_leaf,
-            'num_iterations': num_iterations,
+            'n_estimators': n_estimators,
         }
     
         # LightGBMモデルを訓練
@@ -184,7 +184,7 @@ class LightgbmPack():
         bagging_fraction = lgbm_params["bagging_fraction"]
         bagging_freq = lgbm_params["bagging_freq"]
         min_data_in_leaf = lgbm_params["min_data_in_leaf"]
-        num_iterations = lgbm_params["num_iterations"]
+        n_estimators = lgbm_params["n_estimators"]
     
         # 一列目のラベルを取得
         labels = [row[0] for row in train_data]
@@ -235,7 +235,7 @@ class LightgbmPack():
             'bagging_fraction': bagging_fraction,
             'bagging_freq': bagging_freq,
             'min_data_in_leaf': min_data_in_leaf,
-            'num_iterations': num_iterations,
+            'n_estimators': n_estimators,
         }
     
         # LightGBMモデルを訓練
