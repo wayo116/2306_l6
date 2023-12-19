@@ -268,7 +268,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
             matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
             column_to_remove = dlist_retu
             new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
-            全体の＊＊を計算
+            # 全体の＊＊を計算
             new_matrix_mean = np.mean(new_matrix)
             new_matrix_var = np.var(new_matrix)
             new_matrix_min = np.min(new_matrix)
