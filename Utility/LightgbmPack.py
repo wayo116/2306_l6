@@ -87,7 +87,7 @@ class LightgbmPack():
         lambda_l2 = lgbm_params["lambda_l2"]
         bagging_fraction = lgbm_params["bagging_fraction"]
         bagging_freq = lgbm_params["bagging_freq"]
-        min_child_samples = lgbm_params["min_child_samples"]
+        min_data_in_leaf = lgbm_params["min_data_in_leaf"]
         num_iterations = lgbm_params["num_iterations"]
     
         # 一列目のラベルを取得
@@ -138,7 +138,7 @@ class LightgbmPack():
             'lambda_l2': lambda_l2,
             'bagging_fraction': bagging_fraction,
             'bagging_freq': bagging_freq,
-            'min_child_samples': min_child_samples,
+            'min_data_in_leaf': min_data_in_leaf,
             'num_iterations': num_iterations,
         }
     
@@ -183,7 +183,7 @@ class LightgbmPack():
         lambda_l2 = lgbm_params["lambda_l2"]
         bagging_fraction = lgbm_params["bagging_fraction"]
         bagging_freq = lgbm_params["bagging_freq"]
-        min_child_samples = lgbm_params["min_child_samples"]
+        min_data_in_leaf = lgbm_params["min_data_in_leaf"]
         num_iterations = lgbm_params["num_iterations"]
     
         # 一列目のラベルを取得
@@ -234,7 +234,7 @@ class LightgbmPack():
             'lambda_l2': lambda_l2,
             'bagging_fraction': bagging_fraction,
             'bagging_freq': bagging_freq,
-            'min_child_samples': min_child_samples,
+            'min_data_in_leaf': min_data_in_leaf,
             'num_iterations': num_iterations,
         }
     
