@@ -45,8 +45,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
 
             tmp = []
             tmp.append(dlist[dlist_retu])
-            # tmp.append(int(dlists[kaisu+shokichi:kaisu+shokichi+1, dlist_retu]))
-
+            
             # 最小
             min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # 最大
@@ -67,40 +66,30 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # percentile_25 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 25)
             # percentile_75 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 75)
 
-            # # # 相関係数
-            # # data = {
-            # #     'X': [dlist[dlist_retu]]*bunseki_hani,
-            # #     'Y': dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]
-            # # }
-            # # df = pd.DataFrame(data)
-            # # # 相関行列を計算
-            # # correlation_matrix = df.corr()
-            # # # 'X'と'Y'の相関係数を取得
-            # # correlation_xy = correlation_matrix.loc['X', 'Y']
-            # # # print("correlation_xy",correlation_xy)
+            # # 相関係数
+            # data = {
+            #     'X': [dlist[dlist_retu]]*bunseki_hani,
+            #     'Y': dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]
+            # }
+            # df = pd.DataFrame(data)
+            # # 相関行列を計算
+            # correlation_matrix = df.corr()
+            # # 'X'と'Y'の相関係数を取得
+            # correlation_xy = correlation_matrix.loc['X', 'Y']
+            # # print("correlation_xy",correlation_xy)
 
-            ## 列を削除した新しい2次元配列を生成
-            #matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
-            #column_to_remove = dlist_retu
-            #new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
-            ## 全体の＊＊を計算
-            #new_matrix_mean = np.mean(new_matrix)
-            #new_matrix_var = np.var(new_matrix)
-            #new_matrix_min = np.min(new_matrix)
-            #new_matrix_max = np.max(new_matrix)
+            # 列を削除した新しい2次元配列を生成
+            matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
+            column_to_remove = dlist_retu
+            new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
+            # 全体の＊＊を計算
+            new_matrix_mean = np.mean(new_matrix)
+            new_matrix_var = np.var(new_matrix)
+            new_matrix_min = np.min(new_matrix)
+            new_matrix_max = np.max(new_matrix)
 
-            # # 列を削除した新しい2次元配列を生成　ハーフ
-            # matrix_h = dlists[kaisu+shokichi:kaisu+shokichi+int(bunseki_hani/2)]
-            # column_to_remove = dlist_retu
-            # new_matrix_h = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix_h]
-            # # 全体の＊＊を計算 ハーフ
-            # new_matrix_mean_h = np.mean(new_matrix_h)
-            # new_matrix_var_h = np.var(new_matrix_h)
-            # new_matrix_min_h = np.min(new_matrix_h)
-            # new_matrix_max_h = np.max(new_matrix_h)
-
-            # #tsne = TSNE(n_components = 2,perplexity=5) # n_componentsは低次元データの次元数
-            # #X_tsne = tsne.fit_transform(matrix)
+            # tsne = TSNE(n_components = 2,perplexity=5) # n_componentsは低次元データの次元数
+            # X_tsne = tsne.fit_transform(matrix)
             
             # pca = PCA(n_components=1)
             # pca_result = pca.fit_transform(matrix)
@@ -114,33 +103,17 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # w = np.array([5,4,3,2,1])
             kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]),weights=w)
 
-            # # st=1
-            # # ed=18
-            # # sted1 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
-
-            # # st=10
-            # # ed=24
-            # # sted2 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
-
-            # # st=35
-            # # ed=50
-            # # sted3 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
-
-            # st=0
-            # ed=50
-            # sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
-
-            ## 2次元配列を一次元配列に変換
-            #two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+flat_hani]
-            #flat_array = np.array(two_dimensional_array).flatten()
-            ##print("flat_array",flat_array)
-            ## 一次元配列をランダムに順番を変える
-            #randomized_array = []
-            ##for ii in shuffle_list:
-            ##    randomized_array.append(flat_array[ii])
-            #z = stats.zscore(flat_array)
-            #z_abs = np.abs(z)
-            #randomized_array.extend(z_abs)
+            # 2次元配列を一次元配列に変換
+            two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+flat_hani]
+            flat_array = np.array(two_dimensional_array).flatten()
+            #print("flat_array",flat_array)
+            # 一次元配列をランダムに順番を変える
+            randomized_array = []
+            #for ii in shuffle_list:
+            #    randomized_array.append(flat_array[ii])
+            z = stats.zscore(flat_array)
+            z_abs = np.abs(z)
+            randomized_array.extend(z_abs)
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -152,28 +125,20 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             tmp.append(var_n)
             # tmp.append(percentile_25)
             # tmp.append(percentile_75)
-            # # tmp.append(correlation_xy)
+            # tmp.append(correlation_xy)
 
-            #tmp.append(new_matrix_mean)
-            #tmp.append(new_matrix_var)
-            #tmp.append(new_matrix_min)
-            #tmp.append(new_matrix_max)
+            tmp.append(new_matrix_mean)
+            tmp.append(new_matrix_var)
+            tmp.append(new_matrix_min)
+            tmp.append(new_matrix_max)
 
-            # tmp.append(new_matrix_mean_h)
-            # tmp.append(new_matrix_var_h)
-            # tmp.append(new_matrix_min_h)
-            # tmp.append(new_matrix_max_h)
-            # # tmp.extend(X_tsne[:,1])
+            # tmp.extend(X_tsne[:,1])
+            
             # tmp.extend(pca_result[:,0])
 
             tmp.append(kaju_ave)
 
-            # #tmp.extend(sted1)
-            # #tmp.extend(sted2)
-            # #tmp.extend(sted3)
-            # tmp.extend(sted4)
-
-            #tmp.extend(randomized_array)
+            tmp.extend(randomized_array)
 
             tmp = [round(tmp[n], 2) for n in range(len(tmp))]
             
@@ -265,9 +230,8 @@ def no_dataset_test_multi(dlists, **dataset_params):
         for dlist_retu in range(6):
 
             tmp = []
-            # # tmp.append(dlist[dlist_retu])
-            # tmp.append(int(dlists[kaisu+shokichi:kaisu+shokichi+1, dlist_retu]))
-
+            # tmp.append(dlist[dlist_retu])
+            
             # 最小
             min_n = np.min(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # 最大
@@ -284,44 +248,34 @@ def no_dataset_test_multi(dlists, **dataset_params):
             std_n = np.std(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
             # 分散
             var_n = np.var(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu])
-            # # パーセンタイル
+            # パーセンタイル
             # percentile_25 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 25)
             # percentile_75 = np.percentile(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu], 75)
 
-            # # # 相関係数
-            # # data = {
-            # #     'X': [dlist[dlist_retu]]*bunseki_hani,
-            # #     'Y': dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]
-            # # }
-            # # df = pd.DataFrame(data)
-            # # # 相関行列を計算
-            # # correlation_matrix = df.corr()
-            # # # 'X'と'Y'の相関係数を取得
-            # # correlation_xy = correlation_matrix.loc['X', 'Y']
-            # # # print("correlation_xy",correlation_xy)
+            # # 相関係数
+            # data = {
+            #     'X': [dlist[dlist_retu]]*bunseki_hani,
+            #     'Y': dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]
+            # }
+            # df = pd.DataFrame(data)
+            # # 相関行列を計算
+            # correlation_matrix = df.corr()
+            # # 'X'と'Y'の相関係数を取得
+            # correlation_xy = correlation_matrix.loc['X', 'Y']
+            # # print("correlation_xy",correlation_xy)
 
-            ## 列を削除した新しい2次元配列を生成
-            #matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
-            #column_to_remove = dlist_retu
-            #new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
-            # 全体の＊＊を計算
-            #new_matrix_mean = np.mean(new_matrix)
-            #new_matrix_var = np.var(new_matrix)
-            #new_matrix_min = np.min(new_matrix)
-            #new_matrix_max = np.max(new_matrix)
+            # 列を削除した新しい2次元配列を生成
+            matrix = dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani]
+            column_to_remove = dlist_retu
+            new_matrix = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix]
+            全体の＊＊を計算
+            new_matrix_mean = np.mean(new_matrix)
+            new_matrix_var = np.var(new_matrix)
+            new_matrix_min = np.min(new_matrix)
+            new_matrix_max = np.max(new_matrix)
 
-            # # 列を削除した新しい2次元配列を生成　ハーフ
-            # matrix_h = dlists[kaisu+shokichi:kaisu+shokichi+int(bunseki_hani/2)]
-            # column_to_remove = dlist_retu
-            # new_matrix_h = [[row[i] for i in range(len(row)) if i != column_to_remove] for row in matrix_h]
-            # # 全体の＊＊を計算 ハーフ
-            # new_matrix_mean_h = np.mean(new_matrix_h)
-            # new_matrix_var_h = np.var(new_matrix_h)
-            # new_matrix_min_h = np.min(new_matrix_h)
-            # new_matrix_max_h = np.max(new_matrix_h)
-
-            # #tsne = TSNE(n_components = 2,perplexity=5) # n_componentsは低次元データの次元数
-            # #X_tsne = tsne.fit_transform(matrix)
+            # tsne = TSNE(n_components = 2,perplexity=5) # n_componentsは低次元データの次元数
+            # X_tsne = tsne.fit_transform(matrix)
             
             # pca = PCA(n_components=1)
             # pca_result = pca.fit_transform(matrix)
@@ -335,33 +289,17 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # w = np.array([5,4,3,2,1])
             kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]),weights=w)
 
-            # # st=1
-            # # ed=18
-            # # sted1 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
-
-            # # st=10
-            # # ed=24
-            # # sted2 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
-
-            # # st=35
-            # # ed=50
-            # # sted3 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
-
-            # st=0
-            # ed=50
-            # sted4 = dlists[kaisu+shokichi+st:kaisu+shokichi+ed, dlist_retu]
-
-            ## 2次元配列を一次元配列に変換
-            #two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+flat_hani]
-            #flat_array = np.array(two_dimensional_array).flatten()
-            ##print("flat_array",flat_array)
-            ## 一次元配列をランダムに順番を変える
-            #randomized_array = []
-            ##for ii in shuffle_list:
-            ##    randomized_array.append(flat_array[ii])
-            #z = stats.zscore(flat_array)
-            #z_abs = np.abs(z)
-            #randomized_array.extend(z_abs)
+            # 2次元配列を一次元配列に変換
+            two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+flat_hani]
+            flat_array = np.array(two_dimensional_array).flatten()
+            #print("flat_array",flat_array)
+            # 一次元配列をランダムに順番を変える
+            randomized_array = []
+            #for ii in shuffle_list:
+            #    randomized_array.append(flat_array[ii])
+            z = stats.zscore(flat_array)
+            z_abs = np.abs(z)
+            randomized_array.extend(z_abs)
 
 
             tmp.append(min_n)
@@ -374,28 +312,16 @@ def no_dataset_test_multi(dlists, **dataset_params):
             tmp.append(var_n)
             # tmp.append(percentile_25)
             # tmp.append(percentile_75)
-            # # tmp.append(correlation_xy)
+            # tmp.append(correlation_xy)
 
-            #tmp.append(new_matrix_mean)
-            #tmp.append(new_matrix_var)
-            #tmp.append(new_matrix_min)
-            #tmp.append(new_matrix_max)
-
-            # tmp.append(new_matrix_mean_h)
-            # tmp.append(new_matrix_var_h)
-            # tmp.append(new_matrix_min_h)
-            # tmp.append(new_matrix_max_h)
-            # # tmp.extend(X_tsne[:,1])
-            # tmp.extend(pca_result[:,0])
+            tmp.append(new_matrix_mean)
+            tmp.append(new_matrix_var)
+            tmp.append(new_matrix_min)
+            tmp.append(new_matrix_max)
 
             tmp.append(kaju_ave)
 
-            # #tmp.extend(sted1)
-            # #tmp.extend(sted2)
-            # #tmp.extend(sted3)
-            # tmp.extend(sted4)
-            
-            #tmp.extend(randomized_array)
+            tmp.extend(randomized_array)
             
             tmp = [round(tmp[n], 2) for n in range(len(tmp))]
             
