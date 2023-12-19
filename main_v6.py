@@ -58,7 +58,7 @@ for kaisai in range(st,ed):
         dlists = dlists_shoki
     elif kaisai == 0:
         #最新結果がcolabにはあるが、gitjubには未登録の時
-        saisinkekka_list=[1,8,23,30,36,41]
+        saisinkekka_list=[7,8,12,25,30,32]
         dlists = dlists_shoki
     elif kaisai > 0:
         saisinkekka_list = dlists_shoki[kaisai-1]
@@ -70,19 +70,19 @@ for kaisai in range(st,ed):
 
     print('\n----vol 1----')
     # 初期値
-    dlists_end = 1500
+    dlists_end = 100
     predictions_all = []
     lgbm_obj = LightgbmPack()
-    params = {"dataset_params":{"study_range_start":-0.1,
-                                "study_range_end":0.1,
-                                "study_nmasi":1,
-                                "test_range_start":-0.1,
-                                "test_range_end":0.1,
-                                "test_nmasi":10,
-                                "bunseki_hani":3,
-                                "flat_hani":0,
-                                "z_thresh":1,
-                                "test_dlists_hani":[0,1],},
+    params = {"dataset_params":{"study_range_start":-0.01,
+                                "study_range_end":0.01,
+                                "study_nmasi":6,
+                                "test_range_start":-3,
+                                "test_range_end":3,
+                                "test_nmasi":3,
+                                "bunseki_hani":2,
+                                "flat_hani":2,
+                                "z_thresh":2,
+                                "test_dlists_hani":[0],},
 
                 "lgbm_model":{"model_type":model_type,},
 
@@ -90,18 +90,18 @@ for kaisai in range(st,ed):
                                 'num_class': 43,
                                 'boosting_type': 'gbdt',
                                 'metric': 'multi_logloss',
-                                'num_leaves': 4,
+                                'num_leaves': 2,
                                 'learning_rate': 0.1,
                                 'feature_fraction': 1,
-                                'max_depth': 3,
+                                'max_depth': 7,
                                 'random_seed': 42,
                                 'force_row_wise': True,
                                 'feature_pre_filter': False,
-                                'lambda_l1': 0,
-                                'lambda_l2': 0,
-                                'bagging_fraction': 1,
+                                'lambda_l1': 5,
+                                'lambda_l2': 5,
+                                'bagging_fraction': 0.6,
                                 'bagging_freq': 1,
-                                'min_child_samples': 2,
+                                'min_data_in_leaf': 2,
                                 'num_iterations': 100,},
               }
 
@@ -126,7 +126,7 @@ for kaisai in range(st,ed):
         predictions_delall = []
 
         # 処理
-        predictions_delall = datalists_check(dlists,len(dlists),2)
+        predictions_delall = datalists_check(dlists,len(dlists),1)
 
         # 表示
         print("saisinkekka_list",saisinkekka_list)
@@ -162,7 +162,6 @@ for kekka_matome in kekka_matomes:
     goukei = goukei + kekka_matome[3]
     print(kekka_matome)
 print("goukei",goukei)
-
 print("処理時間",time.time() - start)
 
 from google.colab import drive
