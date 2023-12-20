@@ -140,7 +140,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
 
             tmp.extend(randomized_array)
 
-            tmp = [round(tmp[n], 2) for n in range(len(tmp))]
+            tmp = [round(tmp[n], 1) for n in range(len(tmp))]
             
             if tmp != []:
                 list1 = tmp[1:]
@@ -323,7 +323,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
 
             tmp.extend(randomized_array)
             
-            tmp = [round(tmp[n], 2) for n in range(len(tmp))]
+            tmp = [round(tmp[n], 1) for n in range(len(tmp))]
             
             if tmp != []:
                 list1 = tmp[0:]
@@ -405,10 +405,10 @@ def create_random_lists_float(range_start, range_end, yousosu, random_select, li
         random.seed(cnt+1)
         # バラバラ
         if random_select == 1:
-            random_list = [round(random.uniform(range_start, range_end), 2) for _ in range(yousosu)]
+            random_list = [round(random.uniform(range_start, range_end), 1) for _ in range(yousosu)]
         # すべて同じ
         if random_select == 2:
-            random_list = [round(random.uniform(range_start, range_end),2)]*yousosu
+            random_list = [round(random.uniform(range_start, range_end),1)]*yousosu
         random_lists.append(random_list)
 
     # print("random_lists",random_lists)
