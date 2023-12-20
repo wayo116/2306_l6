@@ -145,7 +145,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             if tmp != []:
                 list1 = tmp[1:]
                 # print("list1",list1)
-                list2s = create_random_lists_float(range_start, range_end, yousosu=len(tmp), random_select=2, listsu=nmasi)
+                list2s = create_random_lists_float(range_start, range_end, yousosu=len(tmp), random_select=1, listsu=nmasi)
 
                 list1_nmasi = []
                 for list2 in list2s:
@@ -403,8 +403,10 @@ def create_random_lists_float(range_start, range_end, yousosu, random_select, li
     random_lists = []
     for cnt in range(listsu):
         random.seed(cnt+1)
+        # バラバラ
         if random_select == 1:
             random_list = [round(random.uniform(range_start, range_end), 2) for _ in range(yousosu)]
+        # すべて同じ
         if random_select == 2:
             random_list = [round(random.uniform(range_start, range_end),2)]*yousosu
         random_lists.append(random_list)
