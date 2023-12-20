@@ -35,7 +35,7 @@ start = time.time()
 
 kekka_matomes = []
 
-kaisai = 10
+kaisai = 5
 if kaisai == -1:
     st = -1
     ed = 0
@@ -70,19 +70,19 @@ for kaisai in range(st,ed):
 
     print('\n----vol 1----')
     # 初期値
-    dlists_end = 100
+    dlists_end = 1500
     predictions_all = []
     lgbm_obj = LightgbmPack()
     params = {"dataset_params":{"study_range_start":-0.01,
                                 "study_range_end":0.01,
-                                "study_nmasi":6,
-                                "test_range_start":-3,
-                                "test_range_end":3,
-                                "test_nmasi":3,
-                                "bunseki_hani":2,
+                                "study_nmasi":10,
+                                "test_range_start":-0.01,
+                                "test_range_end":0.01,
+                                "test_nmasi":1,
+                                "bunseki_hani":3,
                                 "flat_hani":2,
                                 "z_thresh":2,
-                                "test_dlists_hani":[0],},
+                                "test_dlists_hani":[0,17,23,34],},
 
                 "lgbm_model":{"model_type":model_type,},
 
@@ -90,19 +90,20 @@ for kaisai in range(st,ed):
                                 'num_class': 43,
                                 'boosting_type': 'gbdt',
                                 'metric': 'multi_logloss',
-                                'num_leaves': 2,
+                                'num_leaves': 4,
                                 'learning_rate': 0.1,
                                 'feature_fraction': 1,
-                                'max_depth': 7,
+                                'max_depth': 3,
                                 'random_seed': 42,
                                 'force_row_wise': True,
                                 'feature_pre_filter': False,
-                                'lambda_l1': 5,
-                                'lambda_l2': 5,
-                                'bagging_fraction': 0.6,
-                                'bagging_freq': 1,
+                                'lambda_l1': 0,
+                                'lambda_l2': 0,
+                                'bagging_fraction': 1,
+                                'bagging_freq': 0,
                                 'min_data_in_leaf': 2,
-                                'num_iterations': 100,},
+                                'num_boost_round': 100,
+                                'verbose': -1,},
               }
 
     # 処理
