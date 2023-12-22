@@ -94,7 +94,7 @@ class LightgbmPack():
                 
         print("result1",result1)
         print("result2",result2)
-        print("result3",result3)
+        print("result3",list(set(result3)))
 
         
     def light_gbm(self, train_data, test_data, **lgbm_params):
