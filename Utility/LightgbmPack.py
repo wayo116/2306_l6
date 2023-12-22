@@ -78,15 +78,25 @@ class LightgbmPack():
 
         result1 = []
         result2 = []
+        result3 = []
         for chunk in chunks:
             # print(chunk)
             # result.append(any(element in saisinkekka_list for element in chunk))
             result1.append(list(set(saisinkekka_list) & set(chunk)))
             result2.append(len(set(saisinkekka_list) & set(chunk)))
+
+            # リストの要素をカウント
+            chunk_counts = Counter(chunk)
+            # 上位n件の要素と出現回数を取得
+            top_n = chunk_counts.most_common(1)
+            for element, count in top_n:
+                result3.append(element)
+                
         print("result1",result1)
         print("result2",result2)
+        print("result3",result3)
 
-
+        
     def light_gbm(self, train_data, test_data, **lgbm_params):
         import lightgbm as lgb
         
