@@ -306,7 +306,7 @@ def no_dataset_test_multi_fv(dlists, **dataset_params):
                     list1_nmasi.append(result)
                 # print("list1_nmasi",list1_nmasi)
 
-    no_dataset = list1_nmasi.append
+    no_dataset = list1_nmasi
     # print("no_dataset",no_dataset)
     print("no_dataset_rows",len(no_dataset))
     print("no_dataset_columns",len(no_dataset[0]))
