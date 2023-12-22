@@ -103,17 +103,17 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
             # w = np.array([5,4,3,2,1])
             kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]),weights=w)
 
-            # 2次元配列を一次元配列に変換
-            two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+flat_hani]
-            flat_array = np.array(two_dimensional_array).flatten()
-            #print("flat_array",flat_array)
-            # 一次元配列をランダムに順番を変える
-            randomized_array = []
-            #for ii in shuffle_list:
-            #    randomized_array.append(flat_array[ii])
-            z = stats.zscore(flat_array)
-            z_abs = np.abs(z)
-            randomized_array.extend(z_abs)
+            # # 2次元配列を一次元配列に変換
+            # two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+flat_hani]
+            # flat_array = np.array(two_dimensional_array).flatten()
+            # #print("flat_array",flat_array)
+            # # 一次元配列をランダムに順番を変える
+            # randomized_array = []
+            # #for ii in shuffle_list:
+            # #    randomized_array.append(flat_array[ii])
+            # z = stats.zscore(flat_array)
+            # z_abs = np.abs(z)
+            # randomized_array.extend(z_abs)
 
             tmp.append(min_n)
             tmp.append(max_n)
@@ -138,7 +138,7 @@ def no_dataset_trainval_multi(dlists, **dataset_params,):
 
             tmp.append(kaju_ave)
 
-            tmp.extend(randomized_array)
+            # tmp.extend(randomized_array)
 
             tmp = [round(tmp[n], 1) for n in range(len(tmp))]
             
@@ -289,17 +289,17 @@ def no_dataset_test_multi(dlists, **dataset_params):
             # w = np.array([5,4,3,2,1])
             kaju_ave = np.average(np.array(dlists[kaisu+shokichi:kaisu+shokichi+bunseki_hani, dlist_retu]),weights=w)
 
-            # 2次元配列を一次元配列に変換
-            two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+flat_hani]
-            flat_array = np.array(two_dimensional_array).flatten()
-            #print("flat_array",flat_array)
-            # 一次元配列をランダムに順番を変える
-            randomized_array = []
-            #for ii in shuffle_list:
-            #    randomized_array.append(flat_array[ii])
-            z = stats.zscore(flat_array)
-            z_abs = np.abs(z)
-            randomized_array.extend(z_abs)
+            # # 2次元配列を一次元配列に変換
+            # two_dimensional_array = dlists[kaisu+shokichi:kaisu+shokichi+flat_hani]
+            # flat_array = np.array(two_dimensional_array).flatten()
+            # #print("flat_array",flat_array)
+            # # 一次元配列をランダムに順番を変える
+            # randomized_array = []
+            # #for ii in shuffle_list:
+            # #    randomized_array.append(flat_array[ii])
+            # z = stats.zscore(flat_array)
+            # z_abs = np.abs(z)
+            # randomized_array.extend(z_abs)
 
 
             tmp.append(min_n)
@@ -321,7 +321,7 @@ def no_dataset_test_multi(dlists, **dataset_params):
 
             tmp.append(kaju_ave)
 
-            tmp.extend(randomized_array)
+            # tmp.extend(randomized_array)
             
             tmp = [round(tmp[n], 1) for n in range(len(tmp))]
             
