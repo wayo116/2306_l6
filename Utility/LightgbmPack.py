@@ -94,7 +94,8 @@ class LightgbmPack():
                 
         print("result1",result1)
         print("result2",result2)
-        print("result3",list(set(result3)))
+        sorted_result3 = sorted(list(set(result3)))
+        print("sorted_result3",sorted_result3)
 
         
     def light_gbm(self, train_data, test_data, **lgbm_params):
