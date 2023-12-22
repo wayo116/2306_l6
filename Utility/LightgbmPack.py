@@ -52,6 +52,8 @@ class LightgbmPack():
         if lgbm_model["model_type"] == "light_gbm_optuna":
             score ,predictions = self.light_gbm_optuna(train_data, test_data, **lgbm_params)
 
+        self.saisinkekkalist_predictions_chunk(saisinkekka_list, predictions)
+        
         # %計算
         l1 = saisinkekka_list
         l2 = predictions
@@ -68,6 +70,18 @@ class LightgbmPack():
         print("処理時間",time.time() - start)
 
         return predictions
+
+    
+    def saisinkekkalist_predictions_chunk(self, saisinkekka_list, predictions):
+        chunk_size = 6
+        chunks = [predictions[i:i + chunk_size] for i in range(0, len(predictions), chunk_size)]
+
+        result = []
+        for chunk in chunks:
+            # print(chunk)
+            result.append(any(element in saisinkekka_list for element in predictions))
+        print("result",result)
+
 
     def light_gbm(self, train_data, test_data, **lgbm_params):
         import lightgbm as lgb
