@@ -79,7 +79,8 @@ class LightgbmPack():
         result = []
         for chunk in chunks:
             # print(chunk)
-            result.append(any(element in saisinkekka_list for element in predictions))
+            # result.append(any(element in saisinkekka_list for element in predictions))
+            result.append(len(set(saisinkekka_list) & set(predictions)))
         print("result",result)
 
 
