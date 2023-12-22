@@ -73,7 +73,7 @@ class LightgbmPack():
 
     
     def saisinkekkalist_predictions_chunk(self, saisinkekka_list, predictions, chunk_size):
-        chunk_size = 6
+        
         chunks = [predictions[i:i + chunk_size] for i in range(0, len(predictions), chunk_size)]
 
         result1 = []
