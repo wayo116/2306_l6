@@ -76,12 +76,15 @@ class LightgbmPack():
         chunk_size = 6
         chunks = [predictions[i:i + chunk_size] for i in range(0, len(predictions), chunk_size)]
 
-        result = []
+        result1 = []
+        result2 = []
         for chunk in chunks:
             # print(chunk)
             # result.append(any(element in saisinkekka_list for element in chunk))
-            result.append(len(set(saisinkekka_list) & set(chunk)))
-        print("result",result)
+            result1.append(set(saisinkekka_list) & set(chunk))
+            result2.append(len(set(saisinkekka_list) & set(chunk)))
+        print("result1",result1)
+        print("result2",result2)
 
 
     def light_gbm(self, train_data, test_data, **lgbm_params):
