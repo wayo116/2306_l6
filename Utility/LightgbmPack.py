@@ -88,7 +88,7 @@ class LightgbmPack():
             # リストの要素をカウント
             chunk_counts = Counter(chunk)
             # 上位n件の要素と出現回数を取得
-            top_n = chunk_counts.most_common(1)
+            top_n = chunk_counts.most_common(2)
             for element, count in top_n:
                 result3.append(element)
                 
