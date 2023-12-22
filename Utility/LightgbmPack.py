@@ -81,7 +81,7 @@ class LightgbmPack():
         for chunk in chunks:
             # print(chunk)
             # result.append(any(element in saisinkekka_list for element in chunk))
-            result1.append(set(saisinkekka_list) & set(chunk))
+            result1.append([set(saisinkekka_list) & set(chunk)])
             result2.append(len(set(saisinkekka_list) & set(chunk)))
         print("result1",result1)
         print("result2",result2)
